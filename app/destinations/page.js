@@ -1,5 +1,5 @@
-import { destinations, tours, waLink, site } from '@/data/site';
-import { PageHeader, Cta, Jsonld } from '@/components/ui';
+import { destinations, tours, site } from '@/data/site';
+import { PageHeader, Cta, Jsonld, DestCard } from '@/components/ui';
 
 export const metadata = {
   title: 'Destinations in Northern Pakistan',
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 const all = [
-  ...tours.map((t) => ({ n: '', name: t.stops[t.stops.length - 1], desc: t.blurb, img: t.img })),
+  ...tours.map((t) => ({ name: t.stops[t.stops.length - 1], region: t.region, desc: t.blurb, img: t.img, season: t.duration })),
   ...destinations,
 ];
 
@@ -23,13 +23,7 @@ export default function Destinations() {
       <section className="sec">
         <div className="wrap">
           <div className="dests">
-            {all.map((d, i) => (
-              <a key={d.name} className="dest reveal" href={waLink(`Tell me about ${d.name}`)} rel="noopener" style={{ '--img': `url('/img/tours/${d.img}')` }}>
-                <span className="dest__n">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{d.name}</h3>
-                <p>{d.desc}</p>
-              </a>
-            ))}
+            {all.map((d, i) => <DestCard key={d.name} d={d} n={String(i + 1).padStart(2, '0')} />)}
           </div>
         </div>
       </section>

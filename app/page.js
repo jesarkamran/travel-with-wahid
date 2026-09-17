@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { site, tours, destinations, reviews, waLink, faqs, tripSchema, faqSchema } from '@/data/site';
-import { TourCard, CustomTripCard, Cta, Jsonld, WaIcon } from '@/components/ui';
+import { site, tours, destinations, reviews, gallery, credits, faqs, tripSchema, faqSchema } from '@/data/site';
+import { TourCard, CustomTripCard, Cta, Jsonld, WaIcon, DestCard, Strip } from '@/components/ui';
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -35,7 +35,9 @@ export default function Home() {
             <path d="M0 668 L240 620 L520 672 L760 628 L1040 688 L1440 640 L1440 760 L0 760 Z" fill="#0A1C23" />
           </svg>
         </div>
+        <img className="hero__photo" src="/img/hero.jpg" alt="" aria-hidden="true" fetchPriority="high" />
         <div className="hero__veil" aria-hidden="true" />
+        <p className="credit">Photo: {credits[0].title} · {credits[0].by} · <a href={credits[0].licenseUrl} rel="noopener nofollow">{credits[0].license}</a></p>
         <div className="wrap hero__in">
           <p className="eyebrow reveal">📍 {site.city} · Pakistan</p>
           <h1 className="reveal">Exploring Pakistan<br /><em>&amp; Beyond</em></h1>
@@ -82,11 +84,7 @@ export default function Home() {
             <p className="sec__sub">Routes we run again and again, because we know the roads, the hosts and the weather windows.</p>
           </header>
           <div className="dests">
-            {destinations.map((d) => (
-              <a key={d.name} className="dest reveal" href={waLink(`Tell me about ${d.name}`)} rel="noopener" style={{ '--img': `url('/img/tours/${d.img}')` }}>
-                <span className="dest__n">{d.n}</span><h3>{d.name}</h3><p>{d.desc}</p>
-              </a>
-            ))}
+            {destinations.map((d) => <DestCard key={d.name} d={d} n={d.n} />)}
           </div>
           <p className="sec__sub reveal" style={{ textAlign: 'center', marginTop: '2rem' }}>
             <Link className="btn btn--ghost" href="/destinations">All destinations</Link>
@@ -108,6 +106,17 @@ export default function Home() {
             <li className="reveal"><span className="feats__i">⛰</span><h3>Routes we know</h3><p>Kalam, Fairy Meadows, Kumrat, Kalash — repeated trips mean tested drivers, stays and timings.</p></li>
             <li className="reveal"><span className="feats__i">✆</span><h3>One person, always reachable</h3><p>Before, during and after the trip you have a direct WhatsApp line, not a ticket number.</p></li>
           </ul>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap">
+          <header className="sec__head reveal">
+            <p className="eyebrow eyebrow--dark">On the road</p>
+            <h2>What the north actually looks like</h2>
+            <p className="sec__sub">Lakes at 3,000 metres, river camps under the pines, and valleys that still run on their own calendar.</p>
+          </header>
+          <Strip items={gallery} />
         </div>
       </section>
 

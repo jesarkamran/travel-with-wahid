@@ -34,9 +34,10 @@ number, links. Add an object to `tours` and a new page, card, sitemap entry and
 
 Before launch:
 1. `site.url` in `data/site.js` → your real domain.
-2. Photos into `public/img/` — see `public/img/README.md`. Everything falls back to
-   a gradient if a file is missing, so nothing breaks while you gather them.
-   The OG cover matters most: it's what shows when the link is pasted into WhatsApp.
+2. Photos: `public/img/` ships with Creative Commons shots of the actual valleys,
+   credited on `/about` (a licence condition — keep that block, or replace the
+   photos and drop it). Swap in your own trip photos keeping the same filenames.
+   A missing file falls back to a gradient, so nothing ever breaks.
 3. Replace the placeholder `reviews` in `data/site.js` with real ones.
 
 ## SEO

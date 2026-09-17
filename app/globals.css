@@ -259,3 +259,67 @@ em{font-style:italic;color:var(--amber)}
 .nf{min-height:70svh;display:grid;place-items:center;text-align:center;padding:8rem 0 4rem}
 .nf .btn{margin-top:1.8rem}
 .nav__links a[aria-current="page"]{opacity:1;color:var(--teal)}
+
+/* ---------- photos, scrims & labels ---------- */
+.ph{
+  position:absolute;inset:0;display:block;overflow:hidden;
+  background:linear-gradient(150deg,var(--deep),var(--teal) 55%,var(--amber)); /* fallback if a file is missing */
+}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .5s}
+.scrim{position:absolute;inset:auto 0 0;height:62%;background:linear-gradient(180deg,transparent,rgba(8,20,26,.86));pointer-events:none}
+.scrim--full{inset:0;height:auto;background:linear-gradient(180deg,rgba(8,20,26,.15) 0%,rgba(8,20,26,.25) 45%,rgba(8,20,26,.9) 100%)}
+
+.plabel{
+  position:absolute;left:.9rem;bottom:.85rem;z-index:2;
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.74rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--snow);text-shadow:0 1px 6px rgba(8,20,26,.7);
+}
+.plabel--bare{position:static;margin-bottom:.5rem;color:var(--glacier)}
+.pin{width:.95em;height:.95em;flex:none;color:var(--amber)}
+
+/* tour card media becomes a framed, zooming photo */
+.tour__media{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:var(--deep)}
+.tour:hover .ph img{transform:scale(1.06)}
+.tour__body h3 a{text-decoration:none}
+.tour__body h3 a:hover{color:var(--teal)}
+
+/* destination cards */
+.dest{position:relative;isolation:isolate;padding:1.3rem;min-height:340px;justify-content:space-between}
+.dest .ph,.dest .scrim{z-index:-1;border-radius:inherit}
+.dest:hover .ph img{transform:scale(1.07)}
+.dest__top{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.dest__body{display:block}
+.chip{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .6rem;border-radius:999px;background:rgba(247,244,239,.16);backdrop-filter:blur(6px);color:var(--snow)}
+.dest__go{display:block;margin-top:.9rem;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s var(--ease)}
+.dest:hover .dest__go,.dest:focus-visible .dest__go{opacity:1;transform:none}
+@media (hover:none){.dest__go{opacity:1;transform:none}}
+
+/* photo strip */
+.strip{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.shot{position:relative;margin:0;aspect-ratio:4/5;border-radius:14px;overflow:hidden;isolation:isolate}
+.shot:nth-child(3n){aspect-ratio:4/6}
+.shot:hover .ph img{transform:scale(1.07)}
+.shot figcaption{position:absolute;left:.9rem;right:.9rem;bottom:.85rem;z-index:2;color:var(--snow);display:grid;gap:.15rem}
+.shot figcaption strong{font-family:var(--f-display),serif;font-size:1.02rem;font-weight:600}
+.shot figcaption span{display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
+@media (max-width:520px){.strip{grid-template-columns:1fr 1fr}.shot,.shot:nth-child(3n){aspect-ratio:1}}
+
+/* hero photo now carries a real image */
+.hero__photo{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover}
+.credit{position:absolute;right:1rem;bottom:.7rem;z-index:2;font-size:.62rem;letter-spacing:.06em;color:rgba(247,244,239,.42)}
+.credit a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(247,244,239,.2)}
+.credit a:hover{color:var(--snow)}
+
+/* tour detail hero caption */
+.trip__hero{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;padding:1.3rem}
+.trip__hero .ph,.trip__hero .scrim{border-radius:inherit}
+.trip__hero figcaption{position:relative;z-index:2;color:var(--snow)}
+.trip__hero figcaption strong{display:block;font-family:var(--f-display),serif;font-size:1.3rem;font-weight:600}
+
+/* credits list */
+.creds{list-style:none;margin:1.2rem 0 0;padding:0;columns:2;column-gap:2rem;font-size:.8rem;color:var(--stone)}
+.creds li{break-inside:avoid;margin-bottom:.45rem}
+.creds a{color:var(--teal);text-decoration:none}
+.creds a:hover{text-decoration:underline}
+@media (max-width:640px){.creds{columns:1}}

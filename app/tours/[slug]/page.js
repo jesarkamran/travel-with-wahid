@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { tours, site, waLink, tripSchema } from '@/data/site';
-import { Cta, Jsonld, WaIcon } from '@/components/ui';
+import { Cta, Jsonld, WaIcon, Ph, Pin } from '@/components/ui';
 
 export function generateStaticParams() {
   return tours.map((t) => ({ slug: t.slug }));
@@ -48,7 +48,14 @@ export default function Tour({ params }) {
       <section className="sec">
         <div className="wrap trip">
           <div>
-            <div className="trip__hero reveal" style={{ '--img': `url('/img/tours/${t.img}')` }} role="img" aria-label={t.title} />
+            <figure className="trip__hero reveal" style={{ margin: 0 }}>
+              <Ph src={`/img/tours/${t.img}`} alt={`${t.title} — ${t.region}`} priority sizes="(max-width:900px) 100vw, 700px" />
+              <span className="scrim" aria-hidden="true" />
+              <figcaption>
+                <strong>{t.stops[t.stops.length - 1]}</strong>
+                <span className="plabel plabel--bare"><Pin /> {t.region}</span>
+              </figcaption>
+            </figure>
             <h2 className="reveal">Day by day</h2>
             <ol className="days reveal" style={{ marginTop: '1.8rem' }}>
               {t.itinerary.map((d) => (

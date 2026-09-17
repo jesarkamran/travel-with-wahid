@@ -1,4 +1,4 @@
-import { site } from '@/data/site';
+import { site, credits } from '@/data/site';
 import { PageHeader, Cta } from '@/components/ui';
 
 export const metadata = {
@@ -24,6 +24,20 @@ export default function About() {
             <li className="reveal"><span className="feats__i">🎓</span><h3>Student-first</h3><p>Dates planned around semesters, prices planned around student budgets.</p></li>
             <li className="reveal"><span className="feats__i">🤝</span><h3>Direct contact</h3><p>{site.phone} — the same number before, during and after the trip.</p></li>
             <li className="reveal"><span className="feats__i">📸</span><h3>See it first</h3><p>Every trip is documented on Instagram, so you know what you are signing up for.</p></li>
+          </ul>
+        </div>
+      </section>
+      <section className="sec sec--paper">
+        <div className="wrap">
+          <h2 className="reveal">Photography</h2>
+          <p className="sec__sub reveal">Trip photos on this site are Creative Commons work by photographers who shot these valleys before us. Credit where it is due:</p>
+          <ul className="creds reveal">
+            {credits.map((c) => (
+              <li key={c.file}>
+                <a href={c.source} rel="noopener nofollow">{c.title}</a> — {c.by},{' '}
+                <a href={c.licenseUrl} rel="noopener nofollow">{c.license}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
