@@ -132,10 +132,14 @@ em{font-style:italic}
 @media (max-width:920px){
   .burger{display:block}
   .top__cta{display:none}
+  /* backdrop-filter on .top makes it a containing block for position:fixed
+     children, which trapped this overlay inside the 62px bar once the header
+     went sticky. Solid background on mobile instead. */
+  .top.stuck{backdrop-filter:none;background:var(--mist)}
   .menu{
     position:fixed;inset:0;flex-direction:column;justify-content:center;gap:.4rem;
-    background:rgba(237,240,236,.97);backdrop-filter:blur(24px);
-    opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s;
+    background:var(--mist);
+    opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s;
   }
   .menu a{font-family:var(--f-display),serif;font-size:2.3rem;font-weight:300;color:var(--ink);padding:.5rem 0}
   .menu a::after{display:none}
@@ -236,6 +240,11 @@ em{font-style:italic}
 @media (min-width:980px){
   .valleys{grid-template-columns:repeat(3,1fr)}
   .valley{aspect-ratio:4/5}
+}
+/* At two columns an odd count leaves an orphan — let the last one take the row. */
+@media (min-width:620px) and (max-width:979px){
+  .valleys{grid-template-columns:1fr 1fr}
+  .valleys > :last-child:nth-child(odd){grid-column:span 2;aspect-ratio:16/9}
 }
 
 /* ===================== gallery ===================== */
