@@ -1,26 +1,33 @@
-import { faqs, faqSchema } from '@/data/site';
-import { PageHeader, Faq, Cta, Jsonld } from '@/components/ui';
+import { faqs, faqSchema, site } from '@/data/site';
+import { Faq, Close, Jsonld } from '@/components/ui';
 
 export const metadata = {
-  title: 'FAQ — Booking, Pricing & What to Pack',
-  description: 'Where trips depart from, what the price includes, how to book a seat, and what to bring on a trip to the Northern Areas.',
+  title: 'Questions',
+  description:
+    'Where the van leaves from, what a seat covers, how to hold one, whether altitude matters at 4,600 m, and what to pack for the Pakistani north.',
   alternates: { canonical: '/faq' },
 };
 
 export default function FaqPage() {
   return (
     <>
-      <PageHeader eyebrow="Good to know" title="Questions, answered" sub="Anything not covered here — just message. Replies usually come the same day." />
-      <section className="sec">
-        <div className="wrap faq">
-          <div className="reveal">
-            <h2>Before you book</h2>
-            <p className="sec__sub">The six things people ask most.</p>
-          </div>
+      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+        <div className="wrap">
+          <p className="kicker rise rise-1">Before you book</p>
+          <h1 className="rise rise-2">Questions people ask</h1>
+          <p className="lede rise rise-3">
+            If it is not here, message {site.phone}. Replies usually land the same day.
+          </p>
+        </div>
+      </section>
+
+      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+        <div className="wrap" style={{ maxWidth: '54rem' }}>
           <Faq list={faqs} />
         </div>
       </section>
-      <Cta />
+
+      <Close />
       <Jsonld data={faqSchema(faqs)} />
     </>
   );

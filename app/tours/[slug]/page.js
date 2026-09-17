@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { tours, site, waLink, tripSchema } from '@/data/site';
-import { Cta, Jsonld, WaIcon, Ph, Pin } from '@/components/ui';
+import { Close, Jsonld, WaIcon, money } from '@/components/ui';
+import Profile from '@/components/Profile';
 
 export function generateStaticParams() {
   return tours.map((t) => ({ slug: t.slug }));
@@ -11,11 +12,11 @@ export function generateMetadata({ params }) {
   const t = tours.find((x) => x.slug === params.slug);
   if (!t) return {};
   return {
-    title: `${t.title} — ${t.duration}, PKR ${t.price.toLocaleString('en-US')}`,
-    description: `${t.blurb} Departs ${site.city} ${t.dates}.`,
+    title: `${t.title} — ${t.days} days, PKR ${money(t.price)}`,
+    description: `${t.blurb} Leaves ${site.city} ${t.dates}. Highest point ${money(t.high)} m.`,
     alternates: { canonical: `/tours/${t.slug}` },
     openGraph: {
-      title: `${t.title} · ${t.duration}`,
+      title: `${t.title}, ${t.dates}`,
       description: t.blurb,
       url: `/tours/${t.slug}`,
       images: [{ url: `/img/tours/${t.img}`, alt: t.title }],
@@ -29,51 +30,59 @@ export default function Tour({ params }) {
 
   return (
     <>
-      <section className="phead">
+      <section className="mast mistfield">
         <div className="wrap">
-          <nav className="crumbs reveal" aria-label="Breadcrumb">
-            <Link href="/">Home</Link> <span>/</span> <Link href="/tours">Tours</Link> <span>/</span> <span>{t.title}</span>
-          </nav>
-          <h1 className="reveal">{t.title}</h1>
-          <p className="lede reveal">{t.blurb}</p>
-          <div className="phead__meta reveal">
-            <div><span>Dates</span><strong>{t.dates}</strong></div>
-            <div><span>Duration</span><strong>{t.duration}</strong></div>
-            <div><span>Departs</span><strong>{site.city}</strong></div>
-            <div><span>Price</span><strong>PKR {t.price.toLocaleString('en-US')}</strong></div>
-          </div>
+          <p className="crumb rise rise-1">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <Link href="/tours">Trips</Link>
+          </p>
+          <p className="kicker rise rise-1">{t.dates}</p>
+          <h1 className="rise rise-2">{t.title}</h1>
+          <p className="lede rise rise-3">{t.blurb}</p>
+        </div>
+
+        <div className="wrap--wide">
+          <figure className="hero__frame rise rise-4" style={{ aspectRatio: '21/9' }}>
+            <img src={`/img/tours/${t.img}`} alt={`${t.title}, ${t.region}`} fetchPriority="high" />
+            <figcaption>
+              <span>{t.region}</span>
+              <span>{money(t.high)} m at its highest</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       <section className="sec">
-        <div className="wrap trip">
+        <div className="wrap detail">
           <div>
-            <figure className="trip__hero reveal" style={{ margin: 0 }}>
-              <Ph src={`/img/tours/${t.img}`} alt={`${t.title} — ${t.region}`} priority sizes="(max-width:900px) 100vw, 700px" />
-              <span className="scrim" aria-hidden="true" />
-              <figcaption>
-                <strong>{t.stops[t.stops.length - 1]}</strong>
-                <span className="plabel plabel--bare"><Pin /> {t.region}</span>
-              </figcaption>
-            </figure>
-            <h2 className="reveal">Day by day</h2>
-            <ol className="days reveal" style={{ marginTop: '1.8rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem,1.4rem + 1.4vw,2.6rem)' }}>The route</h2>
+            <p className="muted" style={{ marginTop: '.9rem', maxWidth: '52ch' }}>
+              From {site.city} at {money(site.cityM)} m, climbing {money(t.high - site.cityM)} metres
+              over {t.days} days.
+            </p>
+            <Profile stops={t.profile} tall />
+
+            <h2 style={{ fontSize: 'clamp(1.8rem,1.4rem + 1.4vw,2.6rem)', marginTop: 'clamp(2.5rem,5vw,4rem)' }}>
+              Day by day
+            </h2>
+            <ol className="days">
               {t.itinerary.map((d) => (
-                <li key={d.day}><h3>{d.day}</h3><p>{d.text}</p></li>
+                <li key={d.day}>
+                  <b>Day {d.day}</b>
+                  <p>{d.text}</p>
+                </li>
               ))}
             </ol>
-            <h2 className="reveal" style={{ marginTop: '2rem' }}>Stops on this route</h2>
-            <ul className="incl reveal" style={{ marginTop: '1rem' }}>
-              {t.stops.map((s) => <li key={s}>{s}</li>)}
-            </ul>
           </div>
 
-          <aside className="book reveal">
-            <p className="price"><span>PKR</span> {t.price.toLocaleString('en-US')} <small>/ person</small></p>
-            <p className="book__note">Advance confirms your seat · {t.duration} · {t.dates}</p>
-            <a className="btn btn--wa" href={waLink(`Hi Wahid, I'd like to book ${t.title} (${t.dates})`)} rel="noopener"><WaIcon className="ico" /> Reserve on WhatsApp</a>
-            <a className="btn btn--light" href={site.waGroup} rel="noopener">Join the group</a>
-            <h4>Included</h4>
+          <aside className="book">
+            <p className="price">PKR {money(t.price)} <small>per person</small></p>
+            <p className="book__note">Leaves {t.dates}, back after {t.days} days. The advance holds your seat.</p>
+            <a className="btn" href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)} rel="noopener">
+              <WaIcon className="ico" /> Ask for a seat
+            </a>
+            <a className="btn btn--quiet" href={site.waGroup} rel="noopener">Join the trip group</a>
+
+            <h4>Your seat covers</h4>
             <ul className="ticks">{t.includes.map((i) => <li key={i}>{i}</li>)}</ul>
             <h4>Not included</h4>
             <ul className="ticks ticks--no">{t.excludes.map((i) => <li key={i}>{i}</li>)}</ul>
@@ -81,14 +90,14 @@ export default function Tour({ params }) {
         </div>
       </section>
 
-      <Cta title={`Holding seats for ${t.dates}.`} />
+      <Close title={`Seats held for ${t.dates}.`} />
       <Jsonld data={[
         tripSchema(t),
         {
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
-            { '@type': 'ListItem', position: 2, name: 'Tours', item: `${site.url}/tours/` },
+            { '@type': 'ListItem', position: 2, name: 'Trips', item: `${site.url}/tours/` },
             { '@type': 'ListItem', position: 3, name: t.title, item: `${site.url}/tours/${t.slug}/` },
           ],
         },

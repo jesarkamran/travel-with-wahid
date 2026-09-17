@@ -2,9 +2,10 @@
 export const site = {
   name: 'Travel With Wahid',
   tagline: 'Exploring Pakistan & Beyond',
-  bio: '✨ Exploring Pakistan & Beyond 🌍  📍 Islamabad — organizing student trips to the Northern Areas.',
+  bio: 'Student trips to the Pakistani north, out of Islamabad.',
   url: 'https://travelwithwahid.com', // EDIT: your domain
   city: 'Islamabad',
+  cityM: 540,
   phone: '+92 336 3202576',
   wa: 'https://wa.me/923363202576',
   waGroup: 'https://chat.whatsapp.com/GhAWT6pplhB7xk5o4RPT9F',
@@ -13,92 +14,116 @@ export const site = {
 
 export const waLink = (msg) => `${site.wa}?text=${encodeURIComponent(msg)}`;
 
+// Elevations are approximate, in metres above sea level. They drive the route
+// profiles drawn across the site — change a number and the line redraws.
 export const tours = [
   {
     slug: 'kalam-mahodand-lake',
     title: 'Kalam & Mahodand Lake',
     dates: '8–9 August',
+    dateShort: '8 Aug',
     start: '2026-08-08',
     end: '2026-08-09',
-    duration: '2 Days',
+    nights: 1,
+    days: 2,
     price: 7999,
     img: 'kalam.jpg',
-    region: 'Swat Valley · KPK',
     badge: null,
+    region: 'Swat Valley, Khyber Pakhtunkhwa',
+    high: 2865,
     blurb:
-      'Swat Valley, Bahrain Bazaar, Blue Point and the jeep track up to Mahodand Lake — the classic weekend escape from Islamabad.',
-    includes: ['Breakfast included', 'Jeep charges covered', '1 night accommodation'],
+      'Two days up the Swat valley, ending on the jeep track to a lake that sits just under 2,900 metres.',
+    profile: [
+      { name: 'Islamabad', m: 540 },
+      { name: 'Mingora', m: 980 },
+      { name: 'Bahrain', m: 1400 },
+      { name: 'Kalam', m: 2000 },
+      { name: 'Mahodand', m: 2865 },
+    ],
+    includes: ['Van from Islamabad and back', 'One night in Kalam', 'Breakfast both days', 'Jeep up the Mahodand track'],
     stops: ['Swat Valley', 'Bahrain Bazaar', 'Blue Point', 'Mahodand Lake'],
     itinerary: [
-      { day: 'Day 1', text: 'Night departure from Islamabad, breakfast en route, Swat Valley and a stop at Bahrain Bazaar. Blue Point in the afternoon, check in at Kalam by evening.' },
-      { day: 'Day 2', text: 'Early jeep ride up to Mahodand Lake, time at the lake, then the drive back down to Islamabad the same night.' },
+      { day: 1, text: 'Midnight departure from Islamabad. Breakfast somewhere past Mardan, then the climb up the Swat valley. An hour at Bahrain bazaar, Blue Point in the afternoon, beds in Kalam by dark.' },
+      { day: 2, text: 'Out early for the jeep track — it is rough, and that is the point. Time at Mahodand lake, lunch, then the long drive back down. Islamabad the same night.' },
     ],
-    excludes: ['Personal shopping', 'Entry tickets not listed above', 'Anything bought en route'],
+    excludes: ['Lunch and dinner', 'Boat hire at the lake', 'Anything you buy at the bazaar'],
   },
   {
     slug: 'fairy-meadows-nanga-parbat',
     title: 'Fairy Meadows & Nanga Parbat Base Camp',
     dates: '23–27 August',
+    dateShort: '23 Aug',
     start: '2026-08-23',
     end: '2026-08-27',
-    duration: '5 Days',
+    nights: 4,
+    days: 5,
     price: 14999,
     img: 'fairy-meadows.jpg',
-    region: 'Gilgit-Baltistan',
-    badge: 'Holi Colors',
+    badge: 'Holi colours at the meadows',
+    region: 'Diamer, Gilgit-Baltistan',
+    high: 4600,
     blurb:
-      'Four nights under the ninth highest mountain on earth, with the walk up to base camp and a Holi Colors evening at the meadows.',
-    includes: ['Pickup & drop service', 'Full catering', '4 nights / 5 days'],
+      'Five days to walk up to the foot of the ninth highest mountain on earth, sleeping at 3,300 metres.',
+    profile: [
+      { name: 'Islamabad', m: 540 },
+      { name: 'Chilas', m: 1265 },
+      { name: 'Raikot Bridge', m: 1180 },
+      { name: 'Tato', m: 2600 },
+      { name: 'Fairy Meadows', m: 3300 },
+      { name: 'Base Camp', m: 4600 },
+    ],
+    includes: ['Pickup and drop, Islamabad', 'Four nights at the meadows', 'All meals', 'Jeep up the Raikot track'],
     stops: ['Fairy Meadows', 'Nanga Parbat Base Camp'],
     itinerary: [
-      { day: 'Day 1', text: 'Departure from Islamabad on the Karakoram Highway towards Chilas.' },
-      { day: 'Day 2', text: 'Jeep up the Raikot track, then the walk in to Fairy Meadows. Camp set up, Holi Colors evening.' },
-      { day: 'Day 3', text: 'Full day trek to Nanga Parbat Base Camp and back to the meadows.' },
-      { day: 'Day 4', text: 'Beyal camp and free time at the meadows, descent to the jeep point, drive south.' },
-      { day: 'Day 5', text: 'Arrival back in Islamabad.' },
+      { day: 1, text: 'Out of Islamabad in the dark and onto the Karakoram Highway. A full day of driving along the Indus to Chilas.' },
+      { day: 2, text: 'The Raikot jeep track — one of the more committing roads in the country — then the walk in to Fairy Meadows. Camp goes up, and the Holi colours come out in the evening.' },
+      { day: 3, text: 'The long day: up to Nanga Parbat Base Camp at 4,600 m and back down to the meadows before dark. Go slow, drink water.' },
+      { day: 4, text: 'Beyal camp in the morning, the rest of the day free at the meadows, then down to the jeeps and south along the Indus.' },
+      { day: 5, text: 'Back in Islamabad.' },
     ],
-    excludes: ['Personal shopping', 'Porter charges for personal luggage', 'Anything bought en route'],
+    excludes: ['Porters for personal bags', 'Anything bought on the highway', 'Gear hire'],
   },
 ];
 
+// Not a sequence — no numbering.
 export const destinations = [
-  { n: '01', name: 'Kumrat Valley', region: 'Upper Dir · KPK', desc: 'Pine forest, river camps, Jahaz Banda.', img: 'kumrat.jpg', season: 'May – Sep' },
-  { n: '02', name: 'Naran & Saif-ul-Malook', region: 'Kaghan Valley', desc: 'The lake everyone comes back for.', img: 'naran.jpg', season: 'Jun – Sep' },
-  { n: '03', name: 'Chitral & Kalash', region: 'Chitral · KPK', desc: 'Lowari tunnel, Bumburet, living culture.', img: 'kalash.jpg', season: 'Apr – Oct' },
-  { n: '04', name: 'Ganga Choti', region: 'Bagh · AJK', desc: 'A one-day summit hike in AJK.', img: 'ganga-choti.jpg', season: 'All year' },
+  { name: 'Kumrat', region: 'Upper Dir', high: 3100, note: 'Deodar forest, river camps, and the meadow at Jahaz Banda.', img: 'kumrat.jpg', season: 'May to September' },
+  { name: 'Saif-ul-Malook', region: 'Kaghan', high: 3224, note: 'The lake above Naran, still half frozen in June.', img: 'naran.jpg', season: 'June to September' },
+  { name: 'Kalash valleys', region: 'Chitral', high: 1900, note: 'Over the Lowari to Bumburet, where the calendar is their own.', img: 'kalash.jpg', season: 'April to October' },
+  { name: 'Ganga Choti', region: 'Bagh, Azad Kashmir', high: 3044, note: 'Close enough to summit and be home the same night.', img: 'ganga-choti.jpg', season: 'All year' },
 ];
 
-// Home-page photo strip
 export const gallery = [
-  { img: 'mahodand.jpg', label: 'Mahodand Lake', place: 'Kalam' },
-  { img: 'kumrat-river.jpg', label: 'River camp', place: 'Kumrat' },
-  { img: 'nanga-parbat.jpg', label: 'Nanga Parbat', place: 'Gilgit-Baltistan' },
-  { img: 'saiful-muluk.jpg', label: 'Saif-ul-Malook', place: 'Naran' },
-  { img: 'kalash-people.jpg', label: 'Kalash valleys', place: 'Chitral' },
-  { img: 'ganga-choti.jpg', label: 'Ganga Choti', place: 'Bagh, AJK' },
+  { img: 'mahodand.jpg', label: 'Mahodand Lake', place: 'Kalam', m: 2865 },
+  { img: 'kumrat-river.jpg', label: 'River camp', place: 'Kumrat', m: 2300 },
+  { img: 'nanga-parbat.jpg', label: 'Nanga Parbat', place: 'Diamer', m: 8126 },
+  { img: 'saiful-muluk.jpg', label: 'Saif-ul-Malook', place: 'Naran', m: 3224 },
+  { img: 'kalash-people.jpg', label: 'Bumburet', place: 'Chitral', m: 1900 },
+  { img: 'ganga-choti.jpg', label: 'Ganga Choti', place: 'Bagh', m: 3044 },
 ];
 
 export const faqs = [
-  { q: 'Where do the trips start from?', a: 'Every trip departs from Islamabad. Pickup points are shared in the WhatsApp group a few days before departure, and pickup and drop are included on most packages.' },
-  { q: 'What is included in the price?', a: 'Transport, accommodation, the meals listed on the tour page, and local jeep charges where the route needs them. Personal shopping, unlisted entry tickets and anything bought on the way are not included.' },
-  { q: 'Do I need to be a student to join?', a: 'No. The trips are built around student budgets and university schedules, but everyone travelling in a respectful group setting is welcome.' },
-  { q: 'How do I book a seat?', a: 'Message WhatsApp at +92 336 3202576 or join the group. Your seat is confirmed once the advance is paid — groups are small and they fill quickly.' },
-  { q: 'Can families and solo female travellers join?', a: 'Yes. Families and solo travellers join regularly, and rooms are allocated separately for female travellers.' },
-  { q: 'What should I pack?', a: 'A warm layer even in summer, comfortable shoes for jeep tracks and short hikes, a power bank, ID card, and any personal medication. A full list goes out in the group before departure.' },
+  { q: 'Where does the van leave from?', a: 'Islamabad, always, and usually around midnight so the driving happens while you sleep. Pickup points go out in the WhatsApp group a few days before. Drop-off is back at the same points.' },
+  { q: 'What does the price cover?', a: 'The van both ways, your bed, the meals listed on the trip page, and the local jeeps where the road needs them. It does not cover what you buy on the way, gear hire, or meals we have not listed.' },
+  { q: 'Do I have to be a student?', a: 'No. The dates are planned around semesters and the prices around student budgets, but the van is open to anyone who travels well in a group.' },
+  { q: 'How do I hold a seat?', a: 'Message the number. A seat is yours once the advance is in — vans are small and August fills early.' },
+  { q: 'Can I come on my own, or bring family?', a: 'Both happen on most trips. Rooms are allocated separately for women travelling alone or in groups.' },
+  { q: 'How high do we actually go, and does that matter?', a: 'Kalam tops out at 2,865 m, which nobody feels. Nanga Parbat Base Camp is 4,600 m, high enough that you walk slowly, drink more water than you think you need, and tell me if your head hurts.' },
+  { q: 'What should I bring?', a: 'A warm layer even in August, shoes you can walk a jeep track in, a power bank, your ID card, and any medicine you take. A full list goes out in the group before we leave.' },
 ];
 
-// EDIT: replace with real reviews before launch
+// EDIT: replace with real messages from your trips before launch
 export const reviews = [
-  { text: 'Everything was arranged before we even reached the pickup point. First time in the north and I never felt lost.', by: 'Student group · Kalam' },
-  { text: 'The price on the poster was the price we paid. That alone is rare here.', by: 'Traveller · Fairy Meadows' },
-  { text: 'Small group, good food, and someone who knew exactly when to leave to beat the traffic.', by: 'University society · Kumrat' },
+  { text: 'Everything was sorted before we reached the pickup point. First time north and I never once felt lost.', by: 'Bahria University group', trip: 'Kalam, July' },
+  { text: 'The price on the poster was the price we paid. That alone is rare here.', by: 'Hamza', trip: 'Fairy Meadows, June' },
+  { text: 'Small van, good food, and someone who knew exactly when to leave to beat the traffic.', by: 'NUST trekking society', trip: 'Kumrat, May' },
 ];
 
 export const orgSchema = {
   '@type': ['TravelAgency', 'LocalBusiness'],
   '@id': `${site.url}/#org`,
   name: site.name,
-  description: `${site.tagline}. Organizing student trips to the Northern Areas from Islamabad.`,
+  description: `${site.tagline}. Student trips to the Northern Areas of Pakistan, departing Islamabad.`,
   url: `${site.url}/`,
   telephone: site.phone.replace(/\s/g, ''),
   image: `${site.url}/img/og-cover.jpg`,
@@ -117,10 +142,10 @@ export const tripSchema = (t) => ({
   provider: { '@id': `${site.url}/#org` },
   itinerary: {
     '@type': 'ItemList',
-    itemListElement: t.stops.map((s, i) => ({
+    itemListElement: t.profile.map((s, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      item: { '@type': 'TouristAttraction', name: s },
+      item: { '@type': 'TouristAttraction', name: s.name, elevation: `${s.m} m` },
     })),
   },
   offers: {

@@ -1,143 +1,153 @@
 import Link from 'next/link';
-import { site, tours, destinations, reviews, gallery, credits, faqs, tripSchema, faqSchema } from '@/data/site';
-import { TourCard, CustomTripCard, Cta, Jsonld, WaIcon, DestCard, Strip } from '@/components/ui';
+import { site, tours, destinations, reviews, gallery, credits, faqs, tripSchema, faqSchema, waLink } from '@/data/site';
+import { Trip, Valley, Strip, Close, WaIcon, Jsonld, money } from '@/components/ui';
 
-export const metadata = {
-  alternates: { canonical: '/' },
-};
-
-const ticker = ['Kalam', 'Fairy Meadows', 'Naran', 'Kumrat', 'Chitral', 'Kalash', 'Ganga Choti', 'Mahodand Lake'];
+export const metadata = { alternates: { canonical: '/' } };
 
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div className="hero__art" aria-hidden="true">
-          <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice">
-            <defs>
-              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0A1720" /><stop offset="48%" stopColor="#123642" />
-                <stop offset="82%" stopColor="#2E5C60" /><stop offset="100%" stopColor="#5E7F72" />
-              </linearGradient>
-              <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#25525C" /><stop offset="100%" stopColor="#16333D" /></linearGradient>
-              <linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#18404A" /><stop offset="100%" stopColor="#0E262F" /></linearGradient>
-              <radialGradient id="glow" cx="72%" cy="42%" r="34%">
-                <stop offset="0%" stopColor="#E8A33D" stopOpacity=".55" /><stop offset="100%" stopColor="#E8A33D" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <rect width="1440" height="760" fill="url(#sky)" />
-            <rect width="1440" height="760" fill="url(#glow)" />
-            <circle cx="1037" cy="320" r="46" fill="#F0B75C" opacity=".92" />
-            <path d="M0 470 L190 300 L300 392 L430 250 L560 430 L690 340 L820 470 L1440 470 L1440 760 L0 760 Z" fill="url(#r1)" opacity=".85" />
-            <path d="M430 250 L378 322 L430 300 L472 328 Z" fill="#DCE9E6" opacity=".9" />
-            <path d="M190 300 L152 356 L190 340 L226 360 Z" fill="#DCE9E6" opacity=".7" />
-            <path d="M0 560 L160 452 L300 540 L470 400 L640 545 L800 470 L980 580 L1160 490 L1440 600 L1440 760 L0 760 Z" fill="url(#r2)" />
-            <path d="M0 668 L240 620 L520 672 L760 628 L1040 688 L1440 640 L1440 760 L0 760 Z" fill="#0A1C23" />
-          </svg>
-        </div>
-        <img className="hero__photo" src="/img/hero.jpg" alt="" aria-hidden="true" fetchPriority="high" />
-        <div className="hero__veil" aria-hidden="true" />
-        <p className="credit">Photo: {credits[0].title} · {credits[0].by} · <a href={credits[0].licenseUrl} rel="noopener nofollow">{credits[0].license}</a></p>
+      <section className="hero mistfield">
         <div className="wrap hero__in">
-          <p className="eyebrow reveal">📍 {site.city} · Pakistan</p>
-          <h1 className="reveal">Exploring Pakistan<br /><em>&amp; Beyond</em></h1>
-          <p className="lede reveal">Student trips to the Northern Areas — planned properly, priced honestly and run by someone who actually goes on every single one.</p>
-          <div className="hero__cta reveal">
-            <a className="btn btn--wa" href={site.wa} rel="noopener"><WaIcon className="ico" /> Book on WhatsApp</a>
-            <Link className="btn btn--ghost" href="/tours">See upcoming tours</Link>
+          <p className="kicker rise rise-1">Islamabad, and everything north of it</p>
+          <h1 className="rise rise-2">Exploring Pakistan <em>&amp; beyond</em></h1>
+          <p className="lede rise rise-3">
+            Small, unhurried trips into the northern valleys — the van, the beds and the
+            food arranged, so all you carry is a warm layer.
+          </p>
+          <div className="hero__cta rise rise-3">
+            <a className="btn" href={site.wa} rel="noopener"><WaIcon className="ico" /> Book on WhatsApp</a>
+            <Link className="btn btn--quiet" href="/tours">See upcoming trips</Link>
           </div>
-          <dl className="stats reveal">
-            <div><dt>From</dt><dd>PKR 7,999</dd></div>
-            <div><dt>Groups</dt><dd>Small &amp; student-friendly</dd></div>
-            <div><dt>Departs</dt><dd>{site.city}</dd></div>
+        </div>
+
+        <div className="wrap--wide">
+          <figure className="hero__frame rise rise-4">
+            <img src="/img/hero.jpg" alt="Fairy Meadows at first light, with Nanga Parbat behind" fetchPriority="high" />
+            <figcaption>
+              <span>Fairy Meadows, beneath Nanga Parbat</span>
+              <span>3,300 m</span>
+            </figcaption>
+          </figure>
+
+          <dl className="facts">
+            <div><dt>Trips leave from</dt><dd>{site.city}</dd></div>
+            <div><dt>Seats from</dt><dd>PKR {money(tours[0].price)}</dd></div>
+            <div><dt>Group size</dt><dd>One small van</dd></div>
+            <div><dt>Highest we go</dt><dd>{money(4600)} m</dd></div>
           </dl>
         </div>
       </section>
 
-      <div className="ticker" aria-hidden="true">
-        <div className="ticker__row">
-          {[...ticker, ...ticker].map((t, i) => (
-            <span key={i}>{t}<span> ✦ </span></span>
-          ))}
-        </div>
-      </div>
-
       <section className="sec">
         <div className="wrap">
-          <header className="sec__head reveal">
-            <p className="eyebrow eyebrow--dark">Upcoming tours</p>
-            <h2>Seats open right now</h2>
-            <p className="sec__sub">Fixed departures, fixed prices, no hidden add-ons at the last stop. Groups are kept small, so seats go fast.</p>
+          <header className="head">
+            <p className="kicker">Two dates open</p>
+            <h2>Trips leaving this August</h2>
+            <p className="lede">
+              Fixed dates and a fixed price. What you agree before you leave is what the
+              trip costs — nothing is added at the last stop.
+            </p>
           </header>
-          <div className="tours">
-            {tours.map((t) => <TourCard key={t.slug} t={t} />)}
-            <CustomTripCard />
+
+          <div style={{ marginTop: 'clamp(3.5rem,7vw,6rem)' }}>
+            {tours.map((t) => <Trip key={t.slug} t={t} />)}
           </div>
+
+          <p style={{ marginTop: 'clamp(3.5rem,6vw,5rem)', textAlign: 'center' }}>
+            <span className="muted">Planning something for a society or a batch? </span>
+            <a href={waLink('Hi Wahid, I want to plan a group trip')} rel="noopener" style={{ color: 'var(--gold)' }}>
+              Ask for a group date
+            </a>
+          </p>
         </div>
       </section>
 
-      <section className="sec sec--dark">
-        <div className="wrap">
-          <header className="sec__head reveal">
-            <p className="eyebrow">Where we go</p>
-            <h2>The north, valley by valley</h2>
-            <p className="sec__sub">Routes we run again and again, because we know the roads, the hosts and the weather windows.</p>
+      <section className="sec--sm">
+        <div className="wrap--wide">
+          <header className="head center" style={{ marginBottom: 'clamp(2.5rem,5vw,3.5rem)', textAlign: 'center' }}>
+            <p className="kicker">Where the van goes</p>
+            <h2>Six valleys we know well</h2>
           </header>
-          <div className="dests">
-            {destinations.map((d) => <DestCard key={d.name} d={d} n={d.n} />)}
+          <div className="valleys">
+            {destinations.slice(0, 3).map((d) => <Valley key={d.name} d={d} />)}
           </div>
-          <p className="sec__sub reveal" style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <Link className="btn btn--ghost" href="/destinations">All destinations</Link>
+          <p style={{ marginTop: '2rem', textAlign: 'center' }}>
+            <Link className="btn btn--quiet" href="/destinations">See all six valleys</Link>
           </p>
         </div>
       </section>
 
       <section className="sec">
-        <div className="wrap why">
-          <div className="why__intro reveal">
-            <p className="eyebrow eyebrow--dark">Why travel with Wahid</p>
-            <h2>Trips built for student budgets, not tourist traps</h2>
-            <p className="sec__sub">No agency call centre. You message one person, that person answers, and that person is on the bus with you.</p>
-            <a className="btn" href={site.waGroup} rel="noopener">Join the WhatsApp group</a>
-          </div>
-          <ul className="feats">
-            <li className="reveal"><span className="feats__i">₨</span><h3>Honest pricing</h3><p>What&apos;s included is listed on the tour page. No surprise jeep fare or room upgrade halfway up the valley.</p></li>
-            <li className="reveal"><span className="feats__i">◎</span><h3>Small groups</h3><p>Seats are capped so the van isn&apos;t packed and nobody waits an hour at every stop.</p></li>
-            <li className="reveal"><span className="feats__i">⛰</span><h3>Routes we know</h3><p>Kalam, Fairy Meadows, Kumrat, Kalash — repeated trips mean tested drivers, stays and timings.</p></li>
-            <li className="reveal"><span className="feats__i">✆</span><h3>One person, always reachable</h3><p>Before, during and after the trip you have a direct WhatsApp line, not a ticket number.</p></li>
-          </ul>
+        <div className="wrap--wide">
+          <header className="head" style={{ marginBottom: 'clamp(2.5rem,5vw,3.5rem)' }}>
+            <p className="kicker">Photographs</p>
+            <h2>What it looks like up there</h2>
+          </header>
+          <Strip items={gallery} />
+          <p className="muted" style={{ fontSize: '.82rem', marginTop: '1.4rem' }}>
+            Photographs by {credits[0].by} and others, used under Creative Commons.{' '}
+            <Link href="/about" style={{ color: 'var(--sage-deep)' }}>Full credits</Link>
+          </p>
         </div>
       </section>
 
       <section className="sec">
-        <div className="wrap">
-          <header className="sec__head reveal">
-            <p className="eyebrow eyebrow--dark">On the road</p>
-            <h2>What the north actually looks like</h2>
-            <p className="sec__sub">Lakes at 3,000 metres, river camps under the pines, and valleys that still run on their own calendar.</p>
-          </header>
-          <Strip items={gallery} />
+        <div className="wrap split">
+          <div>
+            <p className="kicker">Why travel with Wahid</p>
+            <h2>One person, start to finish</h2>
+            <p className="lede" style={{ marginTop: '1.2rem' }}>
+              There is no office and no call centre. You message one person, that person
+              replies, and that person is in the van with you the whole way.
+            </p>
+            <a className="btn" href={site.waGroup} rel="noopener" style={{ marginTop: '1.8rem' }}>
+              Join the trip group
+            </a>
+          </div>
+          <ul className="reasons">
+            <li>
+              <span className="line" />
+              <h3>The price you are quoted</h3>
+              <p>Everything a seat covers is written on the trip page. No surprise jeep fare, no room upgrade halfway up the valley.</p>
+            </li>
+            <li>
+              <span className="line" />
+              <h3>Room to breathe</h3>
+              <p>Seats are capped so nobody rides squeezed and nobody waits forty minutes at every stop.</p>
+            </li>
+            <li>
+              <span className="line" />
+              <h3>Roads already driven</h3>
+              <p>Kalam, Fairy Meadows, Kumrat, Kalash — run often enough to know which stretch to take at first light.</p>
+            </li>
+            <li>
+              <span className="line" />
+              <h3>One number throughout</h3>
+              <p>{site.phone} is the same line for booking, for questions at 2am on the road, and for the photographs afterwards.</p>
+            </li>
+          </ul>
         </div>
       </section>
 
-      <section className="sec sec--paper">
+      <section className="sec on-pine">
         <div className="wrap">
-          <header className="sec__head reveal">
-            <p className="eyebrow eyebrow--dark">From the group</p>
-            <h2>What travellers say</h2>
+          <header className="head" style={{ marginBottom: 'clamp(2.5rem,5vw,3.5rem)' }}>
+            <p className="kicker">From people who came</p>
+            <h2>Trips, in their words</h2>
           </header>
           <div className="quotes">
             {reviews.map((r) => (
-              <figure key={r.by} className="quote reveal">
+              <figure key={r.by} className="quote">
                 <blockquote>{r.text}</blockquote>
-                <figcaption>{r.by}</figcaption>
+                <figcaption>{r.by}<em>{r.trip}</em></figcaption>
               </figure>
             ))}
           </div>
         </div>
       </section>
 
-      <Cta />
+      <Close />
       <Jsonld data={[...tours.map(tripSchema), faqSchema(faqs)]} />
     </>
   );

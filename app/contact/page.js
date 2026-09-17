@@ -1,39 +1,48 @@
 import { site } from '@/data/site';
-import { PageHeader, Cta } from '@/components/ui';
+import { Close } from '@/components/ui';
 
 export const metadata = {
   title: 'Contact & Booking',
-  description: `Book a seat or ask about custom group trips — WhatsApp ${site.phone}, or join the Travel With Wahid group.`,
+  description: `Hold a seat or ask about a group trip — WhatsApp ${site.phone}, or join the Travel With Wahid trip group.`,
   alternates: { canonical: '/contact' },
 };
 
 export default function Contact() {
   return (
     <>
-      <PageHeader
-        eyebrow="Contact"
-        title="No forms. Just message."
-        sub="Booking, custom group trips, or a question about a route — WhatsApp is the fastest way to reach us."
-      />
-      <section className="sec">
+      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
         <div className="wrap">
-          <div className="contacts">
-            <a href={site.wa} rel="noopener">
-              <h3>WhatsApp</h3><p>{site.phone} — booking, questions, anything.</p>
-            </a>
-            <a href={site.waGroup} rel="noopener">
-              <h3>Trip group</h3><p>New departures and last-minute seats get posted here first.</p>
-            </a>
-            <a href={site.instagram} rel="noopener">
-              <h3>Instagram</h3><p>@travelwithwahid — photos and stories from every trip.</p>
-            </a>
-            <a href={`tel:${site.phone.replace(/\s/g, '')}`}>
-              <h3>Call</h3><p>{site.phone} · {site.city}, Pakistan.</p>
-            </a>
-          </div>
+          <p className="kicker rise rise-1">Contact</p>
+          <h1 className="rise rise-2">No forms. Just message.</h1>
+          <p className="lede rise rise-3">
+            Booking, group trips, or a question about a road — WhatsApp reaches Wahid
+            directly, and he answers it himself.
+          </p>
         </div>
       </section>
-      <Cta title="Ready when you are." text="Tell us the dates and the group size — you'll have a plan back the same day." />
+
+      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+        <div className="wrap rows" style={{ maxWidth: '54rem' }}>
+          <a href={site.wa} rel="noopener">
+            <div><h3>WhatsApp</h3><p>The fastest way to hold a seat or ask anything at all.</p></div>
+            <b>{site.phone}</b>
+          </a>
+          <a href={site.waGroup} rel="noopener">
+            <div><h3>The trip group</h3><p>New departures and last-minute seats are posted here first.</p></div>
+            <b>Join</b>
+          </a>
+          <a href={site.instagram} rel="noopener">
+            <div><h3>Instagram</h3><p>Photographs and stories from every trip that has run.</p></div>
+            <b>@travelwithwahid</b>
+          </a>
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`}>
+            <div><h3>Call</h3><p>{site.city}, Pakistan. Reasonable hours, please.</p></div>
+            <b>{site.phone}</b>
+          </a>
+        </div>
+      </section>
+
+      <Close title="Tell us the dates and the headcount." text="You will have a plan back the same day." />
     </>
   );
 }

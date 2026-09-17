@@ -1,39 +1,54 @@
 import { destinations, tours, site } from '@/data/site';
-import { PageHeader, Cta, Jsonld, DestCard } from '@/components/ui';
+import { Valley, Close, Jsonld } from '@/components/ui';
 
 export const metadata = {
-  title: 'Destinations in Northern Pakistan',
-  description: 'Kalam, Fairy Meadows, Kumrat, Naran & Saif-ul-Malook, Chitral & Kalash, Ganga Choti — the valleys we run group trips to from Islamabad.',
+  title: 'Valleys We Travel To',
+  description:
+    'Kalam, Fairy Meadows, Kumrat, Saif-ul-Malook, the Kalash valleys and Ganga Choti — the northern routes Travel With Wahid runs out of Islamabad.',
   alternates: { canonical: '/destinations' },
 };
 
 const all = [
-  ...tours.map((t) => ({ name: t.stops[t.stops.length - 1], region: t.region, desc: t.blurb, img: t.img, season: t.duration })),
+  ...tours.map((t) => ({
+    name: t.profile[t.profile.length - 1].name,
+    region: t.region,
+    high: t.high,
+    note: t.blurb,
+    img: t.img,
+  })),
   ...destinations,
 ];
 
 export default function Destinations() {
   return (
     <>
-      <PageHeader
-        eyebrow="Where we go"
-        title="The north, valley by valley"
-        sub="Routes we run again and again, because we know the roads, the hosts and the weather windows. Ask about any of them and I'll send dates and costs."
-      />
-      <section className="sec">
+      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,4.5rem)' }}>
         <div className="wrap">
-          <div className="dests">
-            {all.map((d, i) => <DestCard key={d.name} d={d} n={String(i + 1).padStart(2, '0')} />)}
+          <p className="kicker rise rise-1">Where the van goes</p>
+          <h1 className="rise rise-2">Six valleys, north of Islamabad</h1>
+          <p className="lede rise rise-3">
+            These are roads we already know — which stretch washes out, who keeps the rooms,
+            and when the pass opens. Ask about any of them.
+          </p>
+        </div>
+      </section>
+
+      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+        <div className="wrap--wide">
+          <div className="valleys">
+            {[...all].sort((a, b) => b.high - a.high).map((d) => <Valley key={d.name} d={d} />)}
           </div>
         </div>
       </section>
-      <Cta title="Pick a valley, I'll build the trip." text="Society trips, batch trips, family groups — tell me the dates and the budget." />
+
+      <Close title="Name a valley and a week." text="Group dates are built around what you pick, not the other way round." />
       <Jsonld data={{
         '@type': 'ItemList',
-        name: 'Destinations in Northern Pakistan',
+        name: 'Northern Pakistan valleys served by Travel With Wahid',
         itemListElement: all.map((d, i) => ({
-          '@type': 'ListItem', position: i + 1,
-          item: { '@type': 'TouristDestination', name: d.name, description: d.desc, url: `${site.url}/destinations/` },
+          '@type': 'ListItem',
+          position: i + 1,
+          item: { '@type': 'TouristDestination', name: d.name, description: d.note, url: `${site.url}/destinations/` },
         })),
       }} />
     </>

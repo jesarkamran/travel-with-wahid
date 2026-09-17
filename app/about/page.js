@@ -1,47 +1,85 @@
 import { site, credits } from '@/data/site';
-import { PageHeader, Cta } from '@/components/ui';
+import { Close } from '@/components/ui';
 
 export const metadata = {
   title: 'About',
-  description: 'Travel With Wahid organizes small, affordable student trips from Islamabad to the Northern Areas of Pakistan.',
+  description:
+    'Travel With Wahid is one person in Islamabad filling a small van and driving students north. No office, no call centre.',
   alternates: { canonical: '/about' },
 };
 
 export default function About() {
   return (
     <>
-      <PageHeader eyebrow="About" title="One person, a van, and a lot of mountain roads" />
-      <section className="sec">
-        <div className="wrap why">
-          <div className="prose reveal">
-            <p>Travel With Wahid started the way most good trips do — a few friends, a rented van, and a plan made the night before. It turned into fixed departures because people kept asking to come along.</p>
-            <p>The idea has not changed since. Trips are priced for students, groups are kept small enough to actually move, and the person who plans the trip is the person sitting on the bus with you. When the weather closes a pass or a road is out, you hear it from him directly, not from a form on a website.</p>
-            <p>Everything runs out of {site.city}. Departures head north to Swat and Kalam, up the Karakoram Highway to Fairy Meadows, across to Kumrat and Naran, and out to Chitral and the Kalash valleys.</p>
-            <p>If you have been thinking about the north and waiting for someone to handle the logistics — that is the whole job.</p>
-          </div>
-          <ul className="feats">
-            <li className="reveal"><span className="feats__i">📍</span><h3>Based in {site.city}</h3><p>Every departure starts here, with pickup points shared before the trip.</p></li>
-            <li className="reveal"><span className="feats__i">🎓</span><h3>Student-first</h3><p>Dates planned around semesters, prices planned around student budgets.</p></li>
-            <li className="reveal"><span className="feats__i">🤝</span><h3>Direct contact</h3><p>{site.phone} — the same number before, during and after the trip.</p></li>
-            <li className="reveal"><span className="feats__i">📸</span><h3>See it first</h3><p>Every trip is documented on Instagram, so you know what you are signing up for.</p></li>
-          </ul>
+      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+        <div className="wrap">
+          <p className="kicker rise rise-1">About</p>
+          <h1 className="rise rise-2">One person, one van, a lot of mountain road</h1>
         </div>
       </section>
-      <section className="sec sec--paper">
+
+      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+        <div className="wrap split">
+          <div className="prose">
+            <p>
+              Travel With Wahid started the way most good trips do — a few friends, a rented
+              van, and a plan made the night before. It became fixed departures because
+              people kept asking to come along.
+            </p>
+            <p>
+              The idea has not changed. Seats are priced for students, the van is kept small
+              enough to actually move, and the person who plans the trip is the person
+              sitting in it. When a pass closes or a road washes out, you hear it from him
+              directly rather than from a form on a website.
+            </p>
+            <p>
+              Everything runs out of {site.city}, at {site.cityM} metres. From there the
+              routes go north to Swat and Kalam, up the Karakoram Highway to the Raikot
+              track, across to Kumrat and Naran, and over the Lowari to Chitral and the
+              Kalash valleys.
+            </p>
+            <p>
+              If you have been meaning to go north and waiting for someone to handle the
+              logistics — that is the whole job.
+            </p>
+          </div>
+
+          <div className="rows">
+            <a href={site.wa} rel="noopener">
+              <div><h3>Ask Wahid anything</h3><p>The same number for booking, for the road, and for photographs afterwards.</p></div>
+              <b>{site.phone}</b>
+            </a>
+            <a href={site.waGroup} rel="noopener">
+              <div><h3>The trip group</h3><p>New dates and last-minute seats are posted here first.</p></div>
+              <b>WhatsApp</b>
+            </a>
+            <a href={site.instagram} rel="noopener">
+              <div><h3>Every trip, photographed</h3><p>See what you are signing up for before you pay.</p></div>
+              <b>Instagram</b>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec--sm">
         <div className="wrap">
-          <h2 className="reveal">Photography</h2>
-          <p className="sec__sub reveal">Trip photos on this site are Creative Commons work by photographers who shot these valleys before us. Credit where it is due:</p>
-          <ul className="creds reveal">
+          <h2 style={{ fontSize: 'clamp(1.6rem,1.3rem + 1.2vw,2.3rem)' }}>Photographs</h2>
+          <p className="muted" style={{ marginTop: '.9rem', maxWidth: '58ch' }}>
+            The trip photographs here are Creative Commons work by people who shot these
+            valleys before us. Credit is a condition of using them, so here it is.
+          </p>
+          <ul className="creds">
             {credits.map((c) => (
               <li key={c.file}>
-                <a href={c.source} rel="noopener nofollow">{c.title}</a> — {c.by},{' '}
+                <a href={c.source} rel="noopener nofollow">{c.title}</a>, {c.by},{' '}
                 <a href={c.licenseUrl} rel="noopener nofollow">{c.license}</a>
               </li>
             ))}
           </ul>
         </div>
       </section>
-      <Cta />
+
+      <Close />
     </>
   );
 }

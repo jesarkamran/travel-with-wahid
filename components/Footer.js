@@ -5,31 +5,33 @@ import Mark from './Mark';
 export default function Footer() {
   return (
     <footer className="foot">
-      <div className="wrap foot__in">
-        <div>
-          <Link className="brand brand--foot" href="/">
-            <Mark className="brand__mark" ring={false} />
-            <span className="brand__txt">Travel<em>With</em>Wahid</span>
-          </Link>
-          <p className="foot__bio">{site.bio}</p>
+      <div className="wrap">
+        <div className="foot__in">
+          <div>
+            <Link className="brand" href="/">
+              <Mark />
+              <span className="brand__txt">Travel with Wahid</span>
+            </Link>
+            <p className="foot__bio">{site.bio} Every trip leaves from {site.city} and comes back to it.</p>
+          </div>
+          <nav aria-label="Footer">
+            <h4>Travel</h4>
+            <Link href="/tours">Upcoming trips</Link>
+            <Link href="/destinations">Valleys</Link>
+            <Link href="/about">About</Link>
+            <Link href="/faq">Questions</Link>
+          </nav>
+          <nav aria-label="Contact">
+            <h4>Get in touch</h4>
+            <a href={site.wa} rel="noopener">WhatsApp {site.phone}</a>
+            <a href={site.waGroup} rel="noopener">Join the trip group</a>
+            <a href={site.instagram} rel="noopener">Instagram</a>
+          </nav>
         </div>
-        <nav className="foot__nav" aria-label="Footer">
-          <h3>Explore</h3>
-          <Link href="/tours">Upcoming tours</Link>
-          <Link href="/destinations">Destinations</Link>
-          <Link href="/about">About</Link>
-          <Link href="/faq">FAQ</Link>
-        </nav>
-        <div className="foot__nav">
-          <h3>Reach us</h3>
-          <a href={site.wa} rel="noopener">WhatsApp · {site.phone}</a>
-          <a href={site.waGroup} rel="noopener">Join the WhatsApp group</a>
-          <a href={site.instagram} rel="noopener">Instagram · @travelwithwahid</a>
+        <div className="foot__bar">
+          <p>© {new Date().getFullYear()} {site.name}, {site.city}.</p>
+          <p>Mountain roads close without notice. Dates move when they do.</p>
         </div>
-      </div>
-      <div className="wrap foot__bar">
-        <p>© {new Date().getFullYear()} {site.name}. {site.city}, Pakistan.</p>
-        <p>Trips subject to weather and road conditions.</p>
       </div>
     </footer>
   );
