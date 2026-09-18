@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Jsonld } from '@/components/fmt';
 import StickyBook from '@/components/StickyBook';
 import { SmoothScroll } from '@/components/motion';
+import { themeScript } from '@/components/ThemeToggle';
 import { site, orgSchema } from '@/data/site';
 
 // A delicate high-contrast serif, set light and large — the calm voice.
@@ -42,11 +43,19 @@ export const metadata = {
   other: { 'geo.region': 'PK-IS', 'geo.placename': site.city },
 };
 
-export const viewport = { themeColor: '#0A110D' };
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0A110D' },
+    { media: '(prefers-color-scheme: light)', color: '#EDF0EC' },
+  ],
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <a className="skip" href="#main">Skip to content</a>
         <SmoothScroll />

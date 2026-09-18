@@ -17,13 +17,16 @@
   --sage-deep:#5E8C6E;   /* meaningful lines */
   --pine:#132219;        /* deep ground */
   --pine-soft:#A9B7AC;   /* muted text on pine */
-  --gold:#F4A261;        /* accent text on dark  10:1 */
-  --gold-soft:#D97736;   /* accent fill */
-  --ember:#D97736;
+  --gold:#F4A261;        /* accent text on the page — flips with the theme */
+  --gold-soft:#E3B87C;   /* accent on the always-dark bands — never flips */
+  --ember:#D97736;       /* fills, gradients and glows — never flip */
   --sun:#F4A261;
   --clay:#E76F51;
-  --glass:rgba(10,17,13,.75);
-  --edge:rgba(255,255,255,.10);
+  --glass:rgba(10,17,13,.75);   /* dock, pills, sticky bar */
+  --edge:rgba(255,255,255,.10); /* hairline on glass */
+  --soft:rgba(244,246,240,.04); /* barely-there surface fill */
+  --rail:rgba(244,246,240,.09); /* meter track */
+  --scrim:rgba(10,17,13,.96);   /* full-screen mobile menu */
 
   --r-xl:34px;
   --r-lg:24px;
@@ -40,6 +43,33 @@
   --ease:cubic-bezier(.22,.8,.3,1);
   --dock-h:74px;
   color-scheme:dark;
+}
+
+/* ===================== light ===================== */
+/* The original dawn palette. Same token names, so every rule above and below
+   holds its meaning — only the values cross back over. */
+@media (prefers-color-scheme:light){ :root:not([data-theme="dark"]){ color-scheme:light } }
+:root[data-theme="light"]{ color-scheme:light }
+
+@media (prefers-color-scheme:light){ :root:not([data-theme="dark"]){
+  --mist:#EDF0EC; --cloud:#F7F9F6; --forest:#DFE5DF; --haze:#DFE5DF;
+  --ink:#1F2621; --slate:#5A6961; --sage:#7E9384; --sage-deep:#5E7166;
+  --gold:#856228;
+  --glass:rgba(255,255,255,.74); --edge:rgba(31,38,33,.10);
+  --soft:rgba(31,38,33,.03); --rail:rgba(31,38,33,.10); --scrim:rgba(237,240,236,.97);
+  --lift-1:0 1px 2px rgba(31,38,33,.04), 0 6px 16px -10px rgba(46,58,52,.18);
+  --lift-2:0 1px 3px rgba(31,38,33,.05), 0 14px 34px -16px rgba(46,58,52,.22), 0 40px 70px -46px rgba(46,58,52,.28);
+  --lift-3:0 2px 6px rgba(31,38,33,.05), 0 26px 60px -22px rgba(46,58,52,.26), 0 60px 110px -60px rgba(46,58,52,.34);
+}}
+:root[data-theme="light"]{
+  --mist:#EDF0EC; --cloud:#F7F9F6; --forest:#DFE5DF; --haze:#DFE5DF;
+  --ink:#1F2621; --slate:#5A6961; --sage:#7E9384; --sage-deep:#5E7166;
+  --gold:#856228;
+  --glass:rgba(255,255,255,.74); --edge:rgba(31,38,33,.10);
+  --soft:rgba(31,38,33,.03); --rail:rgba(31,38,33,.10); --scrim:rgba(237,240,236,.97);
+  --lift-1:0 1px 2px rgba(31,38,33,.04), 0 6px 16px -10px rgba(46,58,52,.18);
+  --lift-2:0 1px 3px rgba(31,38,33,.05), 0 14px 34px -16px rgba(46,58,52,.22), 0 40px 70px -46px rgba(46,58,52,.28);
+  --lift-3:0 2px 6px rgba(31,38,33,.05), 0 26px 60px -22px rgba(46,58,52,.26), 0 60px 110px -60px rgba(46,58,52,.34);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -107,8 +137,8 @@ em{font-style:italic}
 }
 .btn:hover{transform:translateY(-2px);box-shadow:var(--lift-2),0 10px 40px -12px rgba(217,119,54,.7)}
 .btn--gold{background:linear-gradient(135deg,var(--clay),var(--ember))}
-.btn--quiet{background:rgba(244,246,240,.04);color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge);backdrop-filter:blur(10px)}
-.btn--quiet:hover{background:rgba(244,246,240,.09);box-shadow:inset 0 0 0 1px rgba(244,246,240,.24),var(--lift-1)}
+.btn--quiet{background:var(--soft);color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge);backdrop-filter:blur(10px)}
+.btn--quiet:hover{background:var(--rail);box-shadow:inset 0 0 0 1px var(--sage-deep),var(--lift-1)}
 .on-pine .btn--quiet{color:var(--cloud);box-shadow:inset 0 0 0 1px rgba(247,249,246,.3)}
 .on-pine .btn--quiet:hover{background:rgba(247,249,246,.08);box-shadow:inset 0 0 0 1px rgba(247,249,246,.5)}
 .btn--sm{padding:.7rem 1.3rem;font-size:.88rem}
@@ -194,7 +224,7 @@ em{font-style:italic}
 .trip__tag{
   position:absolute;top:1.1rem;left:1.1rem;padding:.42rem 1rem;border-radius:999px;
   background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(244,162,97,.4);
-  font-size:.82rem;color:var(--sun);box-shadow:var(--lift-1);
+  font-size:.82rem;color:var(--gold);box-shadow:var(--lift-1);
 }
 .trip__when{color:var(--gold);font-family:var(--f-display),serif;font-style:italic;font-size:1.18rem;margin-bottom:.5rem}
 .trip h3{font-size:clamp(1.9rem,1.4rem + 1.8vw,3rem);font-weight:300;letter-spacing:-.018em;line-height:1.08;margin-bottom:1rem}
@@ -344,7 +374,7 @@ em{font-style:italic}
 .rows b{font-weight:500;font-size:.92rem;color:var(--gold);white-space:nowrap}
 .prose p{margin-bottom:1.25rem;max-width:60ch;color:var(--slate)}
 .prose p:first-child{font-family:var(--f-display),serif;font-size:1.5rem;font-weight:300;line-height:1.42;color:var(--ink)}
-.rows a:hover h3{color:var(--sun)}
+.rows a:hover h3{color:var(--gold)}
 .creds{list-style:none;margin:1.5rem 0 0;padding:0;columns:2;column-gap:2.5rem;font-size:.84rem;color:var(--slate);line-height:1.6}
 .creds li{break-inside:avoid;margin-bottom:.6rem}
 .creds a{color:var(--sage-deep)}
@@ -396,9 +426,9 @@ em{font-style:italic}
    Everything below layers on top of the structure above.
    =========================================================== */
 
-.on-pine,.close{background:linear-gradient(180deg,#0E1712,#132219 40%,#0A110D);color:var(--ink)}
-.on-pine .btn--quiet{color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge)}
-.on-pine .quote{background:rgba(244,246,240,.045);border:1px solid var(--edge)}
+.on-pine,.close{background:linear-gradient(180deg,#0E1712,#132219 40%,#0A110D);color:#F4F6F0}
+.on-pine .btn--quiet{color:#F4F6F0;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.on-pine .quote{background:rgba(244,246,240,.045);border:1px solid rgba(255,255,255,.12)}
 
 /* --- floating island dock --------------------------------- */
 .top{position:fixed;inset:0 0 auto;padding:.85rem var(--gut) 0;background:none;pointer-events:none}
@@ -418,8 +448,8 @@ em{font-style:italic}
 /* live departure ticker inside the dock */
 .live{
   display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;
-  font-size:.78rem;letter-spacing:.01em;color:var(--pine-soft);
-  padding:.4rem .85rem;border-radius:999px;background:rgba(244,246,240,.05);
+  font-size:.78rem;letter-spacing:.01em;color:var(--slate);
+  padding:.4rem .85rem;border-radius:999px;background:var(--soft);
   border:1px solid var(--edge);
 }
 .live b{font-weight:500;color:var(--ink)}
@@ -441,13 +471,13 @@ em{font-style:italic}
 @media (max-width:920px){
   /* backdrop-filter makes .top__in a containing block, which would trap the
      fixed full-screen menu inside the dock. Solid glass instead on mobile. */
-  .top__in{border-radius:22px;backdrop-filter:none;background:rgba(10,17,13,.94)}
-  .menu{position:fixed;inset:0;background:rgba(10,17,13,.97)}
+  .top__in{border-radius:22px;backdrop-filter:none;background:var(--scrim)}
+  .menu{position:fixed;inset:0;background:var(--scrim)}
   .top__cta{display:none !important}
 }
 
 /* --- cinematic hero --------------------------------------- */
-.cine{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden;padding:calc(var(--dock-h) + 3rem) 0 clamp(2rem,5vw,4rem)}
+.cine{color:#F4F6F0;position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden;padding:calc(var(--dock-h) + 3rem) 0 clamp(2rem,5vw,4rem)}
 .cine__bg{position:absolute;inset:-8%;z-index:0;will-change:transform}
 .cine__bg img{width:100%;height:100%;object-fit:cover}
 .cine__veil{
@@ -488,7 +518,7 @@ em{font-style:italic}
 .facts div:hover{border-color:rgba(244,162,97,.4);transform:translateY(-3px)}
 .facts dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:.5rem}
 .facts dd{font-size:1.8rem;color:var(--ink)}
-.facts dd small{font-family:var(--f-body),sans-serif;font-size:.78rem;color:var(--sun);letter-spacing:.04em;display:block;margin-top:.15rem}
+.facts dd small{font-family:var(--f-body),sans-serif;font-size:.78rem;color:var(--gold);letter-spacing:.04em;display:block;margin-top:.15rem}
 
 /* --- interactive elevation trail -------------------------- */
 .pf{margin:2.2rem 0 4.4rem;cursor:crosshair;touch-action:pan-y}
@@ -504,10 +534,10 @@ em{font-style:italic}
 .pf__tag b{color:var(--slate);transition:color .3s}
 .pf__tag i{color:var(--sage-deep)}
 .pf__stop.is-on .pf__tag b{color:var(--ink)}
-.pf__stop.is-on .pf__tag i{color:var(--sun)}
+.pf__stop.is-on .pf__tag i{color:var(--gold)}
 .pf__read{
   position:absolute;top:-1.6rem;left:0;font-size:.74rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--sun);pointer-events:none;
+  text-transform:uppercase;color:var(--gold);pointer-events:none;
 }
 
 /* --- trip cards ------------------------------------------- */
@@ -528,8 +558,8 @@ em{font-style:italic}
 /* seat fill meter */
 .seats{margin-top:1.8rem;display:grid;gap:.55rem}
 .seats__top{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
-.seats__top b{font-family:var(--f-display),serif;text-transform:none;letter-spacing:0;font-size:1.05rem;font-weight:400;color:var(--sun)}
-.seats__rail{height:6px;border-radius:999px;background:rgba(244,246,240,.09);overflow:hidden;position:relative}
+.seats__top b{font-family:var(--f-display),serif;text-transform:none;letter-spacing:0;font-size:1.05rem;font-weight:400;color:var(--gold)}
+.seats__rail{height:6px;border-radius:999px;background:var(--rail);overflow:hidden;position:relative}
 .seats__fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ember),var(--sun));box-shadow:0 0 18px rgba(217,119,54,.6)}
 .seats__note{font-size:.82rem;color:var(--clay)}
 
@@ -564,7 +594,7 @@ em{font-style:italic}
 .tip{
   position:fixed;z-index:80;pointer-events:none;padding:.4rem .75rem;border-radius:999px;
   background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(244,162,97,.35);
-  color:var(--sun);font-size:.76rem;letter-spacing:.06em;transform:translate(-50%,-160%);
+  color:var(--gold);font-size:.76rem;letter-spacing:.06em;transform:translate(-50%,-160%);
 }
 
 /* lightbox */
@@ -572,12 +602,12 @@ em{font-style:italic}
 .lb figure{margin:0;max-width:min(1100px,92vw);width:100%}
 .lb img{width:100%;max-height:74svh;object-fit:contain;border-radius:var(--r-lg)}
 .lb figcaption{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between;margin-top:1.2rem;color:var(--ink)}
-.lb__x{position:absolute;top:1.2rem;right:1.2rem;background:rgba(244,246,240,.07);border:1px solid var(--edge);color:var(--ink);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+.lb__x{position:absolute;top:1.2rem;right:1.2rem;background:rgba(244,246,240,.07);border:1px solid rgba(255,255,255,.18);color:#F4F6F0;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
 
 /* --- reasons: cursor-tracking glow ------------------------ */
 .reasons li{
   position:relative;padding:1.6rem 1.5rem;border-radius:var(--r);
-  background:rgba(244,246,240,.025);border:1px solid var(--edge);overflow:hidden;
+  background:var(--soft);border:1px solid var(--edge);overflow:hidden;
 }
 .reasons li::before{
   content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;
@@ -608,7 +638,7 @@ em{font-style:italic}
 .dockbar__txt{display:grid;gap:.1rem;min-width:0;flex:1}
 .dockbar__txt b{font-family:var(--f-display),serif;font-weight:400;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dockbar__txt span{font-size:.78rem;color:var(--slate)}
-.dockbar__price{font-family:var(--f-display),serif;font-size:1.35rem;color:var(--sun);white-space:nowrap}
+.dockbar__price{font-family:var(--f-display),serif;font-size:1.35rem;color:var(--gold);white-space:nowrap}
 @media (max-width:620px){
   .dockbar__in{border-radius:20px;padding:.8rem}
   .dockbar__price{font-size:1.1rem}
@@ -619,8 +649,8 @@ em{font-style:italic}
 .faq details{border-color:var(--haze)}
 .rows a{border-color:var(--haze)}
 .rows a:first-child{border-top-color:var(--haze)}
-.foot{background:linear-gradient(180deg,#0A110D,#0E1712);color:var(--ink)}
-.foot .brand__txt,.foot h4{color:var(--gold)}
+.foot{background:linear-gradient(180deg,#0A110D,#0E1712);color:#F4F6F0}
+.foot .brand__txt,.foot h4{color:var(--gold-soft)}
 .hero__frame,.shot,.valley,.trip__media{background:var(--forest)}
 .book .btn--quiet{margin-bottom:0}
 
@@ -639,3 +669,47 @@ em{font-style:italic}
 .nf{padding-top:calc(var(--dock-h) + 6rem)}
 .hero{padding-top:calc(var(--dock-h) + clamp(2.25rem,4.5vw,3.75rem))}
 body{padding-bottom:0}
+
+/* The dawn gradient, for when the page is light. */
+:root[data-theme="light"] .mistfield,
+.light-field{
+  background:
+    radial-gradient(90% 60% at 12% -5%, rgba(214,183,122,.20), transparent 62%),
+    radial-gradient(75% 55% at 88% 6%, rgba(126,147,132,.24), transparent 66%),
+    radial-gradient(120% 70% at 50% 108%, rgba(126,147,132,.16), transparent 70%),
+    linear-gradient(180deg, #F8FAF7 0%, var(--mist) 46%, #E6EBE6 100%);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .mistfield{
+    background:
+      radial-gradient(90% 60% at 12% -5%, rgba(214,183,122,.20), transparent 62%),
+      radial-gradient(75% 55% at 88% 6%, rgba(126,147,132,.24), transparent 66%),
+      radial-gradient(120% 70% at 50% 108%, rgba(126,147,132,.16), transparent 70%),
+      linear-gradient(180deg, #F8FAF7 0%, var(--mist) 46%, #E6EBE6 100%);
+  }
+}
+/* Grain reads as dirt on a light ground — dial it back. */
+:root[data-theme="light"] .grain::after{opacity:.03;mix-blend-mode:multiply}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .grain::after{opacity:.03;mix-blend-mode:multiply}}
+
+/* ===================== theme toggle ===================== */
+.tog{
+  display:grid;place-items:center;width:38px;height:38px;flex:none;cursor:pointer;
+  border-radius:50%;border:1px solid var(--edge);background:var(--soft);color:var(--ink);
+  transition:background .3s,border-color .3s,transform .4s var(--ease);
+}
+.tog:hover{background:var(--rail);border-color:var(--sage-deep);transform:rotate(-18deg)}
+.tog .sun{display:none}
+:root[data-theme="light"] .tog .sun{display:block}
+:root[data-theme="light"] .tog .moon{display:none}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]) .tog .sun{display:block}
+  :root:not([data-theme="dark"]) .tog .moon{display:none}
+}
+
+.dockbar__x{
+  flex:none;display:grid;place-items:center;width:32px;height:32px;cursor:pointer;
+  border-radius:50%;border:1px solid var(--edge);background:var(--soft);color:var(--slate);
+  transition:color .3s,background .3s,border-color .3s;
+}
+.dockbar__x:hover{color:var(--ink);background:var(--rail);border-color:var(--sage-deep)}

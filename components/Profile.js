@@ -72,8 +72,8 @@ export default function Profile({ stops, tall = false, className = '' }) {
             <stop offset="100%" stopColor="var(--sage-deep)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id={`ridge-${uid}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#1F382B" stopOpacity=".9" />
-            <stop offset="100%" stopColor="#1F382B" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--sage)" stopOpacity=".9" />
+            <stop offset="100%" stopColor="var(--sage)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id={`lit-${uid}`} x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="var(--ember)" />

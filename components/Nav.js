@@ -6,6 +6,7 @@ import { site, nextDeparture } from '@/data/site';
 import { Magnetic } from './motion';
 import { WaIcon } from './ui';
 import Mark from './Mark';
+import ThemeToggle from './ThemeToggle';
 
 const links = [
   { href: '/tours', label: 'Trips' },
@@ -49,6 +50,8 @@ export default function Nav() {
             </Link>
           ))}
         </nav>
+
+        <ThemeToggle />
 
         <Magnetic className="top__cta">
           <a className="btn btn--sm btn--wa" href={site.wa} rel="noopener">
