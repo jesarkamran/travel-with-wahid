@@ -1,5 +1,6 @@
 import { destinations, tours, site } from '@/data/site';
-import { Valley, Close, Jsonld } from '@/components/ui';
+import { Valley, Close } from '@/components/ui';
+import { Jsonld } from '@/components/fmt';
 
 export const metadata = {
   title: 'Valleys We Travel To',

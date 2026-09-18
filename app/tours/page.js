@@ -1,5 +1,6 @@
 import { tours, tripSchema, site, waLink } from '@/data/site';
-import { Trip, Close, Jsonld, money } from '@/components/ui';
+import { Trip, Close } from '@/components/ui';
+import { Jsonld, money } from '@/components/fmt';
 
 export const metadata = {
   title: 'Upcoming Trips & Prices',

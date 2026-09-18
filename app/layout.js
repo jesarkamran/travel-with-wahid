@@ -1,17 +1,19 @@
 import './globals.css';
-import { Cormorant_Garamond, Karla } from 'next/font/google';
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { Jsonld } from '@/components/ui';
+import { Jsonld } from '@/components/fmt';
+import StickyBook from '@/components/StickyBook';
+import { SmoothScroll } from '@/components/motion';
 import { site, orgSchema } from '@/data/site';
 
 // A delicate high-contrast serif, set light and large — the calm voice.
 const display = Cormorant_Garamond({
-  subsets: ['latin'], weight: ['300', '400', '500'], style: ['normal', 'italic'],
+  subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'],
   variable: '--f-display', display: 'swap',
 });
-// Karla is warm and quiet underneath it, and holds up at small sizes.
-const body = Karla({ subsets: ['latin'], weight: ['400', '500'], variable: '--f-body', display: 'swap' });
+// Plus Jakarta Sans underneath it — clean at badge size, steady in the dark.
+const body = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--f-body', display: 'swap' });
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -40,16 +42,18 @@ export const metadata = {
   other: { 'geo.region': 'PK-IS', 'geo.placename': site.city },
 };
 
-export const viewport = { themeColor: '#EDF0EC' };
+export const viewport = { themeColor: '#0A110D' };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
         <a className="skip" href="#main">Skip to content</a>
+        <SmoothScroll />
         <Nav />
         <main id="main">{children}</main>
         <Footer />
+        <StickyBook />
         <Jsonld data={[orgSchema, { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, publisher: { '@id': `${site.url}/#org` }, inLanguage: 'en' }]} />
       </body>
     </html>

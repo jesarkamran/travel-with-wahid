@@ -5,36 +5,46 @@
    =========================================================== */
 
 :root{
-  --mist:#EDF0EC;        /* page */
-  --cloud:#F7F9F6;       /* raised surface */
-  --haze:#DFE5DF;        /* hairlines */
-  --ink:#1F2621;         /* text            13.5:1 on mist */
-  --slate:#5A6961;       /* muted text       5.0:1 on mist */
-  --sage:#7E9384;        /* decorative wash */
-  --sage-deep:#5E7166;   /* meaningful lines 4.5:1 */
-  --pine:#2C3A34;        /* deep ground */
-  --pine-soft:#B4C2B8;   /* muted text on pine 6.4:1 */
-  --gold:#856228;        /* accent text on light 4.8:1 */
-  --gold-soft:#D6B77A;   /* accent on pine       6.2:1 */
+  /* Rugged editorial alpine. Names kept from the light build so every existing
+     rule keeps its meaning — only the values crossed over to night. */
+  --mist:#0A110D;        /* page */
+  --cloud:#132219;       /* raised surface */
+  --forest:#1F382B;      /* lifted surface */
+  --haze:rgba(244,246,240,.11);  /* hairlines */
+  --ink:#F4F6F0;         /* text            17:1 on mist */
+  --slate:#94A3B8;       /* muted text       7.4:1 on mist */
+  --sage:#1F382B;        /* decorative wash */
+  --sage-deep:#5E8C6E;   /* meaningful lines */
+  --pine:#132219;        /* deep ground */
+  --pine-soft:#A9B7AC;   /* muted text on pine */
+  --gold:#F4A261;        /* accent text on dark  10:1 */
+  --gold-soft:#D97736;   /* accent fill */
+  --ember:#D97736;
+  --sun:#F4A261;
+  --clay:#E76F51;
+  --glass:rgba(10,17,13,.75);
+  --edge:rgba(255,255,255,.10);
 
   --r-xl:34px;
   --r-lg:24px;
   --r:16px;
   --r-sm:10px;
 
-  /* depth is sage-tinted and layered — never a grey drop shadow */
-  --lift-1:0 1px 2px rgba(31,38,33,.04), 0 6px 16px -10px rgba(46,58,52,.18);
-  --lift-2:0 1px 3px rgba(31,38,33,.05), 0 14px 34px -16px rgba(46,58,52,.22), 0 40px 70px -46px rgba(46,58,52,.28);
-  --lift-3:0 2px 6px rgba(31,38,33,.05), 0 26px 60px -22px rgba(46,58,52,.26), 0 60px 110px -60px rgba(46,58,52,.34);
+  /* depth on a dark ground is shadow plus a hairline of light on the top edge */
+  --lift-1:0 1px 2px rgba(0,0,0,.4), 0 8px 20px -12px rgba(0,0,0,.6);
+  --lift-2:0 2px 6px rgba(0,0,0,.45), 0 18px 44px -18px rgba(0,0,0,.7);
+  --lift-3:0 4px 12px rgba(0,0,0,.5), 0 34px 80px -26px rgba(0,0,0,.8), 0 0 0 1px var(--edge);
 
   --wrap:1200px;
   --gut:clamp(1.25rem,5vw,3.25rem);
   --ease:cubic-bezier(.22,.8,.3,1);
-  color-scheme:light;
+  --dock-h:74px;
+  color-scheme:dark;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.lenis{scroll-behavior:auto}
 body{
   margin:0;background:var(--mist);color:var(--ink);
   font-family:var(--f-body),system-ui,sans-serif;
@@ -65,7 +75,7 @@ em{font-style:italic}
 .kicker{font-size:.94rem;color:var(--gold);margin-bottom:1.1rem;font-style:italic;font-family:var(--f-display),serif;font-size:1.12rem}
 
 :focus-visible{outline:2.5px solid var(--sage-deep);outline-offset:4px;border-radius:4px}
-.skip{position:absolute;left:-9999px;background:var(--pine);color:var(--cloud);padding:.8rem 1.2rem;border-radius:0 0 var(--r-sm) 0}
+.skip{position:absolute;left:-9999px;background:var(--forest);color:var(--ink);padding:.8rem 1.2rem;border-radius:0 0 var(--r-sm) 0}
 .skip:focus{left:0;top:0;z-index:99}
 
 /* ===================== atmosphere ===================== */
@@ -73,30 +83,32 @@ em{font-style:italic}
 .mistfield{
   position:relative;
   background:
-    radial-gradient(90% 60% at 12% -5%, rgba(214,183,122,.20), transparent 62%),
-    radial-gradient(75% 55% at 88% 6%, rgba(126,147,132,.24), transparent 66%),
-    radial-gradient(120% 70% at 50% 108%, rgba(126,147,132,.16), transparent 70%),
-    linear-gradient(180deg, #F8FAF7 0%, var(--mist) 46%, #E6EBE6 100%);
+    radial-gradient(90% 60% at 12% -5%, rgba(217,119,54,.16), transparent 62%),
+    radial-gradient(75% 55% at 88% 6%, rgba(31,56,43,.75), transparent 66%),
+    radial-gradient(120% 70% at 50% 108%, rgba(94,140,110,.14), transparent 70%),
+    linear-gradient(180deg, #0C140F 0%, var(--mist) 46%, #070C09 100%);
 }
 .fade-top::before,.fade-bot::after{
   content:"";position:absolute;left:0;right:0;height:120px;pointer-events:none;
 }
 .fade-bot::after{bottom:0;background:linear-gradient(180deg,transparent,var(--mist))}
+/* film grain, laid over anything that wants texture */
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* ===================== buttons ===================== */
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
   font-family:var(--f-body),sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.005em;
   padding:.92rem 1.7rem;border:0;border-radius:999px;text-decoration:none;cursor:pointer;
-  background:var(--pine);color:var(--cloud);
-  box-shadow:var(--lift-1);
+  position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(135deg,var(--ember),var(--sun));color:#0A110D;
+  box-shadow:var(--lift-1),0 0 0 1px rgba(244,162,97,.35);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:var(--lift-2);background:#222E29}
-.btn--gold{background:var(--gold-soft);color:var(--ink)}
-.btn--gold:hover{background:#E0C68E}
-.btn--quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--haze)}
-.btn--quiet:hover{background:var(--cloud);box-shadow:inset 0 0 0 1px var(--sage),var(--lift-1)}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--lift-2),0 10px 40px -12px rgba(217,119,54,.7)}
+.btn--gold{background:linear-gradient(135deg,var(--clay),var(--ember))}
+.btn--quiet{background:rgba(244,246,240,.04);color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge);backdrop-filter:blur(10px)}
+.btn--quiet:hover{background:rgba(244,246,240,.09);box-shadow:inset 0 0 0 1px rgba(244,246,240,.24),var(--lift-1)}
 .on-pine .btn--quiet{color:var(--cloud);box-shadow:inset 0 0 0 1px rgba(247,249,246,.3)}
 .on-pine .btn--quiet:hover{background:rgba(247,249,246,.08);box-shadow:inset 0 0 0 1px rgba(247,249,246,.5)}
 .btn--sm{padding:.7rem 1.3rem;font-size:.88rem}
@@ -113,7 +125,7 @@ em{font-style:italic}
 
 /* ===================== masthead ===================== */
 .top{position:sticky;top:0;z-index:60;transition:background .5s var(--ease),box-shadow .5s,backdrop-filter .5s}
-.top.stuck{background:rgba(237,240,236,.78);backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 1px 0 var(--haze)}
+.top.stuck{background:transparent}
 .top__in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.1rem 0;transition:padding .5s var(--ease)}
 .top.stuck .top__in{padding:.7rem 0}
 .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
@@ -135,7 +147,7 @@ em{font-style:italic}
   /* backdrop-filter on .top makes it a containing block for position:fixed
      children, which trapped this overlay inside the 62px bar once the header
      went sticky. Solid background on mobile instead. */
-  .top.stuck{backdrop-filter:none;background:var(--mist)}
+  .top.stuck{backdrop-filter:none;background:transparent}
   .menu{
     position:fixed;inset:0;flex-direction:column;justify-content:center;gap:.4rem;
     background:var(--mist);
@@ -181,8 +193,8 @@ em{font-style:italic}
 .trip:hover .trip__media img{transform:scale(1.035)}
 .trip__tag{
   position:absolute;top:1.1rem;left:1.1rem;padding:.42rem 1rem;border-radius:999px;
-  background:rgba(247,249,246,.9);backdrop-filter:blur(8px);
-  font-size:.82rem;color:var(--ink);box-shadow:var(--lift-1);
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(244,162,97,.4);
+  font-size:.82rem;color:var(--sun);box-shadow:var(--lift-1);
 }
 .trip__when{color:var(--gold);font-family:var(--f-display),serif;font-style:italic;font-size:1.18rem;margin-bottom:.5rem}
 .trip h3{font-size:clamp(1.9rem,1.4rem + 1.8vw,3rem);font-weight:300;letter-spacing:-.018em;line-height:1.08;margin-bottom:1rem}
@@ -235,7 +247,7 @@ em{font-style:italic}
 .valley__alt{
   position:absolute;top:1.1rem;right:1.1rem;z-index:2;
   padding:.35rem .8rem;border-radius:999px;font-size:.78rem;
-  background:rgba(247,249,246,.88);backdrop-filter:blur(8px);color:var(--ink);
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--edge);color:var(--ink);
 }
 @media (min-width:980px){
   .valleys{grid-template-columns:repeat(3,1fr)}
@@ -271,7 +283,7 @@ em{font-style:italic}
 
 .quotes{display:grid;gap:clamp(1rem,2vw,1.6rem);grid-template-columns:repeat(auto-fit,minmax(265px,1fr))}
 .quote{
-  margin:0;background:var(--cloud);border-radius:var(--r-lg);padding:2rem 1.8rem;
+  margin:0;background:var(--cloud);border:1px solid var(--edge);border-radius:var(--r-lg);padding:2rem 1.8rem;
   box-shadow:var(--lift-1);display:flex;flex-direction:column;gap:1.2rem;
 }
 .on-pine .quote{background:rgba(247,249,246,.06);box-shadow:none;backdrop-filter:blur(4px)}
@@ -307,7 +319,7 @@ em{font-style:italic}
 }
 .days p{color:var(--slate)}
 .book{
-  position:sticky;top:96px;background:var(--cloud);border-radius:var(--r-lg);
+  position:sticky;top:calc(var(--dock-h) + 28px);background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--edge);border-radius:var(--r-lg);
   padding:1.9rem;box-shadow:var(--lift-2);
 }
 .book .price{display:block;margin-bottom:.15rem}
@@ -332,6 +344,7 @@ em{font-style:italic}
 .rows b{font-weight:500;font-size:.92rem;color:var(--gold);white-space:nowrap}
 .prose p{margin-bottom:1.25rem;max-width:60ch;color:var(--slate)}
 .prose p:first-child{font-family:var(--f-display),serif;font-size:1.5rem;font-weight:300;line-height:1.42;color:var(--ink)}
+.rows a:hover h3{color:var(--sun)}
 .creds{list-style:none;margin:1.5rem 0 0;padding:0;columns:2;column-gap:2.5rem;font-size:.84rem;color:var(--slate);line-height:1.6}
 .creds li{break-inside:avoid;margin-bottom:.6rem}
 .creds a{color:var(--sage-deep)}
@@ -377,3 +390,252 @@ em{font-style:italic}
   *,*::before,*::after{animation-duration:.001ms !important;animation-delay:0ms !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
 }
+
+/* ===========================================================
+   NIGHT BUILD — the pieces that move.
+   Everything below layers on top of the structure above.
+   =========================================================== */
+
+.on-pine,.close{background:linear-gradient(180deg,#0E1712,#132219 40%,#0A110D);color:var(--ink)}
+.on-pine .btn--quiet{color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge)}
+.on-pine .quote{background:rgba(244,246,240,.045);border:1px solid var(--edge)}
+
+/* --- floating island dock --------------------------------- */
+.top{position:fixed;inset:0 0 auto;padding:.85rem var(--gut) 0;background:none;pointer-events:none}
+.top .wrap{pointer-events:auto}
+.top__in{
+  background:var(--glass);backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid var(--edge);border-radius:999px;
+  padding:.6rem .7rem .6rem 1.2rem;gap:1.1rem;
+  box-shadow:0 10px 40px -18px rgba(0,0,0,.9);
+  transition:padding .5s var(--ease),transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s;
+}
+.top.stuck .top__in{padding:.5rem .6rem .5rem 1.1rem;border-color:rgba(244,162,97,.22);box-shadow:0 14px 50px -18px rgba(0,0,0,1)}
+.top.stuck{background:none}
+.menu{gap:1.6rem}
+.brand__txt{white-space:nowrap}
+
+/* live departure ticker inside the dock */
+.live{
+  display:inline-flex;align-items:center;gap:.5rem;white-space:nowrap;
+  font-size:.78rem;letter-spacing:.01em;color:var(--pine-soft);
+  padding:.4rem .85rem;border-radius:999px;background:rgba(244,246,240,.05);
+  border:1px solid var(--edge);
+}
+.live b{font-weight:500;color:var(--ink)}
+.live__dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;flex:none;box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@media (max-width:1180px){.live{display:none}}
+
+/* WhatsApp CTA pulse */
+.btn--wa{overflow:visible;background:linear-gradient(135deg,#1FA855,#25D366);color:#05140B;box-shadow:var(--lift-1),0 0 0 1px rgba(37,211,102,.4)}
+.btn--wa:hover{box-shadow:var(--lift-2),0 10px 40px -10px rgba(37,211,102,.8)}
+/* two rings, half a beat apart */
+.btn--wa::before,.btn--wa::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  box-shadow:0 0 0 0 rgba(37,211,102,.55);animation:ping-lg 2.8s var(--ease) infinite;
+}
+.btn--wa::before{animation-delay:1.4s}
+@keyframes ping-lg{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}65%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+@media (max-width:920px){
+  /* backdrop-filter makes .top__in a containing block, which would trap the
+     fixed full-screen menu inside the dock. Solid glass instead on mobile. */
+  .top__in{border-radius:22px;backdrop-filter:none;background:rgba(10,17,13,.94)}
+  .menu{position:fixed;inset:0;background:rgba(10,17,13,.97)}
+  .top__cta{display:none !important}
+}
+
+/* --- cinematic hero --------------------------------------- */
+.cine{position:relative;min-height:100svh;display:grid;align-items:end;overflow:hidden;padding:calc(var(--dock-h) + 3rem) 0 clamp(2rem,5vw,4rem)}
+.cine__bg{position:absolute;inset:-8%;z-index:0;will-change:transform}
+.cine__bg img{width:100%;height:100%;object-fit:cover}
+.cine__veil{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(10,17,13,.82) 0%,rgba(10,17,13,.3) 34%,rgba(10,17,13,.72) 72%,var(--mist) 100%),
+    radial-gradient(120% 80% at 50% 50%,transparent 38%,rgba(10,17,13,.85) 100%);
+}
+/* drifting fog banks */
+.fog{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.fog span{
+  position:absolute;left:-40%;width:180%;height:60%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(180,200,190,.14),transparent 72%);
+  filter:blur(28px);
+}
+.fog span:nth-child(1){top:38%;animation:drift 42s linear infinite}
+.fog span:nth-child(2){top:58%;opacity:.7;animation:drift 66s linear infinite reverse}
+.fog span:nth-child(3){top:20%;opacity:.45;animation:drift 90s linear infinite}
+@keyframes drift{from{transform:translate3d(-12%,0,0)}to{transform:translate3d(12%,0,0)}}
+
+.cine__in{position:relative;z-index:3;text-align:center;max-width:52rem;margin-inline:auto}
+.cine h1{font-size:clamp(3rem,1.8rem + 6vw,7rem);margin-bottom:1.4rem}
+.cine h1 em{display:block;font-size:.78em;background:linear-gradient(100deg,var(--sun),#fff 45%,var(--ember));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cine .lede{margin-inline:auto;text-align:center;color:#D5DED6}
+.cine__cta{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:2.4rem}
+/* masked line reveal */
+.mask{display:block;overflow:hidden;padding-bottom:.08em}
+.scroll-hint{position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);z-index:3;color:var(--slate);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;display:grid;justify-items:center;gap:.5rem}
+.scroll-hint i{display:block;width:1px;height:38px;background:linear-gradient(var(--sun),transparent)}
+
+/* altitude / stats glass cards */
+.facts{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;position:relative;z-index:3}
+.facts div{
+  text-align:left;padding:1.2rem 1.3rem;border-radius:var(--r);
+  background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);
+  box-shadow:var(--lift-1);transition:border-color .4s,transform .4s var(--ease);
+}
+.facts div:hover{border-color:rgba(244,162,97,.4);transform:translateY(-3px)}
+.facts dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:.5rem}
+.facts dd{font-size:1.8rem;color:var(--ink)}
+.facts dd small{font-family:var(--f-body),sans-serif;font-size:.78rem;color:var(--sun);letter-spacing:.04em;display:block;margin-top:.15rem}
+
+/* --- interactive elevation trail -------------------------- */
+.pf{margin:2.2rem 0 4.4rem;cursor:crosshair;touch-action:pan-y}
+.pf--tall{margin:2.8rem 0 4.6rem}
+.pf__ridge{fill:url(#ridge-fade);opacity:.5}
+.pf__stop{cursor:pointer}
+.pf__dot{
+  width:7px;height:7px;background:var(--sage-deep);
+  transition:transform .35s var(--ease),background .3s,box-shadow .3s;
+}
+.pf__stop.is-on .pf__dot{background:var(--sun);transform:scale(1.9);box-shadow:0 0 0 6px rgba(244,162,97,.18),0 0 22px rgba(244,162,97,.9)}
+.pf__stop--end .pf__dot{background:var(--ember);box-shadow:0 0 0 5px rgba(217,119,54,.18)}
+.pf__tag b{color:var(--slate);transition:color .3s}
+.pf__tag i{color:var(--sage-deep)}
+.pf__stop.is-on .pf__tag b{color:var(--ink)}
+.pf__stop.is-on .pf__tag i{color:var(--sun)}
+.pf__read{
+  position:absolute;top:-1.6rem;left:0;font-size:.74rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--sun);pointer-events:none;
+}
+
+/* --- trip cards ------------------------------------------- */
+.trip{perspective:1400px}
+.trip__media{transform-style:preserve-3d;border:1px solid var(--edge)}
+.trip__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,17,13,.55));pointer-events:none}
+.trip__foot{border-top:1px solid var(--haze)}
+
+/* shimmering badge for fixed dates */
+.trip__tag{overflow:hidden}
+.trip__tag::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(244,162,97,.5) 50%,transparent 65%);
+  transform:translateX(-120%);animation:shimmer 3.6s var(--ease) infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+
+/* seat fill meter */
+.seats{margin-top:1.8rem;display:grid;gap:.55rem}
+.seats__top{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.seats__top b{font-family:var(--f-display),serif;text-transform:none;letter-spacing:0;font-size:1.05rem;font-weight:400;color:var(--sun)}
+.seats__rail{height:6px;border-radius:999px;background:rgba(244,246,240,.09);overflow:hidden;position:relative}
+.seats__fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ember),var(--sun));box-shadow:0 0 18px rgba(217,119,54,.6)}
+.seats__note{font-size:.82rem;color:var(--clay)}
+
+/* --- valley deck ------------------------------------------ */
+.deck{display:flex;gap:.9rem;height:clamp(380px,56vh,560px)}
+.deck .valley{flex:1 1 0;aspect-ratio:auto;height:100%;min-width:0;border:1px solid var(--edge);transition:flex-grow .7s var(--ease),filter .5s,transform .5s var(--ease)}
+.deck.has-active .valley{filter:blur(3px) saturate(.6) brightness(.6)}
+.deck .valley.is-active{flex-grow:2.6;filter:none;transform:none;box-shadow:var(--lift-3)}
+.deck .valley__more{max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .4s;display:block}
+.deck .valley.is-active .valley__more{max-height:14rem;opacity:1}
+.valley__coord{font-size:.7rem;letter-spacing:.14em;color:var(--sun);opacity:.8;margin-top:.8rem;display:block;font-variant-numeric:tabular-nums}
+.valley__season{display:inline-block;margin-top:.7rem;padding:.25rem .7rem;border-radius:999px;font-size:.74rem;background:rgba(244,162,97,.14);border:1px solid rgba(244,162,97,.3);color:var(--sun)}
+@media (max-width:900px){
+  .deck{display:grid;grid-template-columns:1fr;height:auto;gap:1rem}
+  .deck .valley{aspect-ratio:4/5;height:auto}
+  .deck.has-active .valley{filter:none}
+  .deck .valley__more{max-height:14rem;opacity:1}
+}
+
+/* --- masonry gallery -------------------------------------- */
+.masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.7rem,1.4vw,1.15rem);align-items:start}
+.masonry .shot{cursor:zoom-in;border:1px solid var(--edge);aspect-ratio:auto}
+.masonry .shot img{width:100%;height:100%;object-fit:cover}
+.masonry .shot::after{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;
+  background:radial-gradient(60% 45% at 30% 15%,rgba(255,236,204,.4),transparent 70%);
+  mix-blend-mode:screen;
+}
+.masonry .shot:hover::after{opacity:1}
+.masonry .shot:hover img{transform:scale(1.06)}
+@media (max-width:720px){.masonry{grid-template-columns:1fr 1fr}}
+.tip{
+  position:fixed;z-index:80;pointer-events:none;padding:.4rem .75rem;border-radius:999px;
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid rgba(244,162,97,.35);
+  color:var(--sun);font-size:.76rem;letter-spacing:.06em;transform:translate(-50%,-160%);
+}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:var(--gut);background:rgba(6,10,8,.92);backdrop-filter:blur(18px)}
+.lb figure{margin:0;max-width:min(1100px,92vw);width:100%}
+.lb img{width:100%;max-height:74svh;object-fit:contain;border-radius:var(--r-lg)}
+.lb figcaption{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between;margin-top:1.2rem;color:var(--ink)}
+.lb__x{position:absolute;top:1.2rem;right:1.2rem;background:rgba(244,246,240,.07);border:1px solid var(--edge);color:var(--ink);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer}
+
+/* --- reasons: cursor-tracking glow ------------------------ */
+.reasons li{
+  position:relative;padding:1.6rem 1.5rem;border-radius:var(--r);
+  background:rgba(244,246,240,.025);border:1px solid var(--edge);overflow:hidden;
+}
+.reasons li::before{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;
+  transition:opacity .4s;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(244,162,97,.16),transparent 70%);
+}
+.reasons li:hover::before{opacity:1}
+.reasons .line{background:linear-gradient(90deg,var(--ember),transparent);width:44px;opacity:1}
+
+/* --- testimonial marquee ---------------------------------- */
+.marquee{position:relative;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee__row{display:flex;gap:1.2rem;width:max-content}
+.marquee .quote{width:min(30rem,78vw);flex:none}
+.verified{display:inline-flex;align-items:center;gap:.35rem;font-size:.74rem;color:#4ADE80;margin-top:.5rem}
+
+/* --- sticky quick-book bar -------------------------------- */
+.dockbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;padding:0 var(--gut) max(.8rem,env(safe-area-inset-bottom));
+  pointer-events:none;
+}
+.dockbar__in{
+  pointer-events:auto;width:min(100% ,var(--wrap));margin-inline:auto;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  background:var(--glass);backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid var(--edge);border-radius:999px;padding:.6rem .6rem .6rem 1.4rem;
+  box-shadow:0 -6px 40px -14px rgba(0,0,0,.9);
+}
+.dockbar__txt{display:grid;gap:.1rem;min-width:0;flex:1}
+.dockbar__txt b{font-family:var(--f-display),serif;font-weight:400;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dockbar__txt span{font-size:.78rem;color:var(--slate)}
+.dockbar__price{font-family:var(--f-display),serif;font-size:1.35rem;color:var(--sun);white-space:nowrap}
+@media (max-width:620px){
+  .dockbar__in{border-radius:20px;padding:.8rem}
+  .dockbar__price{font-size:1.1rem}
+  .dockbar .btn{flex:1;justify-content:center}
+}
+
+/* --- misc dark fixes -------------------------------------- */
+.faq details{border-color:var(--haze)}
+.rows a{border-color:var(--haze)}
+.rows a:first-child{border-top-color:var(--haze)}
+.foot{background:linear-gradient(180deg,#0A110D,#0E1712);color:var(--ink)}
+.foot .brand__txt,.foot h4{color:var(--gold)}
+.hero__frame,.shot,.valley,.trip__media{background:var(--forest)}
+.book .btn--quiet{margin-bottom:0}
+
+@media (prefers-reduced-motion:reduce){
+  .fog span,.live__dot,.trip__tag::before,.btn--wa::after,.marquee__row{animation:none !important}
+}
+.marquee__row{animation:slide 46s linear infinite}
+.marquee:hover .marquee__row{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.kenburns{animation:kb 34s var(--ease) infinite alternate}
+@keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.16)}}
+@media (prefers-reduced-motion:reduce){.kenburns{animation:none}}
+
+/* The dock floats over everything, so every page top makes room for it. */
+.mast{padding-top:calc(var(--dock-h) + clamp(2.5rem,5vw,4rem))}
+.nf{padding-top:calc(var(--dock-h) + 6rem)}
+.hero{padding-top:calc(var(--dock-h) + clamp(2.25rem,4.5vw,3.75rem))}
+body{padding-bottom:0}

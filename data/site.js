@@ -10,7 +10,12 @@ export const site = {
   wa: 'https://wa.me/923363202576',
   waGroup: 'https://chat.whatsapp.com/GhAWT6pplhB7xk5o4RPT9F',
   instagram: 'https://www.instagram.com/travelwithwahid',
+  seatsPerVan: 12,
 };
+
+// Shown live in the dock and the quick-book bar. Update these two numbers when
+// seats go — they are the only scarcity claim on the site, so keep them honest.
+export const nextDeparture = { month: 'August', seatsLeft: 3 };
 
 export const waLink = (msg) => `${site.wa}?text=${encodeURIComponent(msg)}`;
 
@@ -27,6 +32,8 @@ export const tours = [
     nights: 1,
     days: 2,
     price: 7999,
+    seats: 12,
+    filled: 8,
     img: 'kalam.jpg',
     badge: null,
     region: 'Swat Valley, Khyber Pakhtunkhwa',
@@ -58,6 +65,8 @@ export const tours = [
     nights: 4,
     days: 5,
     price: 14999,
+    seats: 12,
+    filled: 5,
     img: 'fairy-meadows.jpg',
     badge: 'Holi colours at the meadows',
     region: 'Diamer, Gilgit-Baltistan',
@@ -87,10 +96,10 @@ export const tours = [
 
 // Not a sequence — no numbering.
 export const destinations = [
-  { name: 'Kumrat', region: 'Upper Dir', high: 3100, note: 'Deodar forest, river camps, and the meadow at Jahaz Banda.', img: 'kumrat.jpg', season: 'May to September' },
-  { name: 'Saif-ul-Malook', region: 'Kaghan', high: 3224, note: 'The lake above Naran, still half frozen in June.', img: 'naran.jpg', season: 'June to September' },
-  { name: 'Kalash valleys', region: 'Chitral', high: 1900, note: 'Over the Lowari to Bumburet, where the calendar is their own.', img: 'kalash.jpg', season: 'April to October' },
-  { name: 'Ganga Choti', region: 'Bagh, Azad Kashmir', high: 3044, note: 'Close enough to summit and be home the same night.', img: 'ganga-choti.jpg', season: 'All year' },
+  { name: 'Kumrat', region: 'Upper Dir', high: 3100, coord: '35.5187° N, 72.1085° E', note: 'Deodar forest, river camps, and the meadow at Jahaz Banda.', img: 'kumrat.jpg', season: 'May to September' },
+  { name: 'Saif-ul-Malook', region: 'Kaghan', high: 3224, coord: '34.8776° N, 73.6936° E', note: 'The lake above Naran, still half frozen in June.', img: 'naran.jpg', season: 'June to September' },
+  { name: 'Kalash valleys', region: 'Chitral', high: 1900, coord: '35.7333° N, 71.6667° E', note: 'Over the Lowari to Bumburet, where the calendar is their own.', img: 'kalash.jpg', season: 'April to October' },
+  { name: 'Ganga Choti', region: 'Bagh, Azad Kashmir', high: 3044, coord: '33.9333° N, 73.7833° E', note: 'Close enough to summit and be home the same night.', img: 'ganga-choti.jpg', season: 'All year' },
 ];
 
 export const gallery = [
@@ -114,9 +123,9 @@ export const faqs = [
 
 // EDIT: replace with real messages from your trips before launch
 export const reviews = [
-  { text: 'Everything was sorted before we reached the pickup point. First time north and I never once felt lost.', by: 'Bahria University group', trip: 'Kalam, July' },
-  { text: 'The price on the poster was the price we paid. That alone is rare here.', by: 'Hamza', trip: 'Fairy Meadows, June' },
-  { text: 'Small van, good food, and someone who knew exactly when to leave to beat the traffic.', by: 'NUST trekking society', trip: 'Kumrat, May' },
+  { text: 'Everything was sorted before we reached the pickup point. First time north and I never once felt lost.', by: 'Bahria University group', trip: 'Kalam, July', verified: true },
+  { text: 'The price on the poster was the price we paid. That alone is rare here.', by: 'Hamza', trip: 'Fairy Meadows, June', verified: true },
+  { text: 'Small van, good food, and someone who knew exactly when to leave to beat the traffic.', by: 'NUST trekking society', trip: 'Kumrat, May', verified: true },
 ];
 
 export const orgSchema = {

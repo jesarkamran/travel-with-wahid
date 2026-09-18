@@ -2,7 +2,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { site } from '@/data/site';
+import { site, nextDeparture } from '@/data/site';
+import { Magnetic } from './motion';
+import { WaIcon } from './ui';
 import Mark from './Mark';
 
 const links = [
@@ -35,6 +37,11 @@ export default function Nav() {
           <span className="brand__txt">Travel with Wahid</span>
         </Link>
 
+        <p className="live">
+          <span className="live__dot" aria-hidden="true" />
+          Next van departs: <b>{nextDeparture.month}</b> · <b>{nextDeparture.seatsLeft} seats remaining</b>
+        </p>
+
         <nav className="menu" id="menu" aria-label="Primary">
           {links.map((l) => (
             <Link key={l.href} href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>
@@ -43,7 +50,11 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a className="btn btn--sm top__cta" href={site.wa} rel="noopener">Book a seat</a>
+        <Magnetic className="top__cta">
+          <a className="btn btn--sm btn--wa" href={site.wa} rel="noopener">
+            <WaIcon className="ico" /> Book a seat
+          </a>
+        </Magnetic>
 
         <button
           className="burger"

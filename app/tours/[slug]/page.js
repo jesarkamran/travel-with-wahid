@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { tours, site, waLink, tripSchema } from '@/data/site';
-import { Close, Jsonld, WaIcon, money } from '@/components/ui';
+import { Close, Img, BookBtn } from '@/components/ui';
+import { Jsonld, money } from '@/components/fmt';
 import Profile from '@/components/Profile';
 
 export function generateStaticParams() {
@@ -42,7 +43,7 @@ export default function Tour({ params }) {
 
         <div className="wrap--wide">
           <figure className="hero__frame rise rise-4" style={{ aspectRatio: '21/9' }}>
-            <img src={`/img/tours/${t.img}`} alt={`${t.title}, ${t.region}`} fetchPriority="high" />
+            <Img src={`/img/tours/${t.img}`} alt={`${t.title}, ${t.region}`} sizes="100vw" priority className="kenburns" />
             <figcaption>
               <span>{t.region}</span>
               <span>{money(t.high)} m at its highest</span>
@@ -77,9 +78,11 @@ export default function Tour({ params }) {
           <aside className="book">
             <p className="price">PKR {money(t.price)} <small>per person</small></p>
             <p className="book__note">Leaves {t.dates}, back after {t.days} days. The advance holds your seat.</p>
-            <a className="btn" href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)} rel="noopener">
-              <WaIcon className="ico" /> Ask for a seat
-            </a>
+            <div className="seats" style={{ marginTop: 0, marginBottom: '1.4rem' }}>
+              <p className="seats__top"><span>Seats taken</span><b>{t.filled}/{t.seats}</b></p>
+              <span className="seats__rail"><span className="seats__fill" style={{ display: 'block', width: `${(t.filled / t.seats) * 100}%` }} /></span>
+            </div>
+            <BookBtn href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)}>Ask for a seat</BookBtn>
             <a className="btn btn--quiet" href={site.waGroup} rel="noopener">Join the trip group</a>
 
             <h4>Your seat covers</h4>

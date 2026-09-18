@@ -1,5 +1,6 @@
 import { faqs, faqSchema, site } from '@/data/site';
-import { Faq, Close, Jsonld } from '@/components/ui';
+import { Faq, Close } from '@/components/ui';
+import { Jsonld } from '@/components/fmt';
 
 export const metadata = {
   title: 'Questions',
