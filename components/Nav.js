@@ -34,7 +34,7 @@ export default function Nav() {
     <header className={`top${stuck ? ' stuck' : ''}${open ? ' is-open' : ''}`}>
       <div className="wrap top__in">
         <Link className="brand" href="/">
-          <Mark />
+          <Mark priority />
           <span className="brand__txt">Travel with Wahid</span>
         </Link>
 

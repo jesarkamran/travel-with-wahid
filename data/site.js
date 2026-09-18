@@ -136,7 +136,7 @@ export const orgSchema = {
   url: `${site.url}/`,
   telephone: site.phone.replace(/\s/g, ''),
   image: `${site.url}/img/og-cover.jpg`,
-  logo: `${site.url}/favicon.svg`,
+  logo: `${site.url}/logo.png`,
   priceRange: 'PKR 7,999 – PKR 14,999',
   areaServed: { '@type': 'Country', name: 'Pakistan' },
   address: { '@type': 'PostalAddress', addressLocality: site.city, addressCountry: 'PK' },

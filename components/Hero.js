@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { site, tours } from '@/data/site';
-import { BookBtn, Img, Stat, money } from './ui';
+import { BookBtn, IgIcon, Img, Stat, money } from './ui';
 import { Magnetic, MaskLine, Reveal } from './motion';
 
 export default function Hero() {
@@ -45,6 +45,11 @@ export default function Hero() {
             <BookBtn href={site.wa}>Book on WhatsApp</BookBtn>
             <Magnetic>
               <Link className="btn btn--quiet" href="/tours">See upcoming trips</Link>
+            </Magnetic>
+            <Magnetic>
+              <a className="btn btn--ig" href={site.instagram} rel="noopener" target="_blank">
+                <IgIcon /> Follow on Instagram
+              </a>
             </Magnetic>
           </Reveal>
         </div>

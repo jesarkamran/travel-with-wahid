@@ -41,7 +41,7 @@
   --wrap:1200px;
   --gut:clamp(1.25rem,5vw,3.25rem);
   --ease:cubic-bezier(.22,.8,.3,1);
-  --dock-h:74px;
+  --dock-h:clamp(80px,9vw,96px);
   color-scheme:dark;
 }
 
@@ -431,18 +431,20 @@ em{font-style:italic}
 .on-pine .quote{background:rgba(244,246,240,.045);border:1px solid rgba(255,255,255,.12)}
 
 /* --- floating island dock --------------------------------- */
-.top{position:fixed;inset:0 0 auto;padding:.85rem var(--gut) 0;background:none;pointer-events:none}
+.top{position:fixed;inset:0 0 auto;padding:.85rem 0 0;background:none;pointer-events:none}
 .top .wrap{pointer-events:auto}
 .top__in{
   background:var(--glass);backdrop-filter:blur(22px) saturate(1.4);
   border:1px solid var(--edge);border-radius:999px;
-  padding:.6rem .7rem .6rem 1.2rem;gap:1.1rem;
+  padding:.6rem .7rem .6rem 1.2rem;gap:clamp(.7rem,1.6vw,1.2rem);
   box-shadow:0 10px 40px -18px rgba(0,0,0,.9);
   transition:padding .5s var(--ease),transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s;
 }
 .top.stuck .top__in{padding:.5rem .6rem .5rem 1.1rem;border-color:rgba(244,162,97,.22);box-shadow:0 14px 50px -18px rgba(0,0,0,1)}
 .top.stuck{background:none}
-.menu{gap:1.6rem}
+.brand{flex:0 0 auto;min-width:0}
+.menu{gap:clamp(1rem,1.8vw,1.6rem);flex:0 1 auto;min-width:0}
+.tog,.top__cta,.burger{flex:0 0 auto}
 .brand__txt{white-space:nowrap}
 
 /* live departure ticker inside the dock */
@@ -455,7 +457,7 @@ em{font-style:italic}
 .live b{font-weight:500;color:var(--ink)}
 .live__dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;flex:none;box-shadow:0 0 0 0 rgba(74,222,128,.7);animation:ping 2.4s var(--ease) infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
-@media (max-width:1180px){.live{display:none}}
+@media (max-width:1320px){.live{display:none}}
 
 /* WhatsApp CTA pulse */
 .btn--wa{overflow:visible;background:linear-gradient(135deg,#1FA855,#25D366);color:#05140B;box-shadow:var(--lift-1),0 0 0 1px rgba(37,211,102,.4)}
@@ -655,7 +657,9 @@ em{font-style:italic}
 .book .btn--quiet{margin-bottom:0}
 
 @media (prefers-reduced-motion:reduce){
-  .fog span,.live__dot,.trip__tag::before,.btn--wa::after,.marquee__row{animation:none !important}
+  .fog span,.live__dot,.trip__tag::before,
+  .btn--wa::before,.btn--wa::after,.btn--ig::before,.btn--ig::after,
+  .marquee__row{animation:none !important}
 }
 .marquee__row{animation:slide 46s linear infinite}
 .marquee:hover .marquee__row{animation-play-state:paused}
@@ -713,3 +717,28 @@ body{padding-bottom:0}
   transition:color .3s,background .3s,border-color .3s;
 }
 .dockbar__x:hover{color:var(--ink);background:var(--rail);border-color:var(--sage-deep)}
+
+/* Instagram, in its own colours and with the same double-ring pulse as
+   WhatsApp. The yellow end of the gradient is pushed off the corner so the
+   white label sits on the magenta-to-purple body of the button. */
+.btn--ig{
+  overflow:visible;color:#fff;
+  background:linear-gradient(115deg,#FEDA75 -12%,#FA7E1E 16%,#D62976 54%,#962FBF 80%,#4F5BD5 112%);
+  box-shadow:var(--lift-1),0 0 0 1px rgba(214,41,118,.4);
+}
+.btn--ig:hover{box-shadow:var(--lift-2),0 10px 40px -10px rgba(214,41,118,.8)}
+.btn--ig::before,.btn--ig::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  box-shadow:0 0 0 0 rgba(214,41,118,.55);animation:ping-ig 2.8s var(--ease) infinite;
+}
+.btn--ig::before{animation-delay:1.4s}
+@keyframes ping-ig{
+  0%{box-shadow:0 0 0 0 rgba(214,41,118,.5)}
+  65%{box-shadow:0 0 0 16px rgba(214,41,118,0)}
+  100%{box-shadow:0 0 0 0 rgba(214,41,118,0)}
+}
+
+/* The badge is an illustration, not a glyph — it needs room to read. */
+.mark{width:clamp(48px,5vw,62px);height:auto;flex:none}
+.foot .mark{width:clamp(72px,8vw,92px)}
+@media (max-width:420px){.mark{width:44px}}
