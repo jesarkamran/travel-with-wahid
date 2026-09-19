@@ -23,7 +23,7 @@ const all = [
 export default function Destinations() {
   return (
     <>
-      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,4.5rem)' }}>
+      <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Where the van goes</p>
           <h1 className="rise rise-2">Six valleys, north of Islamabad</h1>
@@ -34,7 +34,7 @@ export default function Destinations() {
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+      <section className="sec sec--flush">
         <div className="wrap--wide">
           <div className="valleys">
             {[...all].sort((a, b) => b.high - a.high).map((d) => <Valley key={d.name} d={d} />)}

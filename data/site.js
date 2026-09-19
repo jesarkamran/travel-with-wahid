@@ -40,12 +40,14 @@ export const tours = [
     high: 2865,
     blurb:
       'Two days up the Swat valley, ending on the jeep track to a lake that sits just under 2,900 metres.',
+    // `day`, `note` and `does` fill the tooltip that opens when a stop on the
+    // route is tapped. EDIT: keep them in step with the itinerary below.
     profile: [
-      { name: 'Islamabad', m: 540 },
-      { name: 'Mingora', m: 980 },
-      { name: 'Bahrain', m: 1400 },
-      { name: 'Kalam', m: 2000 },
-      { name: 'Mahodand', m: 2865 },
+      { name: 'Islamabad', m: 540, day: 'Day 1 · 00:00', note: 'Midnight pickup — the driving happens while you sleep.', does: ['Pickup points shared in the trip group', 'Seats allotted, bags loaded, lights off'] },
+      { name: 'Mingora', m: 980, day: 'Day 1 · morning', note: 'Breakfast past Mardan, then into the Swat valley.', does: ['Breakfast stop on the way up', 'The climb up the Swat valley begins'] },
+      { name: 'Bahrain', m: 1400, day: 'Day 1 · midday', note: 'An hour at Bahrain bazaar, on the river.', does: ['Walk the bazaar', 'Tea by the Swat river'] },
+      { name: 'Kalam', m: 2000, day: 'Day 1 · evening', note: 'Blue Point in the afternoon, beds in Kalam by dark.', does: ['Blue Point viewpoint', 'One night in Kalam — included', 'Breakfast in the morning'] },
+      { name: 'Mahodand', m: 2865, day: 'Day 2', note: 'Out early up the jeep track to the lake — rough, and that is the point.', does: ['Jeep up the Mahodand track — included', 'Time at the lake (boat hire extra)', 'Lunch, then the drive home the same night'] },
     ],
     includes: ['Van from Islamabad and back', 'One night in Kalam', 'Breakfast both days', 'Jeep up the Mahodand track'],
     stops: ['Swat Valley', 'Bahrain Bazaar', 'Blue Point', 'Mahodand Lake'],
@@ -74,12 +76,12 @@ export const tours = [
     blurb:
       'Five days to walk up to the foot of the ninth highest mountain on earth, sleeping at 3,300 metres.',
     profile: [
-      { name: 'Islamabad', m: 540 },
-      { name: 'Chilas', m: 1265 },
-      { name: 'Raikot Bridge', m: 1180 },
-      { name: 'Tato', m: 2600 },
-      { name: 'Fairy Meadows', m: 3300 },
-      { name: 'Base Camp', m: 4600 },
+      { name: 'Islamabad', m: 540, day: 'Day 1 · before dawn', note: 'Out of Islamabad in the dark and onto the Karakoram Highway.', does: ['Pickup points shared in the trip group', 'Onto the KKH before the traffic'] },
+      { name: 'Chilas', m: 1265, day: 'Day 1 · evening', note: 'A full day of driving along the Indus ends here.', does: ['Stops along the Indus gorge', 'End of the first day on the road'] },
+      { name: 'Raikot Bridge', m: 1180, day: 'Day 2 · morning', note: 'The van stays here. Jeeps take over for the Raikot track.', does: ['Switch to jeeps — included', 'One of the more committing roads in the country'] },
+      { name: 'Tato', m: 2600, day: 'Day 2', note: 'The jeep road ends. The walk in to the meadows starts.', does: ['Jeeps drop you at the trailhead', 'Walk in to Fairy Meadows'] },
+      { name: 'Fairy Meadows', m: 3300, day: 'Days 2–4', note: 'Home for four nights, facing Nanga Parbat.', does: ['Camp goes up, Holi colours in the evening', 'Beyal camp on the morning of day 4', 'All meals included'] },
+      { name: 'Base Camp', m: 4600, day: 'Day 3', note: 'The long day — up to Nanga Parbat Base Camp and back before dark.', does: ['Walk slowly, drink more water than you think', 'Back at the meadows by nightfall'] },
     ],
     includes: ['Pickup and drop, Islamabad', 'Four nights at the meadows', 'All meals', 'Jeep up the Raikot track'],
     stops: ['Fairy Meadows', 'Nanga Parbat Base Camp'],
@@ -92,6 +94,14 @@ export const tours = [
     ],
     excludes: ['Porters for personal bags', 'Anything bought on the highway', 'Gear hire'],
   },
+];
+
+// How a booking actually goes, start to finish. Shown on the home page.
+export const steps = [
+  { h: 'Message the number', p: 'Say which trip and how many seats. Wahid answers it himself, usually the same day.' },
+  { h: 'Pay the advance', p: 'A seat is yours once the advance is in — vans are small and August fills early.' },
+  { h: 'Join the trip group', p: 'Pickup points and the packing list go out there a few days before.' },
+  { h: 'Leave at midnight', p: 'The driving happens while you sleep. You wake up in the mountains.' },
 ];
 
 // Not a sequence — no numbering.

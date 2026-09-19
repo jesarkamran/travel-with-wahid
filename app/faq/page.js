@@ -12,7 +12,7 @@ export const metadata = {
 export default function FaqPage() {
   return (
     <>
-      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+      <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Before you book</p>
           <h1 className="rise rise-2">Questions people ask</h1>
@@ -22,8 +22,8 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
-        <div className="wrap" style={{ maxWidth: '54rem' }}>
+      <section className="sec sec--flush">
+        <div className="wrap wrap--narrow">
           <Faq list={faqs} />
         </div>
       </section>

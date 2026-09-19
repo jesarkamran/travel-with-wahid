@@ -1,12 +1,12 @@
 'use client';
-/* The hero is the whole pitch: a valley at first light, the numbers that make
-   the trip legible, and one button. Everything else on the page is detail. */
+/* The hero is the whole pitch: a valley at first light, the next van out with
+   its seats counted, and one button. Everything else on the page is detail. */
 import { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { site, tours } from '@/data/site';
-import { BookBtn, IgIcon, Img, Stat, money } from './ui';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+import { site, tours, waLink } from '@/data/site';
+import { BookBtn, IgIcon, Img, SeatMap, Stat, money } from './ui';
 import { Magnetic, MaskLine, Reveal } from './motion';
 
 export default function Hero() {
@@ -14,7 +14,9 @@ export default function Hero() {
   const calm = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
-  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const fade = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const lift = useTransform(scrollYProgress, [0, 1], ['0%', '-10%']);
+  const next = tours[0];
 
   return (
     <>
@@ -31,28 +33,44 @@ export default function Hero() {
         <div className="cine__veil" />
         <div className="fog" aria-hidden="true"><span /><span /><span /></div>
 
-        <div className="wrap cine__in">
-          <Reveal as="p" className="kicker" delay={0.1}>Islamabad, and everything north of it</Reveal>
-          <h1>
-            <MaskLine delay={0.2}>Exploring Pakistan</MaskLine>
-            <MaskLine delay={0.34}><em>&amp; beyond</em></MaskLine>
-          </h1>
-          <Reveal as="p" className="lede" delay={0.5}>
-            Small, unhurried trips into the northern valleys — the van, the beds and the
-            food arranged, so all you carry is a warm layer.
+        <motion.div className="wrap--wide cine__grid" style={calm ? undefined : { y: lift }}>
+          <div className="cine__in">
+            <Reveal as="p" className="kicker" delay={0.1}>Islamabad, and everything north of it</Reveal>
+            <h1>
+              <MaskLine delay={0.2}>Exploring Pakistan</MaskLine>
+              <MaskLine delay={0.34}><em>&amp; beyond</em></MaskLine>
+            </h1>
+            <Reveal as="p" className="lede" delay={0.5}>
+              Small, unhurried trips into the northern valleys — the van, the beds and the
+              food arranged, so all you carry is a warm layer.
+            </Reveal>
+            <Reveal className="cine__cta" delay={0.62}>
+              <BookBtn href={site.wa} pulse>Book on WhatsApp</BookBtn>
+              <Magnetic>
+                <Link className="btn btn--quiet" href="/tours">
+                  See upcoming trips <ArrowRight size={16} className="arr" aria-hidden="true" />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <a className="btn btn--ig" href={site.instagram} rel="noopener" target="_blank">
+                  <IgIcon /> Instagram
+                </a>
+              </Magnetic>
+            </Reveal>
+          </div>
+
+          {/* the next departure, pinned beside the headline on wide screens */}
+          <Reveal as="aside" className="nextvan" delay={0.75} aria-label="Next departure">
+            <p className="nextvan__eyebrow"><span className="live__dot" aria-hidden="true" /> Next van out</p>
+            <Link href={`/tours/${next.slug}`} className="nextvan__title">{next.title}</Link>
+            <p className="nextvan__sub">{next.dates} · {next.days} days · up to {money(next.high)} m</p>
+            <SeatMap seats={next.seats} filled={next.filled} compact />
+            <div className="nextvan__foot">
+              <p className="price">PKR {money(next.price)} <small>per person</small></p>
+              <BookBtn small href={waLink(`Hi Wahid, I want a seat on ${next.title} (${next.dates})`)}>Hold a seat</BookBtn>
+            </div>
           </Reveal>
-          <Reveal className="cine__cta" delay={0.62}>
-            <BookBtn href={site.wa}>Book on WhatsApp</BookBtn>
-            <Magnetic>
-              <Link className="btn btn--quiet" href="/tours">See upcoming trips</Link>
-            </Magnetic>
-            <Magnetic>
-              <a className="btn btn--ig" href={site.instagram} rel="noopener" target="_blank">
-                <IgIcon /> Follow on Instagram
-              </a>
-            </Magnetic>
-          </Reveal>
-        </div>
+        </motion.div>
 
         <motion.p className="scroll-hint" style={calm ? undefined : { opacity: fade }} aria-hidden="true">
           <i />
@@ -60,7 +78,7 @@ export default function Hero() {
         </motion.p>
       </section>
 
-      <section className="sec--sm" style={{ paddingTop: 0 }}>
+      <section className="facts-band">
         <div className="wrap--wide">
           <dl className="facts">
             <Stat label="Trips leave from" value={site.city} sub={`${money(site.cityM)} m`} />

@@ -10,7 +10,7 @@ export const metadata = {
 export default function Contact() {
   return (
     <>
-      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+      <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Contact</p>
           <h1 className="rise rise-2">No forms. Just message.</h1>
@@ -21,8 +21,8 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
-        <div className="wrap rows" style={{ maxWidth: '54rem' }}>
+      <section className="sec sec--flush">
+        <div className="wrap wrap--narrow rows">
           <a href={site.wa} rel="noopener">
             <div><h3>WhatsApp</h3><p>The fastest way to hold a seat or ask anything at all.</p></div>
             <b>{site.phone}</b>

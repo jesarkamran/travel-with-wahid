@@ -1,5 +1,5 @@
 import './globals.css';
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
+import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Jsonld } from '@/components/fmt';
@@ -8,13 +8,14 @@ import { SmoothScroll } from '@/components/motion';
 import { themeScript } from '@/components/ThemeToggle';
 import { site, orgSchema } from '@/data/site';
 
-// A delicate high-contrast serif, set light and large — the calm voice.
-const display = Cormorant_Garamond({
-  subsets: ['latin'], weight: ['300', '400', '500', '600'], style: ['normal', 'italic'],
+// A variable serif with an optical-size axis: it opens up and stays sturdy at
+// card size, and sharpens into a high-contrast display face at hero size.
+const display = Fraunces({
+  subsets: ['latin'], style: ['normal', 'italic'], axes: ['opsz', 'SOFT'],
   variable: '--f-display', display: 'swap',
 });
 // Plus Jakarta Sans underneath it — clean at badge size, steady in the dark.
-const body = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--f-body', display: 'swap' });
+const body = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--f-body', display: 'swap' });
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -56,7 +57,10 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      {/* Extensions such as Grammarly stamp attributes onto <body> before React
+          hydrates. This silences only that attribute diff on this one tag —
+          mismatches anywhere inside the page are still reported. */}
+      <body suppressHydrationWarning>
         <a className="skip" href="#main">Skip to content</a>
         <SmoothScroll />
         <Nav />

@@ -46,8 +46,14 @@ export default function StickyBook() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 90, opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 0.8, 0.3, 1] }}
+          // A flick down puts it away, the same as the close button.
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={{ top: 0.05, bottom: 0.6 }}
+          onDragEnd={(_, info) => { if (info.offset.y > 50 || info.velocity.y > 400) dismiss(); }}
         >
           <div className="dockbar__in">
+            <span className="dockbar__grip" aria-hidden="true" />
             <span className="dockbar__txt">
               <b>{t.title}</b>
               <span>{t.dates} · leaves Islamabad · {t.seats - t.filled} seats left</span>

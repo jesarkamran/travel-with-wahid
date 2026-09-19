@@ -11,14 +11,14 @@ export const metadata = {
 export default function About() {
   return (
     <>
-      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+      <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">About</p>
           <h1 className="rise rise-2">One person, one van, a lot of mountain road</h1>
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 'clamp(2.5rem,5vw,4rem)' }}>
+      <section className="sec sec--flush">
         <div className="wrap split">
           <div className="prose">
             <p>
@@ -63,8 +63,8 @@ export default function About() {
 
       <section className="sec--sm">
         <div className="wrap">
-          <h2 style={{ fontSize: 'clamp(1.6rem,1.3rem + 1.2vw,2.3rem)' }}>Photographs</h2>
-          <p className="muted" style={{ marginTop: '.9rem', maxWidth: '58ch' }}>
+          <h2 className="h-sub">Photographs</h2>
+          <p className="muted sub-lede">
             The trip photographs here are Creative Commons work by people who shot these
             valleys before us. Credit is a condition of using them, so here it is.
           </p>

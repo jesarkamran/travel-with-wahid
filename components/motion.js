@@ -1,6 +1,6 @@
 'use client';
 /* Shared motion primitives. Everything interactive on the site is built from
-   these five pieces, so the behaviour stays consistent and reduced-motion is
+   these pieces, so the behaviour stays consistent and reduced-motion is
    honoured in exactly one place per primitive. */
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -23,6 +23,13 @@ export function SmoothScroll() {
     return () => { cancelAnimationFrame(raf); lenis?.destroy(); };
   }, [calm]);
   return null;
+}
+
+/* --- reading progress: a hairline of ember across the top ----------- */
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 220, damping: 32, restDelta: 0.001 });
+  return <motion.div className="progress" style={{ scaleX }} aria-hidden="true" />;
 }
 
 /* --- entrance ------------------------------------------------------- */

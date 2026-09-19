@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { tours, site, waLink, tripSchema } from '@/data/site';
-import { Close, Img, BookBtn } from '@/components/ui';
+import { Close, Img, BookBtn, SeatMap, TripMeta, Itinerary, Included } from '@/components/ui';
 import { Jsonld, money } from '@/components/fmt';
 import Profile from '@/components/Profile';
 
@@ -9,8 +9,9 @@ export function generateStaticParams() {
   return tours.map((t) => ({ slug: t.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const t = tours.find((x) => x.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const t = tours.find((x) => x.slug === slug);
   if (!t) return {};
   return {
     title: `${t.title} — ${t.days} days, PKR ${money(t.price)}`,
@@ -25,8 +26,9 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function Tour({ params }) {
-  const t = tours.find((x) => x.slug === params.slug);
+export default async function Tour({ params }) {
+  const { slug } = await params;
+  const t = tours.find((x) => x.slug === slug);
   if (!t) notFound();
 
   return (
@@ -39,10 +41,11 @@ export default function Tour({ params }) {
           <p className="kicker rise rise-1">{t.dates}</p>
           <h1 className="rise rise-2">{t.title}</h1>
           <p className="lede rise rise-3">{t.blurb}</p>
+          <div className="rise rise-3 mast__meta"><TripMeta t={t} /></div>
         </div>
 
         <div className="wrap--wide">
-          <figure className="hero__frame rise rise-4" style={{ aspectRatio: '21/9' }}>
+          <figure className="hero__frame rise rise-4">
             <Img src={`/img/tours/${t.img}`} alt={`${t.title}, ${t.region}`} sizes="100vw" priority className="kenburns" />
             <figcaption>
               <span>{t.region}</span>
@@ -55,40 +58,28 @@ export default function Tour({ params }) {
       <section className="sec">
         <div className="wrap detail">
           <div>
-            <h2 style={{ fontSize: 'clamp(1.8rem,1.4rem + 1.4vw,2.6rem)' }}>The route</h2>
-            <p className="muted" style={{ marginTop: '.9rem', maxWidth: '52ch' }}>
+            <h2 className="h-sub">The route</h2>
+            <p className="muted sub-lede">
               From {site.city} at {money(site.cityM)} m, climbing {money(t.high - site.cityM)} metres
-              over {t.days} days.
+              over {t.days} days. Tap any stop to see what happens there.
             </p>
             <Profile stops={t.profile} tall />
 
-            <h2 style={{ fontSize: 'clamp(1.8rem,1.4rem + 1.4vw,2.6rem)', marginTop: 'clamp(2.5rem,5vw,4rem)' }}>
-              Day by day
-            </h2>
-            <ol className="days">
-              {t.itinerary.map((d) => (
-                <li key={d.day}>
-                  <b>Day {d.day}</b>
-                  <p>{d.text}</p>
-                </li>
-              ))}
-            </ol>
+            <h2 className="h-sub">Day by day</h2>
+            <Itinerary t={t} />
+
+            <h2 className="h-sub">What the seat covers</h2>
+            <Included t={t} />
           </div>
 
-          <aside className="book">
+          <aside className="book card">
             <p className="price">PKR {money(t.price)} <small>per person</small></p>
             <p className="book__note">Leaves {t.dates}, back after {t.days} days. The advance holds your seat.</p>
-            <div className="seats" style={{ marginTop: 0, marginBottom: '1.4rem' }}>
-              <p className="seats__top"><span>Seats taken</span><b>{t.filled}/{t.seats}</b></p>
-              <span className="seats__rail"><span className="seats__fill" style={{ display: 'block', width: `${(t.filled / t.seats) * 100}%` }} /></span>
+            <SeatMap seats={t.seats} filled={t.filled} />
+            <div className="book__cta">
+              <BookBtn pulse href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)}>Ask for a seat</BookBtn>
+              <a className="btn btn--quiet" href={site.waGroup} rel="noopener">Join the trip group</a>
             </div>
-            <BookBtn href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)}>Ask for a seat</BookBtn>
-            <a className="btn btn--quiet" href={site.waGroup} rel="noopener">Join the trip group</a>
-
-            <h4>Your seat covers</h4>
-            <ul className="ticks">{t.includes.map((i) => <li key={i}>{i}</li>)}</ul>
-            <h4>Not included</h4>
-            <ul className="ticks ticks--no">{t.excludes.map((i) => <li key={i}>{i}</li>)}</ul>
           </aside>
         </div>
       </section>

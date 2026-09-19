@@ -1,6 +1,6 @@
 import { tours, tripSchema, site, waLink } from '@/data/site';
 import { Trip, Close } from '@/components/ui';
-import { Jsonld, money } from '@/components/fmt';
+import { Jsonld } from '@/components/fmt';
 
 export const metadata = {
   title: 'Upcoming Trips & Prices',
@@ -12,7 +12,7 @@ export const metadata = {
 export default function Tours() {
   return (
     <>
-      <section className="mast mistfield" style={{ paddingBottom: 'clamp(3rem,6vw,5rem)' }}>
+      <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Two dates open</p>
           <h1 className="rise rise-2">Every seat we have this season</h1>
@@ -23,12 +23,14 @@ export default function Tours() {
         </div>
       </section>
 
-      <section className="sec" style={{ paddingTop: 'clamp(3rem,6vw,5rem)' }}>
+      <section className="sec sec--flush">
         <div className="wrap">
-          {tours.map((t) => <Trip key={t.slug} t={t} />)}
-          <p style={{ marginTop: 'clamp(3.5rem,6vw,5rem)', textAlign: 'center' }}>
+          <div className="trips">
+            {tours.map((t) => <Trip key={t.slug} t={t} />)}
+          </div>
+          <p className="aside-note">
             <span className="muted">Kumrat, Naran, Chitral and Ganga Choti run on request. </span>
-            <a href={waLink('Hi Wahid, I want a group date')} rel="noopener" style={{ color: 'var(--gold)' }}>
+            <a href={waLink('Hi Wahid, I want a group date')} rel="noopener" className="link">
               Ask for a group date
             </a>
           </p>
