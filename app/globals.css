@@ -484,8 +484,8 @@ em{font-style:italic}
 .seatmap--compact{margin-top:1.5rem}
 .seatmap__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
 .seatmap__top b{font-family:var(--f-display),serif;font-size:1rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--gold)}
-.seatmap__row{list-style:none;margin:0;padding:0;display:flex;gap:.3rem}
-.seatmap__row li{flex:1;height:15px;border-radius:5px 5px 3px 3px;box-shadow:inset 0 0 0 1px var(--sage-deep);opacity:.9}
+.seatmap__row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--cols,12),1fr);gap:.3rem}
+.seatmap__row li{height:15px;border-radius:5px 5px 3px 3px;box-shadow:inset 0 0 0 1px var(--sage-deep);opacity:.9}
 .seatmap__row li.is-taken{background:linear-gradient(180deg,var(--sun),var(--ember));box-shadow:0 0 10px -2px rgba(217,119,54,.7);opacity:1}
 .seatmap__note{font-size:.82rem;color:var(--slate)}
 .seatmap__note.is-low{color:var(--clay);font-weight:500}

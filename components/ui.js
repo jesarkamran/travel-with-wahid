@@ -89,7 +89,7 @@ export function SectionHead({ eyebrow, title, lede, action, center, className = 
 }
 
 /* --- the van, seat by seat -------------------------------------------- */
-export function SeatMap({ seats = 12, filled = 0, compact }) {
+export function SeatMap({ seats = 25, filled = 0, compact }) {
   const calm = useReducedMotion();
   const left = seats - filled;
   return (
@@ -99,6 +99,7 @@ export function SeatMap({ seats = 12, filled = 0, compact }) {
         <b>{filled}/{seats} taken</b>
       </p>
       <motion.ol
+        style={{ '--cols': seats > 14 ? Math.ceil(seats / 2) : seats }}
         className="seatmap__row"
         aria-label={`${filled} of ${seats} seats taken`}
         initial={calm ? false : 'off'}
