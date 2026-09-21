@@ -1,142 +1,12 @@
-// Single source of truth. Edit content here, not in the pages.
-export const site = {
-  name: 'Travel With Wahid',
-  tagline: 'Exploring Pakistan & Beyond',
-  bio: 'Student trips to the Pakistani north, out of Islamabad.',
-  url: 'https://travelwithwahid.com', // EDIT: your domain
-  city: 'Islamabad',
-  cityM: 540,
-  phone: '+92 336 3202576',
-  wa: 'https://wa.me/923363202576',
-  waGroup: 'https://chat.whatsapp.com/GhAWT6pplhB7xk5o4RPT9F',
-  instagram: 'https://www.instagram.com/travelwithwahid',
-  seatsPerVan: 12,
-};
+// Content comes from data/site.json, which is generated from data/content.xlsx
+// by `npm run content` (it runs automatically before dev and build, and only
+// rebuilds when the workbook is newer than the json). Edit the workbook, not
+// this file — only the derived helpers below belong here.
+import data from './site.json';
 
-// Shown live in the dock and the quick-book bar. Update these two numbers when
-// seats go — they are the only scarcity claim on the site, so keep them honest.
-export const nextDeparture = { month: 'August', seatsLeft: 3 };
+export const { site, nextDeparture, tours, steps, destinations, gallery, faqs, reviews, credits } = data;
 
 export const waLink = (msg) => `${site.wa}?text=${encodeURIComponent(msg)}`;
-
-// Elevations are approximate, in metres above sea level. They drive the route
-// profiles drawn across the site — change a number and the line redraws.
-export const tours = [
-  {
-    slug: 'kalam-mahodand-lake',
-    title: 'Kalam & Mahodand Lake',
-    dates: '8–9 August',
-    dateShort: '8 Aug',
-    start: '2026-08-08',
-    end: '2026-08-09',
-    nights: 1,
-    days: 2,
-    price: 7999,
-    seats: 12,
-    filled: 8,
-    img: 'kalam.jpg',
-    badge: null,
-    region: 'Swat Valley, Khyber Pakhtunkhwa',
-    high: 2865,
-    blurb:
-      'Two days up the Swat valley, ending on the jeep track to a lake that sits just under 2,900 metres.',
-    // `day`, `note` and `does` fill the tooltip that opens when a stop on the
-    // route is tapped. EDIT: keep them in step with the itinerary below.
-    profile: [
-      { name: 'Islamabad', m: 540, day: 'Day 1 · 00:00', note: 'Midnight pickup — the driving happens while you sleep.', does: ['Pickup points shared in the trip group', 'Seats allotted, bags loaded, lights off'] },
-      { name: 'Mingora', m: 980, day: 'Day 1 · morning', note: 'Breakfast past Mardan, then into the Swat valley.', does: ['Breakfast stop on the way up', 'The climb up the Swat valley begins'] },
-      { name: 'Bahrain', m: 1400, day: 'Day 1 · midday', note: 'An hour at Bahrain bazaar, on the river.', does: ['Walk the bazaar', 'Tea by the Swat river'] },
-      { name: 'Kalam', m: 2000, day: 'Day 1 · evening', note: 'Blue Point in the afternoon, beds in Kalam by dark.', does: ['Blue Point viewpoint', 'One night in Kalam — included', 'Breakfast in the morning'] },
-      { name: 'Mahodand', m: 2865, day: 'Day 2', note: 'Out early up the jeep track to the lake — rough, and that is the point.', does: ['Jeep up the Mahodand track — included', 'Time at the lake (boat hire extra)', 'Lunch, then the drive home the same night'] },
-    ],
-    includes: ['Van from Islamabad and back', 'One night in Kalam', 'Breakfast both days', 'Jeep up the Mahodand track'],
-    stops: ['Swat Valley', 'Bahrain Bazaar', 'Blue Point', 'Mahodand Lake'],
-    itinerary: [
-      { day: 1, text: 'Midnight departure from Islamabad. Breakfast somewhere past Mardan, then the climb up the Swat valley. An hour at Bahrain bazaar, Blue Point in the afternoon, beds in Kalam by dark.' },
-      { day: 2, text: 'Out early for the jeep track — it is rough, and that is the point. Time at Mahodand lake, lunch, then the long drive back down. Islamabad the same night.' },
-    ],
-    excludes: ['Lunch and dinner', 'Boat hire at the lake', 'Anything you buy at the bazaar'],
-  },
-  {
-    slug: 'fairy-meadows-nanga-parbat',
-    title: 'Fairy Meadows & Nanga Parbat Base Camp',
-    dates: '23–27 August',
-    dateShort: '23 Aug',
-    start: '2026-08-23',
-    end: '2026-08-27',
-    nights: 4,
-    days: 5,
-    price: 14999,
-    seats: 12,
-    filled: 5,
-    img: 'fairy-meadows.jpg',
-    badge: 'Holi colours at the meadows',
-    region: 'Diamer, Gilgit-Baltistan',
-    high: 4600,
-    blurb:
-      'Five days to walk up to the foot of the ninth highest mountain on earth, sleeping at 3,300 metres.',
-    profile: [
-      { name: 'Islamabad', m: 540, day: 'Day 1 · before dawn', note: 'Out of Islamabad in the dark and onto the Karakoram Highway.', does: ['Pickup points shared in the trip group', 'Onto the KKH before the traffic'] },
-      { name: 'Chilas', m: 1265, day: 'Day 1 · evening', note: 'A full day of driving along the Indus ends here.', does: ['Stops along the Indus gorge', 'End of the first day on the road'] },
-      { name: 'Raikot Bridge', m: 1180, day: 'Day 2 · morning', note: 'The van stays here. Jeeps take over for the Raikot track.', does: ['Switch to jeeps — included', 'One of the more committing roads in the country'] },
-      { name: 'Tato', m: 2600, day: 'Day 2', note: 'The jeep road ends. The walk in to the meadows starts.', does: ['Jeeps drop you at the trailhead', 'Walk in to Fairy Meadows'] },
-      { name: 'Fairy Meadows', m: 3300, day: 'Days 2–4', note: 'Home for four nights, facing Nanga Parbat.', does: ['Camp goes up, Holi colours in the evening', 'Beyal camp on the morning of day 4', 'All meals included'] },
-      { name: 'Base Camp', m: 4600, day: 'Day 3', note: 'The long day — up to Nanga Parbat Base Camp and back before dark.', does: ['Walk slowly, drink more water than you think', 'Back at the meadows by nightfall'] },
-    ],
-    includes: ['Pickup and drop, Islamabad', 'Four nights at the meadows', 'All meals', 'Jeep up the Raikot track'],
-    stops: ['Fairy Meadows', 'Nanga Parbat Base Camp'],
-    itinerary: [
-      { day: 1, text: 'Out of Islamabad in the dark and onto the Karakoram Highway. A full day of driving along the Indus to Chilas.' },
-      { day: 2, text: 'The Raikot jeep track — one of the more committing roads in the country — then the walk in to Fairy Meadows. Camp goes up, and the Holi colours come out in the evening.' },
-      { day: 3, text: 'The long day: up to Nanga Parbat Base Camp at 4,600 m and back down to the meadows before dark. Go slow, drink water.' },
-      { day: 4, text: 'Beyal camp in the morning, the rest of the day free at the meadows, then down to the jeeps and south along the Indus.' },
-      { day: 5, text: 'Back in Islamabad.' },
-    ],
-    excludes: ['Porters for personal bags', 'Anything bought on the highway', 'Gear hire'],
-  },
-];
-
-// How a booking actually goes, start to finish. Shown on the home page.
-export const steps = [
-  { h: 'Message the number', p: 'Say which trip and how many seats. Wahid answers it himself, usually the same day.' },
-  { h: 'Pay the advance', p: 'A seat is yours once the advance is in — vans are small and August fills early.' },
-  { h: 'Join the trip group', p: 'Pickup points and the packing list go out there a few days before.' },
-  { h: 'Leave at midnight', p: 'The driving happens while you sleep. You wake up in the mountains.' },
-];
-
-// Not a sequence — no numbering.
-export const destinations = [
-  { name: 'Kumrat', region: 'Upper Dir', high: 3100, coord: '35.5187° N, 72.1085° E', note: 'Deodar forest, river camps, and the meadow at Jahaz Banda.', img: 'kumrat.jpg', season: 'May to September' },
-  { name: 'Saif-ul-Malook', region: 'Kaghan', high: 3224, coord: '34.8776° N, 73.6936° E', note: 'The lake above Naran, still half frozen in June.', img: 'naran.jpg', season: 'June to September' },
-  { name: 'Kalash valleys', region: 'Chitral', high: 1900, coord: '35.7333° N, 71.6667° E', note: 'Over the Lowari to Bumburet, where the calendar is their own.', img: 'kalash.jpg', season: 'April to October' },
-  { name: 'Ganga Choti', region: 'Bagh, Azad Kashmir', high: 3044, coord: '33.9333° N, 73.7833° E', note: 'Close enough to summit and be home the same night.', img: 'ganga-choti.jpg', season: 'All year' },
-];
-
-export const gallery = [
-  { img: 'mahodand.jpg', label: 'Mahodand Lake', place: 'Kalam', m: 2865 },
-  { img: 'kumrat-river.jpg', label: 'River camp', place: 'Kumrat', m: 2300 },
-  { img: 'nanga-parbat.jpg', label: 'Nanga Parbat', place: 'Diamer', m: 8126 },
-  { img: 'saiful-muluk.jpg', label: 'Saif-ul-Malook', place: 'Naran', m: 3224 },
-  { img: 'kalash-people.jpg', label: 'Bumburet', place: 'Chitral', m: 1900 },
-  { img: 'ganga-choti.jpg', label: 'Ganga Choti', place: 'Bagh', m: 3044 },
-];
-
-export const faqs = [
-  { q: 'Where does the van leave from?', a: 'Islamabad, always, and usually around midnight so the driving happens while you sleep. Pickup points go out in the WhatsApp group a few days before. Drop-off is back at the same points.' },
-  { q: 'What does the price cover?', a: 'The van both ways, your bed, the meals listed on the trip page, and the local jeeps where the road needs them. It does not cover what you buy on the way, gear hire, or meals we have not listed.' },
-  { q: 'Do I have to be a student?', a: 'No. The dates are planned around semesters and the prices around student budgets, but the van is open to anyone who travels well in a group.' },
-  { q: 'How do I hold a seat?', a: 'Message the number. A seat is yours once the advance is in — vans are small and August fills early.' },
-  { q: 'Can I come on my own, or bring family?', a: 'Both happen on most trips. Rooms are allocated separately for women travelling alone or in groups.' },
-  { q: 'How high do we actually go, and does that matter?', a: 'Kalam tops out at 2,865 m, which nobody feels. Nanga Parbat Base Camp is 4,600 m, high enough that you walk slowly, drink more water than you think you need, and tell me if your head hurts.' },
-  { q: 'What should I bring?', a: 'A warm layer even in August, shoes you can walk a jeep track in, a power bank, your ID card, and any medicine you take. A full list goes out in the group before we leave.' },
-];
-
-// EDIT: replace with real messages from your trips before launch
-export const reviews = [
-  { text: 'Everything was sorted before we reached the pickup point. First time north and I never once felt lost.', by: 'Bahria University group', trip: 'Kalam, July', verified: true },
-  { text: 'The price on the poster was the price we paid. That alone is rare here.', by: 'Hamza', trip: 'Fairy Meadows, June', verified: true },
-  { text: 'Small van, good food, and someone who knew exactly when to leave to beat the traffic.', by: 'NUST trekking society', trip: 'Kumrat, May', verified: true },
-];
 
 export const orgSchema = {
   '@type': ['TravelAgency', 'LocalBusiness'],
@@ -184,20 +54,3 @@ export const faqSchema = (list = faqs) => ({
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 });
-
-// Photo credits — all Creative Commons, commercial use permitted. Attribution is
-// a licence condition: keep the credits block on /about if you keep these photos.
-export const credits = [
-  { file: 'hero.jpg', title: 'Nanga Parbat The Killer Mountain', by: 'Tahsin Anwar Ali', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=40616492' },
-  { file: 'tours/kalam.jpg', title: 'Mahodand Lake, Kalam', by: 'Muhaddas', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=40255478' },
-  { file: 'tours/fairy-meadows.jpg', title: 'Fairy Meadows & Nanga Parbat', by: 'Muhammad Awaab', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=40128735' },
-  { file: 'tours/kumrat.jpg', title: 'Camping in Kumrat Valley', by: 'Abdur Rehman 1982', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=40453518' },
-  { file: 'tours/naran.jpg', title: 'Saiful Muluk Lake, Naran', by: 'Eesha Tariq', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=58429771' },
-  { file: 'tours/kalash.jpg', title: 'Kalash Valley, Chitral', by: 'Waleed0343', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=49084034' },
-  { file: 'tours/ganga-choti.jpg', title: 'Ganga Choti', by: 'Minhalsherazi', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=58497270' },
-  { file: 'tours/mahodand.jpg', title: 'Mahodand Lake, Kalam', by: 'Nadar Sian', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=58773413' },
-  { file: 'tours/saiful-muluk.jpg', title: 'Saiful Muluk Lake, Naran', by: 'Nawabtanweer', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=48579838' },
-  { file: 'tours/kalash-people.jpg', title: 'Kalash children in local dress, Chitral', by: 'Syed Fida Ali Shah Fidai', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=68727795' },
-  { file: 'tours/kumrat-river.jpg', title: 'Kumrat Valley, Dir', by: 'Mafu75', license: 'CC BY-SA 3.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/', source: 'https://commons.wikimedia.org/w/index.php?curid=40490813' },
-  { file: 'tours/nanga-parbat.jpg', title: 'Nanga Parbat', by: 'Guilhem Vellut', license: 'CC BY 2.0', licenseUrl: 'https://creativecommons.org/licenses/by/2.0/', source: 'https://www.flickr.com/photos/22539273@N00/55898931' },
-];

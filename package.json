@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "content": "node scripts/content.mjs",
+    "content:export": "node scripts/content.mjs --export",
+    "predev": "npm run content",
+    "prebuild": "npm run content",
     "dev": "next dev",
     "build": "next build",
-    "preview": "npx serve out"
+    "preview": "npx serve out",
+    "content:check": "node scripts/content.mjs --check"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
@@ -15,5 +20,8 @@
     "next": "^15.5.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }
