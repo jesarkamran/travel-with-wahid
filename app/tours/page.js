@@ -5,7 +5,7 @@ import { Jsonld } from '@/components/fmt';
 export const metadata = {
   title: 'Upcoming Trips & Prices',
   description:
-    'Fixed departures from Islamabad: two days to Mahodand Lake from PKR 7,999, and five days to Fairy Meadows and Nanga Parbat Base Camp from PKR 14,999.',
+    'Fixed departures from Islamabad: two days up the Neelum valley to Arang Kel from PKR 7,999 — van, a night in a hut and breakfast both days included.',
   alternates: { canonical: '/tours' },
 };
 

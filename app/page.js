@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { site, tours, destinations, reviews, gallery, credits, faqs, steps, tripSchema, faqSchema, waLink } from '@/data/site';
+import { site, tours, nextDeparture, destinations, reviews, gallery, credits, faqs, steps, tripSchema, faqSchema, waLink } from '@/data/site';
 import { Trip, Deck, Strip, Quotes, Reasons, Close, Faq, Steps, SectionHead } from '@/components/ui';
 import { Jsonld } from '@/components/fmt';
 import { Reveal } from '@/components/motion';
@@ -11,7 +11,7 @@ export const metadata = { alternates: { canonical: '/' } };
 const reasons = [
   { h: 'The price you are quoted', p: 'Everything a seat covers is written on the trip. No surprise jeep fare, no room upgrade halfway up the valley.' },
   { h: 'Room to breathe', p: 'Seats are capped so nobody rides squeezed and nobody waits forty minutes at every stop.' },
-  { h: 'Roads already driven', p: 'Kalam, Fairy Meadows, Kumrat, Kalash — run often enough to know which stretch to take at first light.' },
+  { h: 'Roads already driven', p: 'The Neelum valley, Kumrat, Kalash — run often enough to know which stretch to take at first light.' },
   { h: 'One number throughout', p: `${site.phone} is the same line for booking, for questions at 2am on the road, and for the photographs afterwards.` },
 ];
 
@@ -24,8 +24,8 @@ export default function Home() {
       <section className="sec" id="trips">
         <div className="wrap">
           <SectionHead
-            eyebrow="Two dates open"
-            title="Trips leaving this August"
+            eyebrow={`${tours.length === 1 ? 'One date' : `${tours.length} dates`} open`}
+            title={`Trips leaving this ${nextDeparture.month}`}
             lede="Fixed dates and a fixed price. Open a trip's route, its days and what the seat covers — all right here."
             action={<Link className="btn btn--sm btn--quiet" href="/tours">All trips <ArrowRight size={15} className="arr" aria-hidden="true" /></Link>}
           />
@@ -51,7 +51,7 @@ export default function Home() {
           <SectionHead
             eyebrow="Where the van goes"
             title="Valleys we know well"
-            action={<Link className="btn btn--sm btn--quiet" href="/destinations">All six valleys <ArrowRight size={15} className="arr" aria-hidden="true" /></Link>}
+            action={<Link className="btn btn--sm btn--quiet" href="/destinations">All {destinations.length + tours.length} valleys <ArrowRight size={15} className="arr" aria-hidden="true" /></Link>}
           />
           <Deck items={destinations.slice(0, 3)} />
         </div>

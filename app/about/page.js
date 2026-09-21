@@ -34,9 +34,9 @@ export default function About() {
             </p>
             <p>
               Everything runs out of {site.city}, at {site.cityM} metres. From there the
-              routes go north to Swat and Kalam, up the Karakoram Highway to the Raikot
-              track, across to Kumrat and Naran, and over the Lowari to Chitral and the
-              Kalash valleys.
+              routes run east into Azad Kashmir for the Neelum valley, north to Swat and
+              Kalam, up the Karakoram Highway to the Raikot track, across to Kumrat and
+              Naran, and over the Lowari to Chitral and the Kalash valleys.
             </p>
             <p>
               If you have been meaning to go north and waiting for someone to handle the

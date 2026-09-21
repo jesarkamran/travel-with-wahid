@@ -5,7 +5,7 @@ import { Jsonld } from '@/components/fmt';
 export const metadata = {
   title: 'Valleys We Travel To',
   description:
-    'Kalam, Fairy Meadows, Kumrat, Saif-ul-Malook, the Kalash valleys and Ganga Choti — the northern routes Travel With Wahid runs out of Islamabad.',
+    'Arang Kel and the Neelum valley, Kumrat, Saif-ul-Malook, the Kalash valleys and Ganga Choti — the routes Travel With Wahid runs out of Islamabad.',
   alternates: { canonical: '/destinations' },
 };
 
@@ -26,7 +26,7 @@ export default function Destinations() {
       <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Where the van goes</p>
-          <h1 className="rise rise-2">Six valleys, north of Islamabad</h1>
+          <h1 className="rise rise-2">{all.length} valleys out of Islamabad</h1>
           <p className="lede rise rise-3">
             These are roads we already know — which stretch washes out, who keeps the rooms,
             and when the pass opens. Ask about any of them.

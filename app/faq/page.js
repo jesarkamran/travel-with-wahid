@@ -5,7 +5,7 @@ import { Jsonld } from '@/components/fmt';
 export const metadata = {
   title: 'Questions',
   description:
-    'Where the van leaves from, what a seat covers, how to hold one, whether altitude matters at 4,600 m, and what to pack for the Pakistani north.',
+    'Where the van leaves from, what a seat covers, how to hold one, whether altitude matters at 2,743 m, and what to pack for the Pakistani north.',
   alternates: { canonical: '/faq' },
 };
 

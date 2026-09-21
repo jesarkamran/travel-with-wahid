@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { tours, site, waLink, tripSchema } from '@/data/site';
 import { Close, Img, BookBtn, SeatMap, TripMeta, Itinerary, Included } from '@/components/ui';
 import { Jsonld, money } from '@/components/fmt';
-import Profile from '@/components/Profile';
+import InteractiveTripRoute from '@/components/TripRoute';
 
 export function generateStaticParams() {
   return tours.map((t) => ({ slug: t.slug }));
@@ -61,9 +61,9 @@ export default async function Tour({ params }) {
             <h2 className="h-sub">The route</h2>
             <p className="muted sub-lede">
               From {site.city} at {money(site.cityM)} m, climbing {money(t.high - site.cityM)} metres
-              over {t.days} days. Tap any stop to see what happens there.
+              over {t.days} days. Start the tour, or drag, pinch and tap your way up the valley.
             </p>
-            <Profile stops={t.profile} tall />
+            <InteractiveTripRoute stops={t.profile} img={t.img} />
 
             <h2 className="h-sub">Day by day</h2>
             <Itinerary t={t} />

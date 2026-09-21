@@ -13,44 +13,50 @@
     "seatsPerVan": 25
   },
   "nextDeparture": {
-    "month": "August",
-    "seatsLeft": 3
+    "month": "September",
+    "seatsLeft": 25
   },
   "tours": [
     {
-      "slug": "kalam-mahodand-lake",
-      "title": "Kalam & Mahodand Lake",
-      "dates": "8–9 August",
-      "dateShort": "8 Aug",
-      "start": "2026-08-08",
-      "end": "2026-08-09",
+      "slug": "arang-kel-neelum-valley",
+      "title": "Arang Kel & the Neelum Valley",
+      "dates": "28–29 September",
+      "dateShort": "28 Sep",
+      "start": "2026-09-28",
+      "end": "2026-09-29",
       "nights": 1,
       "days": 2,
       "price": 7999,
       "seats": 25,
-      "filled": 8,
-      "img": "kalam.jpg",
-      "badge": null,
-      "region": "Swat Valley, Khyber Pakhtunkhwa",
-      "high": 2865,
-      "blurb": "Two days up the Swat valley, ending on the jeep track to a lake that sits just under 2,900 metres.",
+      "filled": 0,
+      "img": "arang-kel.jpg",
+      "badge": "One night at 2,743 m",
+      "region": "Neelum Valley, Azad Kashmir",
+      "high": 2743,
+      "blurb": "Two days up the Neelum valley, ending with a chairlift over the river and a climb to a meadow with no road into it.",
       "includes": [
         "Van from Islamabad and back",
-        "One night in Kalam",
+        "One night in Arang Kel",
         "Breakfast both days",
-        "Jeep up the Mahodand track"
+        "Chairlift across the Neelum"
       ],
-      "stops": ["Swat Valley", "Bahrain Bazaar", "Blue Point", "Mahodand Lake"],
+      "stops": [
+        "Muzaffarabad",
+        "Keran",
+        "Kel",
+        "Arang Kel"
+      ],
       "excludes": [
         "Lunch and dinner",
-        "Boat hire at the lake",
-        "Anything you buy at the bazaar"
+        "Horses up the ridge",
+        "Anything you buy in the bazaar"
       ],
       "profile": [
         {
           "name": "Islamabad",
           "m": 540,
           "day": "Day 1 · 00:00",
+          "img": "islamabad.jpg",
           "note": "Midnight pickup — the driving happens while you sleep.",
           "does": [
             "Pickup points shared in the trip group",
@@ -58,168 +64,60 @@
           ]
         },
         {
-          "name": "Mingora",
-          "m": 980,
-          "day": "Day 1 · morning",
-          "note": "Breakfast past Mardan, then into the Swat valley.",
+          "name": "Muzaffarabad",
+          "m": 737,
+          "day": "Day 1 · 04:30",
+          "img": "muzaffarabad.jpg",
+          "note": "Breakfast where the Neelum meets the Jhelum, as the light comes up.",
           "does": [
-            "Breakfast stop on the way up",
-            "The climb up the Swat valley begins"
+            "Breakfast stop",
+            "ID cards out — there are checkposts up the valley"
           ]
         },
         {
-          "name": "Bahrain",
-          "m": 1400,
-          "day": "Day 1 · midday",
-          "note": "An hour at Bahrain bazaar, on the river.",
-          "does": ["Walk the bazaar", "Tea by the Swat river"]
-        },
-        {
-          "name": "Kalam",
-          "m": 2000,
-          "day": "Day 1 · evening",
-          "note": "Blue Point in the afternoon, beds in Kalam by dark.",
+          "name": "Keran",
+          "m": 1372,
+          "day": "Day 1 · 09:00",
+          "img": "keran.jpg",
+          "note": "Tea on the bank of the Neelum, the far side of the river in Indian-administered Kashmir.",
           "does": [
-            "Blue Point viewpoint",
-            "One night in Kalam — included",
-            "Breakfast in the morning"
+            "Tea and a walk along the water",
+            "The valley road narrows from here"
           ]
         },
         {
-          "name": "Mahodand",
-          "m": 2865,
-          "day": "Day 2",
-          "note": "Out early up the jeep track to the lake — rough, and that is the point.",
+          "name": "Kel",
+          "m": 2097,
+          "day": "Day 1 · 14:00",
+          "img": "kel.jpg",
+          "note": "The van's last stop. From here it is the chairlift and your own legs.",
           "does": [
-            "Jeep up the Mahodand track — included",
-            "Time at the lake (boat hire extra)",
-            "Lunch, then the drive home the same night"
-          ]
-        }
-      ],
-      "itinerary": [
-        {
-          "day": 1,
-          "text": "Midnight departure from Islamabad. Breakfast somewhere past Mardan, then the climb up the Swat valley. An hour at Bahrain bazaar, Blue Point in the afternoon, beds in Kalam by dark."
-        },
-        {
-          "day": 2,
-          "text": "Out early for the jeep track — it is rough, and that is the point. Time at Mahodand lake, lunch, then the long drive back down. Islamabad the same night."
-        }
-      ]
-    },
-    {
-      "slug": "fairy-meadows-nanga-parbat",
-      "title": "Fairy Meadows & Nanga Parbat Base Camp",
-      "dates": "23–27 August",
-      "dateShort": "23 Aug",
-      "start": "2026-08-23",
-      "end": "2026-08-27",
-      "nights": 4,
-      "days": 5,
-      "price": 14999,
-      "seats": 25,
-      "filled": 5,
-      "img": "fairy-meadows.jpg",
-      "badge": "Holi colours at the meadows",
-      "region": "Diamer, Gilgit-Baltistan",
-      "high": 4600,
-      "blurb": "Five days to walk up to the foot of the ninth highest mountain on earth, sleeping at 3,300 metres.",
-      "includes": [
-        "Pickup and drop, Islamabad",
-        "Four nights at the meadows",
-        "All meals",
-        "Jeep up the Raikot track"
-      ],
-      "stops": ["Fairy Meadows", "Nanga Parbat Base Camp"],
-      "excludes": [
-        "Porters for personal bags",
-        "Anything bought on the highway",
-        "Gear hire"
-      ],
-      "profile": [
-        {
-          "name": "Islamabad",
-          "m": 540,
-          "day": "Day 1 · before dawn",
-          "note": "Out of Islamabad in the dark and onto the Karakoram Highway.",
-          "does": [
-            "Pickup points shared in the trip group",
-            "Onto the KKH before the traffic"
+            "Van parks at Kel",
+            "Chairlift across the Neelum — included",
+            "The climb up to the meadow"
           ]
         },
         {
-          "name": "Chilas",
-          "m": 1265,
-          "day": "Day 1 · evening",
-          "note": "A full day of driving along the Indus ends here.",
+          "name": "Arang Kel",
+          "m": 2743,
+          "day": "Days 1–2 · 16:00",
+          "img": "arang-kel.jpg",
+          "note": "A green shelf above the valley — wooden huts, pine forest, and no road in.",
           "does": [
-            "Stops along the Indus gorge",
-            "End of the first day on the road"
-          ]
-        },
-        {
-          "name": "Raikot Bridge",
-          "m": 1180,
-          "day": "Day 2 · morning",
-          "note": "The van stays here. Jeeps take over for the Raikot track.",
-          "does": [
-            "Switch to jeeps — included",
-            "One of the more committing roads in the country"
-          ]
-        },
-        {
-          "name": "Tato",
-          "m": 2600,
-          "day": "Day 2",
-          "note": "The jeep road ends. The walk in to the meadows starts.",
-          "does": [
-            "Jeeps drop you at the trailhead",
-            "Walk in to Fairy Meadows"
-          ]
-        },
-        {
-          "name": "Fairy Meadows",
-          "m": 3300,
-          "day": "Days 2–4",
-          "note": "Home for four nights, facing Nanga Parbat.",
-          "does": [
-            "Camp goes up, Holi colours in the evening",
-            "Beyal camp on the morning of day 4",
-            "All meals included"
-          ]
-        },
-        {
-          "name": "Base Camp",
-          "m": 4600,
-          "day": "Day 3",
-          "note": "The long day — up to Nanga Parbat Base Camp and back before dark.",
-          "does": [
-            "Walk slowly, drink more water than you think",
-            "Back at the meadows by nightfall"
+            "One night in a hut — included",
+            "Breakfast in the morning",
+            "The meadow before the day trippers arrive"
           ]
         }
       ],
       "itinerary": [
         {
           "day": 1,
-          "text": "Out of Islamabad in the dark and onto the Karakoram Highway. A full day of driving along the Indus to Chilas."
+          "text": "Midnight departure from Islamabad. Breakfast at Muzaffarabad as the light comes up, then the Neelum valley road all day — tea at Keran, lunch past Sharda. Kel by mid-afternoon, the chairlift across the river, and the last stretch up on foot. Night in a hut at Arang Kel."
         },
         {
           "day": 2,
-          "text": "The Raikot jeep track — one of the more committing roads in the country — then the walk in to Fairy Meadows. Camp goes up, and the Holi colours come out in the evening."
-        },
-        {
-          "day": 3,
-          "text": "The long day: up to Nanga Parbat Base Camp at 4,600 m and back down to the meadows before dark. Go slow, drink water."
-        },
-        {
-          "day": 4,
-          "text": "Beyal camp in the morning, the rest of the day free at the meadows, then down to the jeeps and south along the Indus."
-        },
-        {
-          "day": 5,
-          "text": "Back in Islamabad."
+          "text": "Out early for the meadow before the day trippers come up. Down the ridge by late morning, back into the van at Kel, and the long drive home. Islamabad the same night."
         }
       ]
     }
@@ -231,7 +129,7 @@
     },
     {
       "h": "Pay the advance",
-      "p": "A seat is yours once the advance is in — vans are small and August fills early."
+      "p": "A seat is yours once the advance is in — vans are small and September fills early."
     },
     {
       "h": "Join the trip group",
@@ -281,6 +179,24 @@
     }
   ],
   "gallery": [
+    {
+      "img": "arang-kel.jpg",
+      "label": "Arang Kel",
+      "place": "Neelum Valley",
+      "m": 2743
+    },
+    {
+      "img": "keran.jpg",
+      "label": "Keran",
+      "place": "Neelum Valley",
+      "m": 1372
+    },
+    {
+      "img": "kel.jpg",
+      "label": "Kel",
+      "place": "Neelum Valley",
+      "m": 2097
+    },
     {
       "img": "mahodand.jpg",
       "label": "Mahodand Lake",
@@ -333,7 +249,7 @@
     },
     {
       "q": "How do I hold a seat?",
-      "a": "Message the number. A seat is yours once the advance is in — vans are small and August fills early."
+      "a": "Message the number. A seat is yours once the advance is in — vans are small and September fills early."
     },
     {
       "q": "Can I come on my own, or bring family?",
@@ -341,11 +257,11 @@
     },
     {
       "q": "How high do we actually go, and does that matter?",
-      "a": "Kalam tops out at 2,865 m, which nobody feels. Nanga Parbat Base Camp is 4,600 m, high enough that you walk slowly, drink more water than you think you need, and tell me if your head hurts."
+      "a": "Arang Kel tops out at 2,743 m, which nobody feels. The climb up from Kel is the part your legs notice, not your lungs — an hour or so on foot once the chairlift has taken you over the river."
     },
     {
       "q": "What should I bring?",
-      "a": "A warm layer even in August, shoes you can walk a jeep track in, a power bank, your ID card, and any medicine you take. A full list goes out in the group before we leave."
+      "a": "A warm layer — it drops close to freezing up there at night in late September — shoes you can walk a rough track in, a power bank, your ID card, and any medicine you take. A full list goes out in the group before we leave."
     }
   ],
   "reviews": [
@@ -464,6 +380,78 @@
       "license": "CC BY 2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
       "source": "https://www.flickr.com/photos/22539273@N00/55898931"
+    },
+    {
+      "file": "tours/islamabad.jpg",
+      "title": "The Shah Faisal Mosque, Islamabad",
+      "by": "Mansoor Bashir",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=62674975"
+    },
+    {
+      "file": "tours/muzaffarabad.jpg",
+      "title": "Muzaffarabad city, Azad Kashmir 2019-06-07",
+      "by": "Mariaivon",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=87078678"
+    },
+    {
+      "file": "tours/keran.jpg",
+      "title": "Keran Village of Neelum Valley AJK Northern Pakistan",
+      "by": "Syed Ali Zaidi 1167",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=69094679"
+    },
+    {
+      "file": "tours/kel.jpg",
+      "title": "A Stream of River Neelum at Kel, Neelum Valley Road, Pakistan controlled Kashmir",
+      "by": "Ijazurrehman1970",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=40356744"
+    },
+    {
+      "file": "tours/arang-kel.jpg",
+      "title": "Arang Kel, Neelum Valley, Azad Jammu & Kashmir, Pakistan",
+      "by": "Nadeem Riaz",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=59237123"
+    },
+    {
+      "file": "hero/winter.jpg",
+      "title": "Nanga Parbat The Killer Mountain",
+      "by": "Tahsin Anwar Ali",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=40616492"
+    },
+    {
+      "file": "hero/spring.jpg",
+      "title": "Keran Village of Neelum Valley AJK Northern Pakistan",
+      "by": "Syed Ali Zaidi 1167",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=69094679"
+    },
+    {
+      "file": "hero/summer.jpg",
+      "title": "Arang Kel, Neelum Valley, Azad Jammu & Kashmir, Pakistan",
+      "by": "Nadeem Riaz",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=59237123"
+    },
+    {
+      "file": "hero/autumn.jpg",
+      "title": "Autumn in Hunza Valley",
+      "by": "Ghezwan274",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/w/index.php?curid=69010681"
     }
   ]
 }
