@@ -2,11 +2,12 @@
 /* Appears once the first screen is behind you and stays there. It names the trip
    you are actually looking at, so the WhatsApp message arrives with context. */
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import { tours, waLink } from '@/data/site';
-import { BookBtn, money } from './ui';
+import { tours } from '@/data/site';
+import { money } from './ui';
 
 // Dismissal lasts the tab session, not forever — closing it means "not now",
 // and a fresh visit is a fresh chance to book.
@@ -59,9 +60,7 @@ export default function StickyBook() {
               <span>{t.dates} · leaves Islamabad · {t.seats - t.filled} seats left</span>
             </span>
             <span className="dockbar__price">PKR {money(t.price)}</span>
-            <BookBtn small href={waLink(`Hi Wahid, I want to book a seat on ${t.title} (${t.dates}) at PKR ${money(t.price)}`)}>
-              Instant WhatsApp booking
-            </BookBtn>
+            <Link className="btn btn--sm btn--book" href="/book">Book now</Link>
             <button className="dockbar__x" type="button" onClick={dismiss} aria-label="Hide the booking bar">
               <X size={16} aria-hidden="true" />
             </button>

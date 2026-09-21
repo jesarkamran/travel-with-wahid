@@ -1,14 +1,24 @@
-// Content sync: data/content.xlsx  <->  data/site.json
+// Content sync: Google Sheet -> data/content.xlsx -> data/site.json
 //
-//   node scripts/content.mjs           sync xlsx -> json, but only if the
-//                                      workbook is newer than the json
+//   node scripts/content.mjs           pull the sheet if CONTENT_SHEET_URL is
+//                                      set, then sync xlsx -> json
+//   node scripts/content.mjs --local   skip the download, use the local file
 //   node scripts/content.mjs --export  write the workbook from the json
 //   node scripts/content.mjs --force   sync regardless of timestamps
 //
-// The app only ever reads data/site.json (see data/site.js). Edit the workbook
-// in Excel, run `npm run dev` or `npm run build`, and the json is rebuilt.
+// The app only ever reads data/site.json (see data/site.js). Two ways in:
+//
+//   · Edit the Google Sheet. Set CONTENT_SHEET_URL and every build downloads it
+//     first, so a price or a date changed on Drive is live on the next deploy.
+//     Nothing reaches the site until it is rebuilt — this is a static export,
+//     so the HTML is written once and then served as files.
+//   · Edit data/content.xlsx in Excel and commit it. Same result, no network.
+//
+// A failed download is never fatal: it warns and falls back to the committed
+// workbook, because a build that dies when Drive is slow is worse than a build
+// carrying yesterday's prices.
 import fs from 'node:fs';
-const { readFileSync, writeFileSync, statSync } = fs;
+const { readFileSync, writeFileSync, statSync, existsSync } = fs;
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import * as XLSX from 'xlsx';
@@ -18,6 +28,54 @@ XLSX.set_fs(fs); // the ESM build does not pull in node:fs itself
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'data');
 const XLS = join(dir, 'content.xlsx');
 const JSN = join(dir, 'site.json');
+
+/* This runs as a plain node script, not through Next, so nothing has loaded
+   .env for it. Read it here — without overwriting anything the environment
+   already set, which is what lets Vercel's own variables win on a real build. */
+function loadEnv() {
+  for (const name of ['.env.local', '.env']) {
+    const file = join(dir, '..', name);
+    if (!existsSync(file)) continue;
+    for (const line of readFileSync(file, 'utf8').split(/\r?\n/)) {
+      const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/);
+      if (!m) continue;
+      const key = m[1];
+      if (process.env[key] !== undefined) continue;
+      process.env[key] = m[2].trim().replace(/^["']|["']$/g, '');
+    }
+  }
+}
+loadEnv();
+
+/* Google hands any viewer an .xlsx of a sheet through this path, so the sheet
+   needs to be shared "anyone with the link can view" and nothing more — no key,
+   no service account, nothing that could leak in a build log. */
+/* Only CONTENT_SHEET_URL turns this on, and deliberately not the link that
+   happens to be lying around in .env. Pulling makes Drive the source of truth,
+   and the first pull silently overwrites whatever is in the committed
+   workbook — so switching it on has to be a decision, taken once the sheet on
+   Drive is known to be the better copy. */
+const SHEET = process.env.CONTENT_SHEET_URL || '';
+
+async function pull() {
+  const id = (String(SHEET).match(/spreadsheets[/]d[/]([A-Za-z0-9_-]+)/) || [])[1];
+  if (!id) return false;
+  try {
+    const res = await fetch('https://docs.google.com/spreadsheets/d/' + id + '/export?format=xlsx', { redirect: 'follow' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const buf = Buffer.from(await res.arrayBuffer());
+    // an .xlsx is a zip; anything else is Google handing back a sign-in page
+    if (buf.length < 1000 || buf[0] !== 0x50 || buf[1] !== 0x4b) {
+      throw new Error('that is not a workbook — is the sheet shared with "anyone with the link"?');
+    }
+    writeFileSync(XLS, buf);
+    console.log('content: pulled the sheet (' + (buf.length / 1024).toFixed(0) + ' KB)');
+    return true;
+  } catch (err) {
+    console.warn('content: could not pull the sheet (' + err.message + ') — using the committed workbook');
+    return false;
+  }
+}
 
 // Fields holding a list. One cell, entries separated by " | ".
 const LIST = new Set(['includes', 'stops', 'excludes', 'does']);
@@ -110,8 +168,13 @@ if (process.argv.includes('--check')) {
   XLSX.writeFile(toXlsx(), XLS);
   console.log(`content: wrote ${XLS}`);
 }
-else if (!mtime(XLS)) console.log('content: no workbook, using data/site.json as is');
-else if (mtime(XLS) > mtime(JSN) || process.argv.includes('--force')) {
-  writeFileSync(JSN, JSON.stringify(toJson(), null, 2) + '\n');
-  console.log('content: workbook is newer — rebuilt data/site.json');
-} else console.log('content: data/site.json is current');
+else {
+  // a fresh download is always newer than the json, so it always rebuilds
+  const pulled = SHEET && !process.argv.includes('--local') ? await pull() : false;
+
+  if (!mtime(XLS)) console.log('content: no workbook, using data/site.json as is');
+  else if (pulled || mtime(XLS) > mtime(JSN) || process.argv.includes('--force')) {
+    writeFileSync(JSN, JSON.stringify(toJson(), null, 2) + '\n');
+    console.log('content: rebuilt data/site.json');
+  } else console.log('content: data/site.json is current');
+}

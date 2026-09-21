@@ -25,7 +25,7 @@ export default function Destinations() {
     <>
       <section className="mast mastpad mistfield">
         <div className="wrap">
-          <p className="kicker rise rise-1">Where the van goes</p>
+          <p className="kicker rise rise-1">Where we go</p>
           <h1 className="rise rise-2">{all.length} valleys out of Islamabad</h1>
           <p className="lede rise rise-3">
             These are roads we already know — which stretch washes out, who keeps the rooms,

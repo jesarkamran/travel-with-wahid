@@ -13,10 +13,11 @@ export default function Contact() {
       <section className="mast mastpad mistfield">
         <div className="wrap">
           <p className="kicker rise rise-1">Contact</p>
-          <h1 className="rise rise-2">No forms. Just message.</h1>
+          <h1 className="rise rise-2">Message, or book online.</h1>
           <p className="lede rise rise-3">
-            Booking, group trips, or a question about a road — WhatsApp reaches Wahid
-            directly, and he answers it himself.
+            To hold a seat, log your advance on the <a className="link" href="/book">booking page</a>.
+            For anything else — group trips, or a question about a road — WhatsApp reaches
+            Wahid directly, and he answers it himself.
           </p>
         </div>
       </section>

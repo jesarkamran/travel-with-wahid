@@ -43,7 +43,7 @@ export const SEASONS = {
     icon: Sun,
     photo: '/img/hero/summer.jpg',
     alt: 'A high meadow in full sun, wooden huts along the tree line',
-    note: 'Every road open, the meadows at their greenest, the vans full.',
+    note: 'Every road open, the meadows at their greenest, the trips full.',
     particle: 'firefly',
   },
   autumn: {

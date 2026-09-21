@@ -25,6 +25,7 @@
     17  close, footer, 404
     18  quick-book bar, theme toggle, mark
     19  motion
+    20  booking
    =========================================================== */
 
 /* ===================== 1 · tokens ===================== */
@@ -254,6 +255,31 @@ em{font-style:italic}
   box-shadow:var(--lift-1),0 0 0 1px rgba(214,41,118,.4);
 }
 .btn--ig:hover{box-shadow:var(--lift-2),0 10px 36px -10px rgba(214,41,118,.75)}
+/* The booking button wears the season.
+
+   background-image, not the background shorthand — the shorthand would reset
+   background-clip and the other background longhands set above it. Because
+   --se-accent and --se-accent-deep are registered with @property (§8b) and
+   transitioned on :root, the gradient genuinely interpolates when the season
+   changes instead of snapping.
+
+   The ring, the hairline and the hover glow all use the light accent mixed
+   down with color-mix, so they are the same hue as the button, only thinner. */
+.btn--book{
+  background-image:linear-gradient(135deg,var(--se-accent-deep),var(--se-accent));
+  box-shadow:var(--lift-1),0 0 0 1px color-mix(in srgb,var(--se-accent) 45%,transparent);
+}
+.btn--book:hover{
+  box-shadow:var(--lift-2),0 10px 36px -12px color-mix(in srgb,var(--se-accent-deep) 78%,transparent);
+}
+.btn--book .ico{color:inherit}
+
+/* the double ring, in the season's light accent rather than WhatsApp green */
+@keyframes ping-season{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--se-accent) 55%,transparent)}
+  65%{box-shadow:0 0 0 16px color-mix(in srgb,var(--se-accent) 0%,transparent)}
+  100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--se-accent) 0%,transparent)}
+}
 /* the double ring, half a beat apart — only on the main call of a screen */
 .btn--pulse{overflow:visible}
 .btn--pulse::before,.btn--pulse::after{
@@ -263,6 +289,9 @@ em{font-style:italic}
 .btn--pulse::before{animation-delay:1.4s}
 .btn--pulse:hover::after{transform:none}
 @keyframes ping-wa{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}65%{box-shadow:0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+/* the booking button rings in the season instead. It beats the shorthand above
+   on specificity, and now on source order too, so neither can drift. */
+.btn--book.btn--pulse::before,.btn--book.btn--pulse::after{animation-name:ping-season}
 .ico{width:1.1em;height:1.1em;flex:none}
 
 .chip{
@@ -444,7 +473,7 @@ em{font-style:italic}
   --se-grade:saturate(1.1) contrast(1.05);
   --se-photo:url(/img/hero/autumn.jpg);
 }
-.cine{transition:--se-accent 1s var(--ease),--se-accent-deep 1s var(--ease),--se-sky-top 1s var(--ease),--se-sky-mid 1s var(--ease),--se-sky-low 1s var(--ease),--se-ridge 1s var(--ease)}
+:root{transition:--se-accent 1s var(--ease),--se-accent-deep 1s var(--ease),--se-sky-top 1s var(--ease),--se-sky-mid 1s var(--ease),--se-sky-low 1s var(--ease),--se-ridge 1s var(--ease)}
 
 /* 1 · sky: furthest, pure colour, inset so the parallax never uncovers an edge */
 .cine__sky{position:absolute;inset:-6%;z-index:0;background:linear-gradient(180deg,var(--se-sky-top),var(--se-sky-mid) 52%,var(--se-sky-low))}
@@ -535,7 +564,10 @@ em{font-style:italic}
 
 /* the season reaches the furniture too */
 .cine .kicker{color:var(--se-accent)}
-.cine h1 em{background:linear-gradient(100deg,var(--se-accent-deep),#fff 45%,var(--se-accent))}
+/* background-image, not the background shorthand: the shorthand resets
+   background-clip to border-box, which turns the clipped-to-text gradient
+   above into a solid rectangle behind transparent letters. */
+.cine h1 em{background-image:linear-gradient(100deg,var(--se-accent-deep),#fff 45%,var(--se-accent))}
 .cine .scroll-hint i{background:linear-gradient(var(--se-accent),transparent)}
 .cine .nextvan__title:hover{color:var(--se-accent)}
 .cine .live__dot{background:var(--se-accent)}
@@ -1372,3 +1404,167 @@ em{font-style:italic}
   .marquee__row,.kenburns,.pf__flow,.pf__stop.is-on::after,.scroll-hint i,
   .tr__spark,.tr__stop.is-on::after,.cine__sun{animation:none !important}
 }
+
+/* ===================== 20 · booking ===================== */
+.book-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(2rem,4.5vw,4rem);align-items:start}
+@media (max-width:920px){.book-grid{grid-template-columns:1fr}}
+
+.book-side{position:sticky;top:calc(var(--dock-h) + 1.5rem);padding:var(--pad);display:grid;gap:.9rem}
+.book-side__title{font-size:1.45rem;line-height:1.15}
+.book-side__title a{text-decoration:none;transition:color .3s}
+.book-side__title a:hover{color:var(--gold)}
+.book-side .meta{margin:0}
+.book-side__how{list-style:none;counter-reset:s;margin:.4rem 0 0;padding:.9rem 0 0;border-top:1px solid var(--edge);display:grid;gap:.55rem}
+.book-side__how li{counter-increment:s;display:grid;grid-template-columns:1.4rem 1fr;gap:.6rem;font-size:.85rem;color:var(--slate);line-height:1.45}
+.book-side__how li::before{
+  content:counter(s);display:grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;
+  font-size:.7rem;font-weight:700;color:var(--gold);background:rgba(244,162,97,.12);border:1px solid rgba(244,162,97,.32);
+}
+@media (max-width:920px){.book-side{position:static;order:-1}}
+
+/* the form */
+.bk{display:grid;gap:clamp(1.5rem,3vw,2.25rem)}
+.bk__set{border:0;margin:0;padding:0;display:grid;gap:1.1rem}
+.bk__set:disabled{opacity:.6}
+.bk__legend{
+  padding:0;margin-bottom:.2rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--slate);
+}
+.bk__row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media (max-width:560px){.bk__row{grid-template-columns:1fr}}
+
+/* we recognise you — said once, with a way out of it */
+.bk__known{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;
+  padding:.65rem .85rem;border-radius:var(--r-sm);font-size:.83rem;line-height:1.5;
+  color:var(--ink);background:rgba(244,162,97,.09);border:1px solid rgba(244,162,97,.3);
+}
+.bk__known svg{flex:none;color:var(--gold)}
+.bk__known span{flex:1;min-width:0;overflow-wrap:anywhere}
+.bk__known-x{
+  flex:none;padding:.18rem .6rem;border-radius:var(--pill);cursor:pointer;
+  font-size:.72rem;font-weight:600;color:var(--slate);
+  background:var(--soft);border:1px solid var(--edge);
+  transition:color .25s,border-color .25s;
+}
+.bk__known-x:hover{color:var(--ink);border-color:var(--sage-deep)}
+/* the same notice, when it is a stop sign rather than a greeting */
+.bk__known.is-held{color:var(--ink);background:rgba(231,111,81,.09);border-color:rgba(231,111,81,.35)}
+.bk__known.is-held svg{color:var(--clay)}
+.bk__known.is-held b{color:var(--clay)}
+.bk__field{display:grid;gap:.4rem;margin:0}
+.bk__field label{display:flex;align-items:baseline;gap:.5rem;font-size:.85rem;font-weight:600;color:var(--ink)}
+.bk__field label i{font-style:normal;font-size:.72rem;font-weight:500;color:var(--slate)}
+.bk__field input,.bk__field textarea{
+  width:100%;padding:.72rem .85rem;border-radius:var(--r-sm);font:inherit;font-size:.95rem;
+  color:var(--ink);background:var(--soft);border:1px solid var(--edge);
+  transition:border-color .25s,background .25s,box-shadow .25s;
+}
+.bk__field textarea{resize:vertical;min-height:5.5rem;line-height:1.5}
+.bk__field input::placeholder,.bk__field textarea::placeholder{color:var(--slate);opacity:.7}
+.bk__field input:focus-visible,.bk__field textarea:focus-visible{
+  outline:none;border-color:var(--sun);background:var(--card);
+  box-shadow:0 0 0 3px rgba(244,162,97,.18);
+}
+.bk__field [aria-invalid="true"]{border-color:var(--clay)}
+.bk__hint{font-size:.76rem;color:var(--slate)}
+.bk__err{display:flex;align-items:center;gap:.35rem;font-size:.76rem;font-weight:600;color:var(--clay)}
+
+/* the receipt drop zone */
+.bk__pay{font-size:.88rem;line-height:1.55;color:var(--slate)}
+.bk__pay strong{display:block;margin-top:.3rem;color:var(--gold);font-size:1rem}
+/* the three steps, since the receipt now travels by WhatsApp */
+.bk__how{list-style:none;counter-reset:none;margin:0;padding:0;display:grid;gap:.6rem}
+.bk__how li{display:grid;grid-template-columns:1.5rem minmax(0,1fr);gap:.7rem;align-items:start;font-size:.88rem;line-height:1.5;color:var(--slate);overflow-wrap:anywhere}
+.bk__how li b{color:var(--ink);font-weight:600;white-space:nowrap}
+.bk__how li span{
+  display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;
+  font-size:.72rem;font-weight:700;color:var(--gold);
+  background:rgba(244,162,97,.12);border:1px solid rgba(244,162,97,.32);
+}
+.bk__agree{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:start;font-size:.86rem;color:var(--slate);cursor:pointer}
+.bk__agree input{width:1.05rem;height:1.05rem;margin-top:.15rem;accent-color:var(--ember);cursor:pointer}
+.bk__agree.is-bad span{color:var(--clay)}
+
+/* states */
+.bk__fail{
+  display:flex;align-items:flex-start;gap:.6rem;padding:.8rem 1rem;border-radius:var(--r-sm);
+  font-size:.85rem;line-height:1.5;margin:0;
+}
+.bk__fail{color:var(--clay);background:rgba(231,111,81,.1);border:1px solid rgba(231,111,81,.35)}
+.bk__fail svg{flex:none;margin-top:.1rem}
+
+.bk__send{display:grid;gap:.7rem;justify-items:start;padding-top:.4rem;border-top:1px solid var(--edge)}
+.bk__go{margin-top:1.1rem}
+.bk__go:disabled{opacity:.55;cursor:not-allowed}
+.bk__spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bk__small{font-size:.78rem;color:var(--slate);max-width:46ch}
+
+/* the receipt landed */
+.bk--done{display:grid;justify-items:start;gap:.7rem;padding:clamp(1.5rem,3vw,2.25rem);border-radius:var(--r-lg);background:var(--card);border:1px solid var(--edge);box-shadow:var(--lift-2)}
+.bk__tick{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;color:#10180F;background:linear-gradient(135deg,var(--ember),var(--sun));margin-bottom:.3rem}
+.bk--done h2{font-size:clamp(1.6rem,1.3rem + 1.2vw,2.2rem)}
+.bk__ref{
+  font-family:var(--f-display),serif;font-size:clamp(1.8rem,1.4rem + 2vw,2.8rem);letter-spacing:.06em;
+  color:var(--gold);font-variant-numeric:tabular-nums;
+}
+.bk__saidit{font-size:.92rem;line-height:1.6;color:var(--slate);max-width:52ch}
+/* whether the row reached the sheet — stated, not assumed */
+.bk__saved{
+  display:flex;align-items:flex-start;gap:.45rem;margin-top:.3rem;padding:.6rem .8rem;
+  border-radius:var(--r-sm);font-size:.82rem;line-height:1.5;max-width:52ch;
+  color:var(--slate);background:var(--soft);border:1px solid var(--edge);
+}
+.bk__saved svg{flex:none;margin-top:.15rem}
+.bk__saved span{min-width:0;overflow-wrap:anywhere}
+.bk__saved b{color:var(--gold);font-weight:600}
+.bk__saved.is-on{color:var(--ink);border-color:rgba(244,162,97,.32);background:rgba(244,162,97,.08)}
+.bk__saved.is-on svg{color:var(--gold)}
+.bk__after{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.8rem}
+.bk--done strong{color:var(--gold);font-weight:600}
+
+@media (prefers-reduced-motion:reduce){.bk__spin{animation:none !important}}
+
+/* checking a booking */
+.bk-tabs .tabs__panel{min-height:0;padding-top:1.6rem}
+.bst{display:grid;gap:1.2rem}
+.bst__ask{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.75rem;max-width:34rem}
+.bst__ask .bk__field{flex:1 1 15rem;min-width:0}
+.bst__ask .btn{flex:none}
+@media (max-width:420px){.bst__ask .btn{flex:1 1 100%}}
+.bst__none{
+  padding:1rem 1.1rem;border-radius:var(--r-sm);font-size:.88rem;line-height:1.6;
+  color:var(--slate);background:var(--soft);border:1px solid var(--edge);max-width:50ch;
+}
+.bst__list{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.bst__row{
+  display:grid;gap:.55rem;justify-items:start;padding:var(--pad);border-radius:var(--r);
+  background:var(--card);border:1px solid var(--edge);box-shadow:var(--lift-1);
+}
+.bst__top{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem;width:100%}
+.bst__ref{
+  display:inline-flex;align-items:center;gap:.3rem;margin-left:auto;
+  font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--slate);
+  font-variant-numeric:tabular-nums;
+}
+.bst__tag{
+  display:inline-flex;align-items:center;padding:.22rem .7rem;border-radius:var(--pill);
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--slate);background:var(--soft);border:1px solid var(--edge);
+}
+/* the sheet's own words drive these; anything unknown stays neutral */
+.bst__tag.is-pending{color:var(--gold);background:rgba(244,162,97,.12);border-color:rgba(244,162,97,.35)}
+.bst__tag.is-booked,.bst__tag.is-confirmed{color:#86EFAC;background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.35)}
+.bst__tag.is-cancelled{color:var(--clay);background:rgba(231,111,81,.12);border-color:rgba(231,111,81,.35)}
+.bst__tag.is-waitlist{color:#8FD3FF;background:rgba(143,211,255,.12);border-color:rgba(143,211,255,.35)}
+.bst__row h3{font-size:1.2rem;line-height:1.25;letter-spacing:-.012em;color:var(--ink)}
+.bst__meta{display:flex;flex-wrap:wrap;gap:.35rem .9rem;font-size:.8rem;color:var(--slate)}
+.bst__meta span{display:inline-flex;align-items:center;gap:.3rem}
+.bst__says{font-size:.88rem;line-height:1.55;color:var(--ink);opacity:.92;max-width:52ch}
+.bst__notes{
+  font-size:.82rem;line-height:1.5;color:var(--slate);max-width:52ch;
+  padding-left:.7rem;border-left:2px solid var(--rail);
+}
+.bst__row .btn{margin-top:.3rem}
+@media (max-width:520px){.bst__ref{margin-left:0;width:100%}}

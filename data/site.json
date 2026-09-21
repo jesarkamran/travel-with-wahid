@@ -6,8 +6,8 @@
     "url": "https://travelwithwahid.com",
     "city": "Islamabad",
     "cityM": 540,
-    "phone": "+92 336 3202576",
-    "wa": "https://wa.me/923363202576",
+    "phone": "+92 305 1786177",
+    "wa": "https://wa.me/+923051786177",
     "waGroup": "https://chat.whatsapp.com/GhAWT6pplhB7xk5o4RPT9F",
     "instagram": "https://www.instagram.com/travelwithwahid",
     "seatsPerVan": 25
@@ -40,12 +40,7 @@
         "Breakfast both days",
         "Chairlift across the Neelum"
       ],
-      "stops": [
-        "Muzaffarabad",
-        "Keran",
-        "Kel",
-        "Arang Kel"
-      ],
+      "stops": ["Muzaffarabad", "Keran", "Kel", "Arang Kel"],
       "excludes": [
         "Lunch and dinner",
         "Horses up the ridge",
@@ -129,7 +124,7 @@
     },
     {
       "h": "Pay the advance",
-      "p": "A seat is yours once the advance is in — vans are small and September fills early."
+      "p": "A seat is yours once the advance is in — trips are small and September fills early."
     },
     {
       "h": "Join the trip group",
@@ -249,7 +244,7 @@
     },
     {
       "q": "How do I hold a seat?",
-      "a": "Message the number. A seat is yours once the advance is in — vans are small and September fills early."
+      "a": "Message the number. A seat is yours once the advance is in — trips are small and September fills early."
     },
     {
       "q": "Can I come on my own, or bring family?",

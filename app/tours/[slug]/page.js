@@ -75,9 +75,10 @@ export default async function Tour({ params }) {
           <aside className="book card">
             <p className="price">PKR {money(t.price)} <small>per person</small></p>
             <p className="book__note">Leaves {t.dates}, back after {t.days} days. The advance holds your seat.</p>
-            <SeatMap seats={t.seats} filled={t.filled} />
+            <SeatMap seats={t.seats} filled={t.filled} slug={t.slug} />
             <div className="book__cta">
-              <BookBtn pulse href={waLink(`Hi Wahid, I want a seat on ${t.title} (${t.dates})`)}>Ask for a seat</BookBtn>
+              <Link className="btn btn--book btn--pulse" href="/book">Book now</Link>
+              <BookBtn href={waLink(`Hi Wahid, I have a question about ${t.title} (${t.dates})`)}>Contact on WhatsApp</BookBtn>
               <a className="btn btn--quiet" href={site.waGroup} rel="noopener">Join the trip group</a>
             </div>
           </aside>

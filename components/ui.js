@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { nextDeparture, site, waLink } from "@/data/site";
 import InteractiveTripRoute, { StopCard } from "./TripRoute";
+import { lookupSeats } from "@/lib/booking";
 import {
   Counter,
   Magnetic,
@@ -127,21 +128,46 @@ export function SectionHead({
 }
 
 /* --- the van, seat by seat -------------------------------------------- */
-export function SeatMap({ seats = 25, filled = 0, compact }) {
+/**
+ * The van, seat by seat.
+ *
+ * `filled` is the figure from the content sheet — right when it was typed,
+ * stale the moment somebody books. Pass `slug` as well and it counts the real
+ * bookings instead, so a seat taken on the booking page shows here without
+ * anyone editing a spreadsheet or rebuilding the site.
+ *
+ * The typed figure stays as the floor: it is what renders into the HTML, what
+ * a crawler sees, and what shows if the count cannot be fetched. A live number
+ * only ever moves it up — a booking sheet that has not caught up with a seat
+ * sold in person must not un-sell it.
+ */
+export function SeatMap({ seats = 25, filled = 0, compact, slug }) {
   const calm = useReducedMotion();
-  const left = seats - filled;
+  const [live, setLive] = useState(null);
+
+  useEffect(() => {
+    if (!slug) return;
+    const ac = new AbortController();
+    lookupSeats(slug, { signal: ac.signal }).then((n) => {
+      if (!ac.signal.aborted && typeof n === "number") setLive(n);
+    });
+    return () => ac.abort();
+  }, [slug]);
+
+  const taken = Math.min(Math.max(live ?? filled, filled), seats);
+  const left = seats - taken;
   return (
     <div className={`seatmap${compact ? " seatmap--compact" : ""}`}>
       <p className="seatmap__top">
-        <span>Seats on the van</span>
+        <span>Seats on this trip</span>
         <b>
-          {filled}/{seats} taken
+          {taken}/{seats} taken
         </b>
       </p>
       <motion.ol
         style={{ "--cols": seats > 14 ? Math.ceil(seats / 2) : seats }}
         className="seatmap__row"
-        aria-label={`${filled} of ${seats} seats taken`}
+        aria-label={`${taken} of ${seats} seats taken`}
         initial={calm ? false : "off"}
         whileInView="on"
         viewport={{ once: true, margin: "-10% 0px" }}
@@ -150,7 +176,7 @@ export function SeatMap({ seats = 25, filled = 0, compact }) {
         {Array.from({ length: seats }, (_, i) => (
           <motion.li
             key={i}
-            className={i < filled ? "is-taken" : ""}
+            className={i < taken ? "is-taken" : ""}
             variants={{
               off: { scale: 0.4, opacity: 0 },
               on: { scale: 1, opacity: 1 },
@@ -161,9 +187,9 @@ export function SeatMap({ seats = 25, filled = 0, compact }) {
       </motion.ol>
       <p className={`seatmap__note${left <= 4 ? " is-low" : ""}`}>
         {left <= 0
-          ? "This van is full — ask about the next one"
+          ? "This trip is full — ask about the next one"
           : left <= 4
-            ? `Only ${left} seats left on this van`
+            ? `Only ${left} seats left on this trip`
             : `${left} seats still open`}
       </p>
     </div>
@@ -375,6 +401,7 @@ export function Trip({ t }) {
         <SeatMap
           seats={t.seats ?? site.seatsPerVan}
           filled={t.filled ?? 0}
+          slug={t.slug}
           compact
         />
 
@@ -387,14 +414,9 @@ export function Trip({ t }) {
               Full trip{" "}
               <ArrowRight size={15} className="arr" aria-hidden="true" />
             </Link>
-            <BookBtn
-              small
-              href={waLink(
-                `Hi Wahid, is there a seat on ${t.title}, ${t.dates}?`,
-              )}
-            >
-              Ask about a seat
-            </BookBtn>
+            <Link className="btn btn--sm btn--book" href="/book">
+              Book now
+            </Link>
           </div>
         </div>
       </div>
@@ -765,7 +787,7 @@ export function Stat({ label, value, sub }) {
 }
 
 export function Close({
-  title = `The next van leaves in ${nextDeparture.month}.`,
+  title = `The next trip leaves in ${nextDeparture.month}.`,
   text = "Message the number and Wahid answers it himself, usually the same day.",
 }) {
   return (
@@ -776,9 +798,12 @@ export function Close({
           {text}
         </Reveal>
         <Reveal className="close__row" delay={0.16}>
-          <BookBtn href={site.wa} pulse>
-            Book on WhatsApp
-          </BookBtn>
+          <Magnetic>
+            <Link className="btn btn--book btn--pulse" href="/book">
+              Book now
+            </Link>
+          </Magnetic>
+          <BookBtn href={site.wa}>Contact on WhatsApp</BookBtn>
           <Magnetic>
             <a
               className="btn btn--quiet"

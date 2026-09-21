@@ -49,7 +49,7 @@ export default function Home() {
       <section className="sec">
         <div className="wrap--wide">
           <SectionHead
-            eyebrow="Where the van goes"
+            eyebrow="Where we go"
             title="Valleys we know well"
             action={<Link className="btn btn--sm btn--quiet" href="/destinations">All {destinations.length + tours.length} valleys <ArrowRight size={15} className="arr" aria-hidden="true" /></Link>}
           />
@@ -75,7 +75,7 @@ export default function Home() {
             <h2>One person, start to finish</h2>
             <p className="lede">
               There is no office and no call centre. You message one person, that person
-              replies, and that person is in the van with you the whole way.
+              replies, and that person is on the trip with you the whole way.
             </p>
             <a className="btn" href={site.waGroup} rel="noopener">
               Join the trip group <ArrowRight size={16} className="arr" aria-hidden="true" />

@@ -14,6 +14,7 @@ const links = [
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'Questions' },
   { href: '/contact', label: 'Contact' },
+  { href: '/book', label: 'Book' },
 ];
 
 export default function Nav() {
@@ -59,7 +60,7 @@ export default function Nav() {
 
         <p className="live">
           <span className="live__dot" aria-hidden="true" />
-          Next van: <b>{nextDeparture.month}</b> · <b>{nextDeparture.seatsLeft} seats left</b>
+          Next trip: <b>{nextDeparture.month}</b> · <b>{nextDeparture.seatsLeft} seats left</b>
         </p>
 
         <nav className="menu" id="menu" aria-label="Primary">
@@ -74,15 +75,18 @@ export default function Nav() {
             </Link>
           ))}
           <div className="menu__foot" style={{ '--i': links.length }}>
+            <Link className="btn btn--book" href="/book" onClick={() => setOpen(false)}>
+              Book now
+            </Link>
             <a className="btn btn--wa" href={site.wa} rel="noopener">
-              <WaIcon className="ico" /> Book a seat
+              <WaIcon className="ico" /> Contact on WhatsApp
             </a>
             <a className="btn btn--quiet" href={site.instagram} rel="noopener" target="_blank">
               <IgIcon size={16} /> Instagram
             </a>
             <p className="menu__live">
               <span className="live__dot" aria-hidden="true" />
-              Next van {nextDeparture.month} · {nextDeparture.seatsLeft} seats left
+              Next trip {nextDeparture.month} · {nextDeparture.seatsLeft} seats left
             </p>
           </div>
         </nav>
@@ -90,9 +94,7 @@ export default function Nav() {
         <ThemeToggle />
 
         <Magnetic className="top__cta">
-          <a className="btn btn--sm btn--wa" href={site.wa} rel="noopener">
-            <WaIcon className="ico" /> Book a seat
-          </a>
+          <Link className="btn btn--sm btn--book" href="/book">Book now</Link>
         </Magnetic>
 
         <button

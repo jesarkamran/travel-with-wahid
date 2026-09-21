@@ -21,7 +21,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, ChevronDown, RotateCcw } from 'lucide-react';
-import { site, tours, waLink } from '@/data/site';
+import { site, tours } from '@/data/site';
 import { BookBtn, IgIcon, SeatMap, Stat, money } from './ui';
 import { Magnetic, MaskLine, Reveal } from './motion';
 import RouteRibbon from './RouteRibbon';
@@ -169,8 +169,8 @@ export default function Hero() {
               <MaskLine delay={0.34}><em>&amp; beyond</em></MaskLine>
             </h1>
             <Reveal as="p" className="lede" delay={0.5}>
-              Small, unhurried trips into the northern valleys — the van, the beds and the
-              food arranged, so all you carry is a warm layer.
+              Small, unhurried trips into the northern valleys — transport, beds and food
+              arranged, so all you carry is a warm layer.
             </Reveal>
 
             {/* The dial's looks come from CSS and the attribute, so it is right
@@ -210,7 +210,12 @@ export default function Hero() {
             </Reveal>
 
             <Reveal className="cine__cta" delay={0.66}>
-              <BookBtn href={site.wa} pulse>Book on WhatsApp</BookBtn>
+              <Magnetic>
+                <Link className="btn btn--book btn--pulse" href="/book">
+                  Book now <ArrowRight size={16} className="arr" aria-hidden="true" />
+                </Link>
+              </Magnetic>
+              <BookBtn href={site.wa}>Contact on WhatsApp</BookBtn>
               <Magnetic>
                 <Link className="btn btn--quiet btn--season" href="/tours">
                   See upcoming trips <ArrowRight size={16} className="arr" aria-hidden="true" />
@@ -232,14 +237,14 @@ export default function Hero() {
             aria-label="Next departure"
             style={calm ? undefined : { x: cardX, rotateY: cardRy, rotateX: cardRx }}
           >
-            <p className="nextvan__eyebrow"><span className="live__dot" aria-hidden="true" /> Next van out</p>
+            <p className="nextvan__eyebrow"><span className="live__dot" aria-hidden="true" /> Next trip out</p>
             <Link href={`/tours/${next.slug}`} className="nextvan__title">{next.title}</Link>
             <p className="nextvan__sub">{next.dates} · {next.days} days · up to {money(next.high)} m</p>
             <RouteRibbon stops={next.profile} />
-            <SeatMap seats={next.seats} filled={next.filled} compact />
+            <SeatMap seats={next.seats} filled={next.filled} slug={next.slug} compact />
             <div className="nextvan__foot">
               <p className="price">PKR {money(next.price)} <small>per person</small></p>
-              <BookBtn small href={waLink(`Hi Wahid, I want a seat on ${next.title} (${next.dates})`)}>Hold a seat</BookBtn>
+              <Link className="btn btn--sm btn--book" href="/book">Book now</Link>
             </div>
           </Reveal>
         </motion.div>
@@ -255,7 +260,7 @@ export default function Hero() {
           <dl className="facts">
             <Stat label="Trips leave from" value={site.city} sub={`${money(site.cityM)} m`} />
             <Stat label="Seats from" value={`PKR ${money(tours[0].price)}`} sub="per person, all in" />
-            <Stat label="Group size" value="One small van" sub={`${site.seatsPerVan} seats max`} />
+            <Stat label="Group size" value="Small group" sub={`${site.seatsPerVan} seats max`} />
             <Stat label="Highest we go" value={high.m} sub={`metres — ${high.name}`} />
           </dl>
         </div>
