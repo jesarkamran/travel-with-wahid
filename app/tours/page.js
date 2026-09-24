@@ -6,7 +6,7 @@ import { Jsonld } from '@/components/fmt';
 export const metadata = {
   title: 'Upcoming Trips & Prices',
   description:
-    'Fixed departures from Islamabad: two days up the Neelum valley to Arang Kel from PKR 7,999 — van, a night in a hut and breakfast both days included.',
+    'Fixed departures from Islamabad: two days to Naran, Kaghan and Babusar Top from PKR 7,999 — transport, a night in Naran, breakfast and dinner included.',
   alternates: { canonical: '/tours' },
 };
 
@@ -15,11 +15,11 @@ export default function Tours() {
     <>
       <section className="mast mastpad mistfield">
         <div className="wrap">
-          <p className="kicker rise rise-1">Two dates open</p>
+          <p className="kicker rise rise-1">{tours.length === 1 ? 'One date open' : `${tours.length} dates open`}</p>
           <h1 className="rise rise-2">Every seat we have this season</h1>
           <p className="lede rise rise-3">
-            Both trips leave {site.city} at night, so the driving happens while you sleep,
-            and both come back to the same pickup point.
+            Every trip leaves from {site.city} and brings you back to the same pickup
+            points, with transport, a bed and a guide sorted.
           </p>
         </div>
       </section>

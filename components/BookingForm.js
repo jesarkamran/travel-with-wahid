@@ -424,7 +424,7 @@ export default function BookingForm({ trip }) {
           id="pickup"
           label="Pickup point"
           optional
-          hint="Faizabad, 26 Number, G-9 — or say where suits."
+          hint="QAU, Kashmir Chowk, Abpara, G-8, H-9, G-13, 26 Number — or say where suits."
         >
           <input
             id="pickup"
@@ -432,7 +432,7 @@ export default function BookingForm({ trip }) {
             type="text"
             value={form.pickup}
             onChange={(e) => set("pickup", e.target.value)}
-            placeholder="Faizabad"
+            placeholder="QAU"
           />
         </Field>
       </fieldset>

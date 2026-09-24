@@ -57,6 +57,7 @@ function doPost(e) {
 
     const b = JSON.parse(raw);
     if (b.kind === 'custom') return reply(customTrip(b));
+    if (b.kind === 'content') return reply(contentWrite(b));
     const email = String(b.email || '').trim().toLowerCase();
     const name = String(b.name || '').trim();
     const seats = Math.max(1, Math.min(parseInt(b.seats, 10) || 1, 25));
@@ -297,6 +298,40 @@ function aboutContent() {
   } catch (err) {
     return { ok: false, error: String(err) };
   }
+}
+
+/**
+ * Replace one tab of the content sheet with the rows sent — how
+ * `npm run content:push` keeps Drive in step with data/content.xlsx.
+ *
+ * This URL is public, so a write needs the token kept in Script Properties
+ * (Project Settings ▸ Script properties ▸ CONTENT_TOKEN), never in this file,
+ * which is committed. No token set means no writes at all.
+ */
+function contentWrite(b) {
+  const token = PropertiesService.getScriptProperties().getProperty('CONTENT_TOKEN');
+  if (!token || String(b.token || '') !== token) return { ok: false, error: 'not allowed' };
+  if (!CONTENT_SHEET_ID) return { ok: false, error: 'CONTENT_SHEET_ID is not set' };
+  const name = String(b.tab || '').trim();
+  const rows = b.rows;
+  if (!name || !Array.isArray(rows) || !rows.length) return { ok: false, error: 'no tab or rows' };
+
+  const width = Math.max.apply(null, rows.map(function (r) { return r.length; }));
+  const grid = rows.map(function (r) {
+    const out = r.slice();
+    while (out.length < width) out.push('');
+    return out;
+  });
+  const ss = SpreadsheetApp.openById(CONTENT_SHEET_ID);
+  const tab = ss.getSheetByName(name) || ss.insertSheet(name);
+  tab.clearContents();
+  const range = tab.getRange(1, 1, grid.length, width);
+  // text stays text: without this, Sheets turns "2026-10-03" into a date
+  range.setNumberFormats(grid.map(function (r) {
+    return r.map(function (v) { return typeof v === 'string' ? '@' : '0.###'; });
+  }));
+  range.setValues(grid);
+  return { ok: true, tab: name, rows: grid.length - 1 };
 }
 
 /** A tab as a list of objects keyed by its header row. */

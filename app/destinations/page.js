@@ -5,7 +5,7 @@ import { Jsonld } from '@/components/fmt';
 export const metadata = {
   title: 'Valleys We Travel To',
   description:
-    'Arang Kel and the Neelum valley, Kumrat, Saif-ul-Malook, the Kalash valleys and Ganga Choti — the routes Travel With Wahid runs out of Islamabad.',
+    'Naran, Kaghan and Babusar Top, Kumrat, Saif-ul-Malook, the Kalash valleys and Ganga Choti — the routes Travel With Wahid runs out of Islamabad.',
   alternates: { canonical: '/destinations' },
 };
 

@@ -25,10 +25,10 @@ export const metadata = {
     template: `%s — ${site.name}`,
   },
   description:
-    'Student trips from Islamabad to Arang Kel and the Neelum valley, Kumrat, Naran, Chitral and Kalash. Transport, beds and food sorted. Two days to Arang Kel from PKR 7,999.',
+    'Student trips from Islamabad to Naran, Kaghan and Babusar Top, the Neelum valley, Kumrat, Chitral and Kalash. Transport, beds and food sorted. Two days to Naran and Babusar Top from PKR 7,999.',
   applicationName: site.name,
   authors: [{ name: site.name }],
-  keywords: ['northern areas tour', 'student trips Pakistan', 'Islamabad tour company', 'Arang Kel trip', 'Neelum valley tour', 'Kumrat', 'Naran', 'Kalash valley'],
+  keywords: ['northern areas tour', 'student trips Pakistan', 'Islamabad tour company', 'Naran Kaghan trip', 'Babusar Top', 'Saif ul Malook', 'Neelum valley tour', 'Kumrat', 'Kalash valley'],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
@@ -36,7 +36,7 @@ export const metadata = {
     locale: 'en_PK',
     url: '/',
     title: `${site.name} — Student Trips to Pakistan's Northern Areas`,
-    description: 'From Islamabad at 540 m to the meadow at Arang Kel at 2,743 m. Small groups, fixed prices, student dates.',
+    description: 'From Islamabad at 540 m to Babusar Top at 4,173 m. Small groups, fixed prices, student dates.',
     images: [{ url: '/img/og-cover.jpg', width: 1200, height: 630, alt: 'Snow peaks above an alpine lake in northern Pakistan' }],
   },
   twitter: { card: 'summary_large_image', title: site.name, description: `${site.tagline}. Group trips from Islamabad.`, images: ['/img/og-cover.jpg'] },

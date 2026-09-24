@@ -5,8 +5,9 @@
   "scripts": {
     "content": "node scripts/content.mjs",
     "content:export": "node scripts/content.mjs --export",
+    "content:push": "node scripts/content.mjs --push",
     "predev": "npm run content",
-    "prebuild": "npm run content",
+    "prebuild": "npm run content && node scripts/content.mjs --push --soft",
     "dev": "next dev",
     "build": "next build",
     "preview": "npx serve out",

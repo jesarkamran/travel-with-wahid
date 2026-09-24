@@ -5,6 +5,10 @@
 //   node scripts/content.mjs --local   skip the download, use the local file
 //   node scripts/content.mjs --export  write the workbook from the json
 //   node scripts/content.mjs --force   sync regardless of timestamps
+//   node scripts/content.mjs --push    write the workbook's tabs to the Google
+//                                      content sheet through the Apps Script
+//                                      endpoint (runs by itself on every build,
+//                                      so a deploy leaves Drive matching it)
 //
 // The app only ever reads data/site.json (see data/site.js). Two ways in:
 //
@@ -165,6 +169,36 @@ if (process.argv.includes('--check')) {
   const wb = XLSX.read(XLSX.write(toXlsx(before), { type: 'buffer', bookType: 'xlsx' }));
   deepStrictEqual(tidy(toJson(wb)), tidy(before));
   console.log('content: round-trip ok');
+} else if (process.argv.includes('--push')) {
+  // workbook -> the Google content sheet, through the Apps Script endpoint.
+  // `--push about` sends one tab; bare `--push` sends every tab. `--soft` is
+  // how the build runs it: a push that fails warns and the build carries on,
+  // for the same reason a failed pull does.
+  try {
+  const endpoint = process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || '';
+  const token = process.env.CONTENT_WRITE_TOKEN || '';
+  if (!/^https:\/\/script\.google\.com\/.+\/exec\b/.test(endpoint)) throw new Error('content: NEXT_PUBLIC_BOOKING_ENDPOINT is not an Apps Script /exec URL');
+  if (!token) throw new Error('content: CONTENT_WRITE_TOKEN is not set in .env');
+  const wb = XLSX.readFile(XLS);
+  const want = process.argv.slice(process.argv.indexOf('--push') + 1).filter((a) => !a.startsWith('--'));
+  const tabs = want.length ? want : wb.SheetNames;
+  for (const tab of tabs) {
+    if (!wb.Sheets[tab]) throw new Error(`content: no "${tab}" tab in the workbook`);
+    const rows = XLSX.utils.sheet_to_json(wb.Sheets[tab], { header: 1, defval: '' }).filter((r) => r.some((v) => v !== ''));
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      body: new URLSearchParams({ payload: JSON.stringify({ kind: 'content', token, tab, rows }) }),
+      redirect: 'follow',
+    });
+    const text = await res.text();
+    const out = text.trim().startsWith('{') ? JSON.parse(text) : { ok: false, error: `HTTP ${res.status}, not JSON — is the latest .gs deployed?` };
+    if (!out.ok) throw new Error(`content: push of "${tab}" failed — ${out.error}`);
+    console.log(`content: pushed "${tab}" (${out.rows} rows)`);
+  }
+  } catch (err) {
+    if (!process.argv.includes('--soft')) throw err;
+    console.warn(`${err.message} — Drive not updated, build continues`);
+  }
 } else if (process.argv.includes('--export')) {
   XLSX.writeFile(toXlsx(), XLS);
   console.log(`content: wrote ${XLS}`);

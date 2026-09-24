@@ -13,111 +13,148 @@
     "seatsPerVan": 25
   },
   "nextDeparture": {
-    "month": "September",
-    "seatsLeft": 25
+    "month": "October",
+    "seatsLeft": 21
   },
   "tours": [
     {
-      "slug": "arang-kel-neelum-valley",
-      "title": "Arang Kel & the Neelum Valley",
-      "dates": "28–29 September",
-      "dateShort": "28 Sep",
-      "start": "2026-09-28",
-      "end": "2026-09-29",
+      "slug": "naran-kaghan-babusar-top",
+      "title": "Naran, Kaghan & Babusar Top",
+      "dates": "3–4 October",
+      "dateShort": "3 Oct",
+      "start": "2026-10-03",
+      "end": "2026-10-04",
       "nights": 1,
       "days": 2,
       "price": 7999,
       "seats": 25,
-      "filled": 0,
-      "img": "arang-kel.jpg",
-      "badge": "One night at 2,743 m",
-      "region": "Neelum Valley, Azad Kashmir",
-      "high": 2743,
-      "blurb": "Two days up the Neelum valley, ending with a chairlift over the river and a climb to a meadow with no road into it.",
+      "filled": 4,
+      "img": "naran.jpg",
+      "badge": "4 tickets booked",
+      "region": "Kaghan Valley, Khyber Pakhtunkhwa",
+      "high": 4173,
+      "blurb": "Two days up the Kaghan valley — Saif ul Malook, a night in Naran, Lulusar Lake and the snow at Babusar Top.",
       "includes": [
-        "Van from Islamabad and back",
-        "One night in Arang Kel",
-        "Breakfast both days",
-        "Chairlift across the Neelum"
+        "Transport from Islamabad and back",
+        "One night's accommodation in Naran",
+        "Breakfast on day 1",
+        "Dinner at Balakot on day 2",
+        "Toll taxes",
+        "Tour guide",
+        "Videography",
+        "First aid"
       ],
       "stops": [
-        "Muzaffarabad",
-        "Keran",
-        "Kel",
-        "Arang Kel"
+        "Hazara Motorway",
+        "Balakot",
+        "Kiwai Waterfall",
+        "Paras",
+        "Kunhar River",
+        "Kaghan Valley",
+        "Naran",
+        "Naran Bazaar",
+        "Rafting Club",
+        "Saif ul Malook Lake",
+        "Batakundi",
+        "Lulusar Lake",
+        "Jalkhand",
+        "Besar",
+        "Babusar Top"
       ],
       "excludes": [
-        "Lunch and dinner",
-        "Horses up the ridge",
+        "Jeep to Saif ul Malook Lake",
+        "Dinner in Naran on day 1",
+        "Breakfast at Batakundi on day 2",
+        "Rafting and zipline",
         "Anything you buy in the bazaar"
       ],
       "profile": [
         {
           "name": "Islamabad",
           "m": 540,
-          "day": "Day 1 · 00:00",
+          "day": "Day 1 · 06:00",
           "img": "islamabad.jpg",
-          "note": "Midnight pickup — the driving happens while you sleep.",
+          "note": "Report at 5:30 AM — the van leaves at 6:00 sharp from Quaid-e-Azam University.",
           "does": [
-            "Pickup points shared in the trip group",
-            "Seats allotted, bags loaded, lights off"
+            "Pickups: QAU, Kashmir Chowk, Abpara, G-8, H-9, G-13, 26 Number",
+            "Up the Hazara Motorway, breakfast stop at 9:30 — included"
           ]
         },
         {
-          "name": "Muzaffarabad",
-          "m": 737,
-          "day": "Day 1 · 04:30",
-          "img": "muzaffarabad.jpg",
-          "note": "Breakfast where the Neelum meets the Jhelum, as the light comes up.",
+          "name": "Naran",
+          "m": 2409,
+          "day": "Day 1 · 13:00",
+          "img": "naran.jpg",
+          "note": "Into Naran by one, back again in the afternoon for the river and the bazaar.",
           "does": [
-            "Breakfast stop",
-            "ID cards out — there are checkposts up the valley"
+            "Rafting and zipline on the Kunhar at 4:00 PM",
+            "Hotel check-in at 6:00 PM — included",
+            "Naran Bazaar and dinner, 7–9 PM, at your own expense"
           ]
         },
         {
-          "name": "Keran",
-          "m": 1372,
-          "day": "Day 1 · 09:00",
-          "img": "keran.jpg",
-          "note": "Tea on the bank of the Neelum, the far side of the river in Indian-administered Kashmir.",
+          "name": "Saif ul Malook",
+          "m": 3224,
+          "day": "Day 1 · 13:30",
+          "img": "saiful-muluk.jpg",
+          "note": "By jeep up to the lake, under Malika Parbat. Back in Naran by 3:30.",
           "does": [
-            "Tea and a walk along the water",
-            "The valley road narrows from here"
+            "Jeeps from Naran, 1:00–1:30 PM — not included",
+            "Time at the lake"
           ]
         },
         {
-          "name": "Kel",
-          "m": 2097,
-          "day": "Day 1 · 14:00",
-          "img": "kel.jpg",
-          "note": "The van's last stop. From here it is the chairlift and your own legs.",
-          "does": [
-            "Van parks at Kel",
-            "Chairlift across the Neelum — included",
-            "The climb up to the meadow"
-          ]
+          "name": "Batakundi",
+          "m": 2600,
+          "day": "Day 2 · 06:30",
+          "img": null,
+          "note": "Wake-up call at five, on the road by half past, breakfast up the valley.",
+          "does": ["Breakfast stop, 6:30–7:30 AM — at your own expense"]
         },
         {
-          "name": "Arang Kel",
-          "m": 2743,
-          "day": "Days 1–2 · 16:00",
-          "img": "arang-kel.jpg",
-          "note": "A green shelf above the valley — wooden huts, pine forest, and no road in.",
+          "name": "Lulusar Lake",
+          "m": 3410,
+          "day": "Day 2 · 09:00",
+          "img": null,
+          "note": "The lake the Kunhar river starts from, still and high.",
+          "does": ["A stop at the lake on the way up"]
+        },
+        {
+          "name": "Babusar Top",
+          "m": 4173,
+          "day": "Day 2 · 10:30",
+          "img": null,
+          "note": "The top of the pass, with live snowfall expected in October.",
+          "does": ["An hour at the top, 10:30–11:30 AM", "Photos at 4,173 m"]
+        },
+        {
+          "name": "Kaghan",
+          "m": 2012,
+          "day": "Day 2 · 15:00",
+          "img": null,
+          "note": "Back down the valley for a short stay in Kaghan.",
+          "does": ["Short stay, 3:00–3:30 PM"]
+        },
+        {
+          "name": "Balakot",
+          "m": 975,
+          "day": "Day 2 · 17:30",
+          "img": null,
+          "note": "Dinner on the way home, then Islamabad by around 11 PM.",
           "does": [
-            "One night in a hut — included",
-            "Breakfast in the morning",
-            "The meadow before the day trippers arrive"
+            "Dinner at Balakot — included",
+            "Leave for Islamabad at 6:30 PM"
           ]
         }
       ],
       "itinerary": [
         {
           "day": 1,
-          "text": "Midnight departure from Islamabad. Breakfast at Muzaffarabad as the light comes up, then the Neelum valley road all day — tea at Keran, lunch past Sharda. Kel by mid-afternoon, the chairlift across the river, and the last stretch up on foot. Night in a hut at Arang Kel."
+          "text": "Report at 5:30 AM at Quaid-e-Azam University; the van leaves at 6:00 sharp, collecting from Kashmir Chowk, Abpara, G-8, H-9, G-13 and 26 Number. Up the Hazara Motorway with breakfast on the way, into Naran by 1 PM, then jeeps to Saif ul Malook Lake. Back in Naran for rafting and the zipline, hotel check-in at 6, and the evening in Naran Bazaar."
         },
         {
           "day": 2,
-          "text": "Out early for the meadow before the day trippers come up. Down the ridge by late morning, back into the van at Kel, and the long drive home. Islamabad the same night."
+          "text": "Wake-up call at 5, breakfast at Batakundi, then Lulusar Lake and up to Babusar Top by 10:30 — an hour at the pass, where snow is expected. Down through Kaghan Valley in the afternoon, dinner at Balakot, and back in Islamabad by around 11 PM."
         }
       ]
     }
@@ -541,17 +578,24 @@
     },
     {
       "block": "team",
-      "name": "Wahid",
-      "role": "Founder & trip lead",
+      "name": "Abdul Wahid",
+      "role": "CEO & Founder",
       "text": "Founded Travel With Wahid and leads the trips — planning routes, managing departures and looking after every group on the road.",
-      "photo": null
+      "photo": "/img/team/abdul-wahid.jpg"
     },
     {
       "block": "team",
       "name": "Kamran Jesar",
       "role": "Tech Director",
       "text": "Built and runs the technology behind the trips — this website, the online booking system, live seat tracking and booking records.",
-      "photo": null
+      "photo": "/img/team/kamran-jesar.png"
+    },
+    {
+      "block": "team",
+      "name": "Jan Muhammad Hur",
+      "role": "Managing Director",
+      "text": "A visionary leader with a passion for exploration and a commitment to creating memorable experiences.",
+      "photo": "/img/team/jan-muhammad-hur.jpg"
     }
   ]
 }

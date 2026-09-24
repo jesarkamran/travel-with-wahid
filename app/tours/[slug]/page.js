@@ -39,6 +39,7 @@ export default async function Tour({ params }) {
             <Link href="/">Home</Link> <span aria-hidden="true">/</span> <Link href="/tours">Trips</Link>
           </p>
           <p className="kicker rise rise-1">{t.dates}</p>
+          {t.badge && <p className="rise rise-1"><span className="chip chip--sun">{t.badge}</span></p>}
           <h1 className="rise rise-2">{t.title}</h1>
           <p className="lede rise rise-3">{t.blurb}</p>
           <div className="rise rise-3 mast__meta"><TripMeta t={t} /></div>
