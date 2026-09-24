@@ -16,6 +16,11 @@ tours/kalam.jpg tours/fairy-meadows.jpg tours/kumrat.jpg tours/naran.jpg
 tours/kalash.jpg tours/ganga-choti.jpg tours/mahodand.jpg tours/saiful-muluk.jpg
 tours/kalash-people.jpg tours/kumrat-river.jpg tours/nanga-parbat.jpg
                       valleys on /destinations + the home photo strip (`gallery`)
+tours/batakundi.jpg tours/lulusar.jpg tours/babusar-top.jpg tours/kaghan.jpg
+tours/balakot.jpg     stops on the Naran, Kaghan & Babusar Top route (`profile`
+                      sheet `img` column), all CC BY-SA 4.0 from Wikimedia Commons
+team/                 portraits for the About page team cards (`about` sheet,
+                      `photo` column)
 
 Replacing one: keep the filename and everything else stays wired. Compress first
 (squoosh.app), target ~1100px wide and under 250KB.

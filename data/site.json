@@ -107,39 +107,48 @@
           "name": "Batakundi",
           "m": 2600,
           "day": "Day 2 · 06:30",
-          "img": null,
+          "img": "batakundi.jpg",
           "note": "Wake-up call at five, on the road by half past, breakfast up the valley.",
-          "does": ["Breakfast stop, 6:30–7:30 AM — at your own expense"]
+          "does": [
+            "Breakfast stop, 6:30–7:30 AM — at your own expense"
+          ]
         },
         {
           "name": "Lulusar Lake",
           "m": 3410,
           "day": "Day 2 · 09:00",
-          "img": null,
+          "img": "lulusar.jpg",
           "note": "The lake the Kunhar river starts from, still and high.",
-          "does": ["A stop at the lake on the way up"]
+          "does": [
+            "A stop at the lake on the way up"
+          ]
         },
         {
           "name": "Babusar Top",
           "m": 4173,
           "day": "Day 2 · 10:30",
-          "img": null,
+          "img": "babusar-top.jpg",
           "note": "The top of the pass, with live snowfall expected in October.",
-          "does": ["An hour at the top, 10:30–11:30 AM", "Photos at 4,173 m"]
+          "does": [
+            "An hour at the top, 10:30–11:30 AM",
+            "Photos at 4,173 m"
+          ]
         },
         {
           "name": "Kaghan",
           "m": 2012,
           "day": "Day 2 · 15:00",
-          "img": null,
+          "img": "kaghan.jpg",
           "note": "Back down the valley for a short stay in Kaghan.",
-          "does": ["Short stay, 3:00–3:30 PM"]
+          "does": [
+            "Short stay, 3:00–3:30 PM"
+          ]
         },
         {
           "name": "Balakot",
           "m": 975,
           "day": "Day 2 · 17:30",
-          "img": null,
+          "img": "balakot.jpg",
           "note": "Dinner on the way home, then Islamabad by around 11 PM.",
           "does": [
             "Dinner at Balakot — included",
@@ -489,6 +498,46 @@
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/w/index.php?curid=69010681"
+    },
+    {
+      "file": "tours/babusar-top.jpg",
+      "title": "Babusar Top, looking towards Naran",
+      "by": "Samikhan86",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:View_from_babusar_top_towards_naran.jpg"
+    },
+    {
+      "file": "tours/batakundi.jpg",
+      "title": "Batakundi, Naran",
+      "by": "Asham Shahzad",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Batakundi,_Naran.jpg"
+    },
+    {
+      "file": "tours/lulusar.jpg",
+      "title": "Lulusar Lake",
+      "by": "Shahzaib Damn Cruze",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Lulusar_Lake_01.jpg"
+    },
+    {
+      "file": "tours/kaghan.jpg",
+      "title": "Besar, Kaghan Valley",
+      "by": "Faisal Rafiq",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Besar_-_Kaghan_Valley.jpg"
+    },
+    {
+      "file": "tours/balakot.jpg",
+      "title": "Balakot, Kaghan Valley",
+      "by": "Mimalkera",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Balakot_,_Kaghan_Valley_,_KPK_Pakistan.jpg"
     }
   ],
   "about": [
