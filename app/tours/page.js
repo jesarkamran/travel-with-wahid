@@ -1,4 +1,5 @@
-import { tours, tripSchema, site, waLink } from '@/data/site';
+import Link from 'next/link';
+import { tours, tripSchema, site } from '@/data/site';
 import { Trip, Close } from '@/components/ui';
 import { Jsonld } from '@/components/fmt';
 
@@ -30,9 +31,7 @@ export default function Tours() {
           </div>
           <p className="aside-note">
             <span className="muted">Kumrat, Naran, Chitral and Ganga Choti run on request. </span>
-            <a href={waLink('Hi Wahid, I want a group date')} rel="noopener" className="link">
-              Ask for a group date
-            </a>
+            <Link href="/custom-trip" className="link">Plan a custom trip</Link>
           </p>
         </div>
       </section>

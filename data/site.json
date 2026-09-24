@@ -40,7 +40,12 @@
         "Breakfast both days",
         "Chairlift across the Neelum"
       ],
-      "stops": ["Muzaffarabad", "Keran", "Kel", "Arang Kel"],
+      "stops": [
+        "Muzaffarabad",
+        "Keran",
+        "Kel",
+        "Arang Kel"
+      ],
       "excludes": [
         "Lunch and dinner",
         "Horses up the ridge",
@@ -447,6 +452,106 @@
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "source": "https://commons.wikimedia.org/w/index.php?curid=69010681"
+    }
+  ],
+  "about": [
+    {
+      "block": "heading",
+      "name": null,
+      "role": null,
+      "text": "Northern Pakistan, planned and managed for you",
+      "photo": null
+    },
+    {
+      "block": "description",
+      "name": null,
+      "role": null,
+      "text": "Travel With Wahid plans and manages trips from Islamabad to northern Pakistan — fixed departures, custom group trips, and online booking with live seat availability.",
+      "photo": null
+    },
+    {
+      "block": "story",
+      "name": null,
+      "role": null,
+      "text": "Travel With Wahid runs trips from Islamabad to the valleys of northern Pakistan — the Neelum valley and Arang Kel, Swat and Kalam, Fairy Meadows, Kumrat, Naran and the Kalash valleys.",
+      "photo": null
+    },
+    {
+      "block": "story",
+      "name": null,
+      "role": null,
+      "text": "We manage the whole trip: the route and timings, transport, stays and the day-by-day plan, with support on the road from pickup to drop-off. All you have to do is turn up.",
+      "photo": null
+    },
+    {
+      "block": "story",
+      "name": null,
+      "role": null,
+      "text": "Booking takes a few minutes online. See how many seats are left on a departure in real time, get a booking reference straight away, and check your booking status any time with your email.",
+      "photo": null
+    },
+    {
+      "block": "story",
+      "name": null,
+      "role": null,
+      "text": "Travelling as a university society, a batch, a family or a group of friends? We build custom trips around your dates, your group and your budget.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Trip management",
+      "role": null,
+      "text": "Routes, transport, stays and timings planned and run for you, with support on the road from pickup to drop-off.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Custom group trips",
+      "role": null,
+      "text": "Private trips for societies, batches, families and friends, built around your dates, group size and budget.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Fixed departures",
+      "role": null,
+      "text": "Scheduled trips with a fixed date and a fixed price, and everything a seat covers written on the trip.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Online booking",
+      "role": null,
+      "text": "Hold a seat on any departure online, send the advance receipt on WhatsApp, and get a booking reference straight away.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Live seats and booking status",
+      "role": null,
+      "text": "See how many seats are left on every trip in real time, and look up your booking any time with your email.",
+      "photo": null
+    },
+    {
+      "block": "service",
+      "name": "Trip group updates",
+      "role": null,
+      "text": "New dates and last-minute seats are posted first in the WhatsApp trip group.",
+      "photo": null
+    },
+    {
+      "block": "team",
+      "name": "Wahid",
+      "role": "Founder & trip lead",
+      "text": "Founded Travel With Wahid and leads the trips — planning routes, managing departures and looking after every group on the road.",
+      "photo": null
+    },
+    {
+      "block": "team",
+      "name": "Kamran Jesar",
+      "role": "Tech Director",
+      "text": "Built and runs the technology behind the trips — this website, the online booking system, live seat tracking and booking records.",
+      "photo": null
     }
   ]
 }

@@ -542,7 +542,7 @@ export default function BookingForm({ trip }) {
 
 /* One field shape for the whole form: label, control, and an error that only
    takes up room once there is something to say. */
-function Field({ id, label, error, hint, optional, children }) {
+export function Field({ id, label, error, hint, optional, children }) {
   return (
     <p className={`bk__field${error ? " is-bad" : ""}`}>
       <label htmlFor={id}>

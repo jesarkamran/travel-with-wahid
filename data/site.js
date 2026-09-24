@@ -7,6 +7,7 @@ import data from "./site.json";
 export const {
   site,
   nextDeparture,
+  about,
   tours,
   steps,
   destinations,
@@ -17,6 +18,10 @@ export const {
 } = data;
 
 export const waLink = (msg) => `${site.wa}?text=${encodeURIComponent(msg)}`;
+
+/** Rows of the about tab whose block column is `b` (heading, story, team…). */
+export const block = (rows, b) =>
+  rows.filter((r) => String(r.block || '').trim().toLowerCase() === b);
 
 export const orgSchema = {
   "@type": ["TravelAgency", "LocalBusiness"],

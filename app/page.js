@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { site, tours, nextDeparture, destinations, reviews, gallery, credits, faqs, steps, tripSchema, faqSchema, waLink } from '@/data/site';
+import { site, tours, nextDeparture, destinations, reviews, gallery, credits, faqs, steps, tripSchema, faqSchema } from '@/data/site';
 import { Trip, Deck, Strip, Quotes, Reasons, Close, Faq, Steps, SectionHead } from '@/components/ui';
 import { Jsonld } from '@/components/fmt';
 import { Reveal } from '@/components/motion';
@@ -34,7 +34,7 @@ export default function Home() {
           </div>
           <Reveal as="p" className="aside-note">
             <span className="muted">Planning something for a society or a batch? </span>
-            <a href={waLink('Hi Wahid, I want to plan a group trip')} rel="noopener" className="link">Ask for a group date</a>
+            <Link href="/custom-trip" className="link">Plan a custom trip</Link>
           </Reveal>
         </div>
       </section>
@@ -72,10 +72,11 @@ export default function Home() {
         <div className="wrap split">
           <Reveal className="split__lead">
             <p className="kicker">Why travel with Wahid</p>
-            <h2>One person, start to finish</h2>
+            <h2>Planned, managed and booked for you</h2>
             <p className="lede">
-              There is no office and no call centre. You message one person, that person
-              replies, and that person is on the trip with you the whole way.
+              Routes, transport, stays and bookings are handled end to end — fixed departures
+              or a custom trip for your group, with support from the first message to the
+              drive home.
             </p>
             <a className="btn" href={site.waGroup} rel="noopener">
               Join the trip group <ArrowRight size={16} className="arr" aria-hidden="true" />

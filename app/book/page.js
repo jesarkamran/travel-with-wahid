@@ -51,6 +51,10 @@ export default function Book() {
               <li>Wahid confirms — usually the same day.</li>
               <li>Pickup points go out in the trip group.</li>
             </ol>
+            <p className="muted">
+              Going as a group on your own dates?{' '}
+              <Link href="/custom-trip" className="link">Plan a custom trip</Link>
+            </p>
           </aside>
         </div>
       </section>

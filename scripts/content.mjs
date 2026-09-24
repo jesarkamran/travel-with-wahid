@@ -128,6 +128,7 @@ function toJson(wb = XLSX.readFile(XLS)) {
     faqs: rows(wb, 'faqs').map(clean),
     reviews: rows(wb, 'reviews').map(clean),
     credits: rows(wb, 'credits').map(clean),
+    about: rows(wb, 'about').map(clean),
   };
 }
 
@@ -143,7 +144,7 @@ function toXlsx(d = JSON.parse(readFileSync(JSN, 'utf8'))) {
   add('tours', d.tours.map(({ profile, itinerary, ...rest }) => rest));
   for (const s of Object.keys(CHILD))
     add(s, d.tours.flatMap((t) => (t[s] ?? []).map((r) => ({ slug: t.slug, ...r }))));
-  for (const s of ['steps', 'destinations', 'gallery', 'faqs', 'reviews', 'credits']) add(s, d[s]);
+  for (const s of ['steps', 'destinations', 'gallery', 'faqs', 'reviews', 'credits', 'about']) add(s, d[s]);
 
   return wb;
 }

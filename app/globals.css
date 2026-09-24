@@ -1307,12 +1307,13 @@ em{font-style:italic}
 .creds li{break-inside:avoid;margin-bottom:.6rem}
 .creds a{color:var(--gold)}
 @media (max-width:640px){.creds{columns:1}}
+.h-sub + .reasons{margin:1.5rem 0 clamp(3rem,6vw,4.5rem)}
 .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1.25rem;margin:1.5rem 0 clamp(3rem,6vw,4.5rem)}
 .team h3{margin:1rem 0 .5rem}
 .team .muted{margin-top:.9rem;font-size:.94rem}
 .team__av{
   display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:50%;
-  background:linear-gradient(135deg,var(--ember),var(--sun));color:#0A110D;font-weight:600;
+  background:linear-gradient(135deg,var(--ember),var(--sun));color:#0A110D;font-weight:600;object-fit:cover;
 }
 
 /* ===================== 17 · close, footer, 404 ===================== */
@@ -1462,14 +1463,14 @@ em{font-style:italic}
 .bk__field{display:grid;gap:.4rem;margin:0}
 .bk__field label{display:flex;align-items:baseline;gap:.5rem;font-size:.85rem;font-weight:600;color:var(--ink)}
 .bk__field label i{font-style:normal;font-size:.72rem;font-weight:500;color:var(--slate)}
-.bk__field input,.bk__field textarea{
+.bk__field input,.bk__field textarea,.bk__field select{
   width:100%;padding:.72rem .85rem;border-radius:var(--r-sm);font:inherit;font-size:.95rem;
   color:var(--ink);background:var(--soft);border:1px solid var(--edge);
   transition:border-color .25s,background .25s,box-shadow .25s;
 }
 .bk__field textarea{resize:vertical;min-height:5.5rem;line-height:1.5}
 .bk__field input::placeholder,.bk__field textarea::placeholder{color:var(--slate);opacity:.7}
-.bk__field input:focus-visible,.bk__field textarea:focus-visible{
+.bk__field input:focus-visible,.bk__field textarea:focus-visible,.bk__field select:focus-visible{
   outline:none;border-color:var(--sun);background:var(--card);
   box-shadow:0 0 0 3px rgba(244,162,97,.18);
 }
@@ -1561,9 +1562,9 @@ em{font-style:italic}
   color:var(--slate);background:var(--soft);border:1px solid var(--edge);
 }
 /* the sheet's own words drive these; anything unknown stays neutral */
-.bst__tag.is-pending{color:var(--gold);background:rgba(244,162,97,.12);border-color:rgba(244,162,97,.35)}
-.bst__tag.is-booked,.bst__tag.is-confirmed{color:#86EFAC;background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.35)}
-.bst__tag.is-cancelled{color:var(--clay);background:rgba(231,111,81,.12);border-color:rgba(231,111,81,.35)}
+.bst__tag.is-pending,.bst__tag.is-requested{color:var(--gold);background:rgba(244,162,97,.12);border-color:rgba(244,162,97,.35)}
+.bst__tag.is-booked,.bst__tag.is-confirmed,.bst__tag.is-approved{color:#86EFAC;background:rgba(134,239,172,.12);border-color:rgba(134,239,172,.35)}
+.bst__tag.is-cancelled,.bst__tag.is-declined{color:var(--clay);background:rgba(231,111,81,.12);border-color:rgba(231,111,81,.35)}
 .bst__tag.is-waitlist{color:#8FD3FF;background:rgba(143,211,255,.12);border-color:rgba(143,211,255,.35)}
 .bst__row h3{font-size:1.2rem;line-height:1.25;letter-spacing:-.012em;color:var(--ink)}
 .bst__meta{display:flex;flex-wrap:wrap;gap:.35rem .9rem;font-size:.8rem;color:var(--slate)}

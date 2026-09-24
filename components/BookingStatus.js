@@ -27,6 +27,10 @@ const SAYS = {
   confirmed: 'Confirmed. Your seat is yours — pickup points go out in the trip group.',
   cancelled: 'This booking was cancelled and the seat released.',
   waitlist: 'The trip is full. You are next in line if a seat opens.',
+  // custom trip requests (the custom-trips tab)
+  requested: 'Wahid is planning your trip and will send a route and a price on WhatsApp.',
+  approved: 'Approved. Wahid will message you on WhatsApp with the plan and the advance to lock it in.',
+  declined: 'We cannot run this one as asked. Wahid will message you with other options.',
 };
 
 export default function BookingStatus() {

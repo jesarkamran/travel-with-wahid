@@ -14,7 +14,8 @@
  *
  *     Bookings are filed one tab per trip, named after the trip's slug, and a
  *     tab appears by itself the first time someone books that trip. The first
- *     tab in the workbook is the header template — leave it in place.
+ *     tab in the workbook is the header template — leave it in place. Custom
+ *     trip requests get a tab of their own, custom-trips, made the same way.
  *  2. script.google.com ▸ New project, paste this file in. The two sheet ids
  *     are already filled in below, read out of .env.
  *  3. Deploy ▸ New deployment ▸ Web app.
@@ -34,6 +35,17 @@ const PEOPLE_SHEET_ID = '12wgqmRQs1tpg7SyfTIKe_V2NV2-9UV39sKoMhNAsEMY';
 const BOOKINGS_SHEET_ID = '1TVO-JaUDhsYqGT5YVd6Xn6iKukh_0W9wh0-zRkLlfWA';
 /** Where a booking notification goes. Blank turns the email off. */
 const NOTIFY = '';
+/** Custom trip requests land on their own tab in the bookings workbook, made
+    on the first request. Its columns share names with a trip tab wherever they
+    mean the same thing, so "Check a booking" lists a request with no extra
+    code. Status starts at "requested"; Wahid moves it to "approved" (or
+    "declined") by hand, and adds the quote in `amount`. */
+const CUSTOM_TAB = 'custom-trips';
+const CUSTOM_HEADERS = ['ref', 'submittedAt', 'email', 'tripTitle', 'dates', 'seats', 'groupType',
+  'budget', 'pickup', 'amount', 'status', 'notes'];
+/** The content sheet — data/content.xlsx uploaded to Drive and saved as a
+    Google Sheet (File ▸ Save as Google Sheets). Only ?about reads it. */
+const CONTENT_SHEET_ID = '';
 
 /* The browser posts form-encoded, not JSON, on purpose: a JSON content-type
    would trigger a CORS preflight, and Apps Script web apps cannot answer one.
@@ -44,6 +56,7 @@ function doPost(e) {
     if (!raw) return reply({ ok: false, error: 'empty request' });
 
     const b = JSON.parse(raw);
+    if (b.kind === 'custom') return reply(customTrip(b));
     const email = String(b.email || '').trim().toLowerCase();
     const name = String(b.name || '').trim();
     const seats = Math.max(1, Math.min(parseInt(b.seats, 10) || 1, 25));
@@ -116,6 +129,60 @@ function doPost(e) {
 }
 
 /**
+ * A custom trip request: a row on the custom-trips tab, status "requested",
+ * and the person added to (or updated in) people — the same email key as a
+ * seat, so one traveller's requests and bookings sit together.
+ *
+ * No one-per-person rule here, unlike a seat: someone can ask for Kumrat in
+ * October and Chitral in May. A retry is still caught by its ref.
+ */
+function customTrip(b) {
+  const email = String(b.email || '').trim().toLowerCase();
+  const name = String(b.name || '').trim();
+  const destination = String(b.destination || '').trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) return { ok: false, error: 'that email does not look right' };
+  if (!name) return { ok: false, error: 'we need a name for the request' };
+  if (!destination) return { ok: false, error: 'no destination on the request' };
+
+  const ref = String(b.ref || '').trim() || makeRef();
+  const tab = tripTab(CUSTOM_TAB, CUSTOM_HEADERS);
+  if (alreadyFiled(tab, ref)) return { ok: true, ref: ref, duplicate: true, sheet: CUSTOM_TAB };
+
+  const seats = Math.max(1, Math.min(parseInt(b.seats, 10) || 1, 200));
+  appendBooking(tab, {
+    ref: ref,
+    submittedAt: iso(new Date()),
+    email: email,
+    tripTitle: 'Custom trip — ' + destination,
+    dates: String(b.dates || '').trim(),
+    seats: seats,
+    groupType: String(b.groupType || '').trim(),
+    budget: Number(b.budget) || '',
+    pickup: String(b.pickup || '').trim(),
+    status: 'requested',
+    notes: String(b.notes || '').trim()
+  });
+
+  upsertPerson({
+    email: email,
+    name: name,
+    phone: String(b.phone || '').trim(),
+    city: '',
+    institution: '',
+    when: ymd(new Date()),
+    seats: 0, // a request holds no seat until it is approved and paid for
+    trip: CUSTOM_TAB
+  });
+
+  if (NOTIFY) {
+    MailApp.sendEmail(NOTIFY, 'Custom trip ' + ref + ' — ' + name,
+      [name + ' · ' + seats + ' people · ' + destination, email, String(b.phone || ''),
+       String(b.dates || ''), String(b.notes || '')].join('\n'));
+  }
+  return { ok: true, ref: ref, sheet: CUSTOM_TAB };
+}
+
+/**
  * A GET never writes. It answers two things: a health check, and "have we met?"
  *
  * ?email= returns what we already know about a returning traveller so the form
@@ -127,6 +194,7 @@ function doPost(e) {
  */
 function doGet(e) {
   const q = (e && e.parameter) || {};
+  if (q.about) return reply(aboutContent());
   if (q.seats) return reply(seatsFor(String(q.seats)));
   if (q.bookings) return reply(bookingsFor(String(q.bookings)));
   if (q.email) return reply(lookup(String(q.email), String(q.trip || '')));
@@ -213,6 +281,37 @@ function seatsFor(slug) {
 }
 
 /**
+ * The About page as the content sheet has it right now, so an edit on Drive is
+ * live on the site without a rebuild. The site bakes the same copy in at build
+ * time and falls back to it whenever this cannot answer.
+ *
+ * Only the about tab — never the whole workbook, so a tab added to the content
+ * sheet later is not public by default.
+ */
+function aboutContent() {
+  if (!CONTENT_SHEET_ID) return { ok: false, error: 'CONTENT_SHEET_ID is not set' };
+  try {
+    const tab = SpreadsheetApp.openById(CONTENT_SHEET_ID).getSheetByName('about');
+    if (!tab) return { ok: false, error: 'the content sheet has no "about" tab' };
+    return { ok: true, about: table(tab).filter(function (r) { return r.block; }) };
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+}
+
+/** A tab as a list of objects keyed by its header row. */
+function table(sh) {
+  if (!sh || sh.getLastRow() < 2) return [];
+  const rows = sh.getDataRange().getValues();
+  const headers = rows.shift().map(function (h) { return String(h).trim(); });
+  return rows.map(function (r) {
+    const o = {};
+    headers.forEach(function (h, i) { if (h) o[h] = typeof r[i] === 'string' ? r[i].trim() : r[i]; });
+    return o;
+  });
+}
+
+/**
  * Every booking this email has made, newest first, across every trip tab.
  *
  * Same bargain as the lookup above: open to anyone, so it hands back only the
@@ -291,7 +390,7 @@ function allow(email) {
  * site sends. Renaming a tab by hand means the next booking for that trip
  * makes a fresh one, so rename the trip in the workbook instead.
  */
-function tripTab(slug) {
+function tripTab(slug, own) {
   const ss = SpreadsheetApp.openById(BOOKINGS_SHEET_ID);
   const template = ss.getSheets()[0];
   if (!slug) return template; // no trip on the booking — better filed than lost
@@ -299,9 +398,10 @@ function tripTab(slug) {
   const found = ss.getSheetByName(slug);
   if (found) return found;
 
+  // `own` headers for a tab that is not a trip (custom-trips); else the template's
   const made = ss.insertSheet(slug);
-  const width = template.getLastColumn();
-  const headers = template.getRange(1, 1, 1, width).getValues();
+  const headers = own ? [own] : template.getRange(1, 1, 1, template.getLastColumn()).getValues();
+  const width = headers[0].length;
   made.getRange(1, 1, 1, width).setValues(headers);
   made.getRange(1, 1, 1, width).setFontWeight('bold');
   made.setFrozenRows(1);
