@@ -8,6 +8,19 @@ export const metadata = {
   alternates: { canonical: '/about' },
 };
 
+const team = [
+  {
+    name: 'Wahid',
+    role: 'Founder & trip lead',
+    bio: 'Plans every route, fills every van and rides north with every group. The number on this site is his phone.',
+  },
+  {
+    name: 'Kamran Jesar',
+    role: 'Tech Director',
+    bio: 'Builds and runs everything online — this website, the booking system and the seat records — so Wahid can stay on the road.',
+  },
+];
+
 export default function About() {
   return (
     <>
@@ -57,6 +70,24 @@ export default function About() {
               <div><h3>Every trip, photographed</h3><p>See what you are signing up for before you pay.</p></div>
               <b>Instagram</b>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec--sm">
+        <div className="wrap">
+          <h2 className="h-sub">The people behind it</h2>
+          <div className="team">
+            {team.map((p) => (
+              <article key={p.name} className="card">
+                <span className="team__av" aria-hidden="true">
+                  {p.name.split(' ').map((w) => w[0]).join('')}
+                </span>
+                <h3>{p.name}</h3>
+                <p className="chip chip--sun">{p.role}</p>
+                <p className="muted">{p.bio}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

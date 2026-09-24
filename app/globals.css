@@ -1307,6 +1307,13 @@ em{font-style:italic}
 .creds li{break-inside:avoid;margin-bottom:.6rem}
 .creds a{color:var(--gold)}
 @media (max-width:640px){.creds{columns:1}}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1.25rem;margin:1.5rem 0 clamp(3rem,6vw,4.5rem)}
+.team h3{margin:1rem 0 .5rem}
+.team .muted{margin-top:.9rem;font-size:.94rem}
+.team__av{
+  display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:50%;
+  background:linear-gradient(135deg,var(--ember),var(--sun));color:#0A110D;font-weight:600;
+}
 
 /* ===================== 17 · close, footer, 404 ===================== */
 .close{position:relative;overflow:hidden;padding:clamp(5rem,10vw,8.5rem) 0;text-align:center}
